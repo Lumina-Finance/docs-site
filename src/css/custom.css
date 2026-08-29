@@ -1,30 +1,161 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
+@import '@fontsource-variable/dm-sans';
+@import '@fontsource-variable/cormorant-garamond';
+@import '@fontsource/dm-mono/400.css';
 
-/* You can override the default Infima variables here. */
+/* Brand values follow the app's Tailwind theme, with readable text at docs sizes */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-color-primary: #9b6c2c;
+  --ifm-color-primary-dark: #8c6128;
+  --ifm-color-primary-darker: #845c25;
+  --ifm-color-primary-darkest: #6d4c1f;
+  --ifm-color-primary-light: #aa7730;
+  --ifm-color-primary-lighter: #b27c33;
+  --ifm-color-primary-lightest: #c28e44;
+  --ifm-background-color: #fafafa;
+  --ifm-background-surface-color: #fbf8f0;
+  --ifm-font-color-base: #1c1510;
+  --ifm-font-color-secondary: #63513f;
+  --ifm-font-family-base: 'DM Sans Variable', system-ui, sans-serif;
+  --ifm-font-family-monospace: 'DM Mono', monospace;
+  --ifm-heading-font-family: 'DM Sans Variable', system-ui, sans-serif;
+  --ifm-font-size-base: 17px;
+  --ifm-line-height-base: 1.75;
+  --ifm-heading-line-height: 1.25;
+  --ifm-heading-font-weight: 550;
+  --ifm-navbar-background-color: #f8f4ec;
+  --ifm-navbar-height: 4.5rem;
+  --ifm-navbar-shadow: none;
+  --ifm-footer-background-color: #fafafa;
+  --ifm-footer-color: #63513f;
+  --ifm-footer-link-color: #63513f;
+  --ifm-menu-color: #63513f;
+  --ifm-menu-color-active: #7f541c;
+  --ifm-menu-color-background-active: #9b6c2c12;
+  --ifm-menu-color-background-hover: #9b6c2c0a;
+  --ifm-toc-border-color: #4b37231c;
+  --ifm-hr-border-color: #4b37231c;
+  --ifm-code-background: #eef0f3;
+  --docs-inline-code-color: #365b7d;
+  --ifm-code-font-size: 85%;
+  --ifm-global-radius: 0.5rem;
+  --ifm-table-border-color: #4b372333;
+  --ifm-table-stripe-background: transparent;
+  --ifm-table-head-background: #e9e2d6;
+  --ifm-table-head-color: var(--ifm-font-color-base);
+  --ifm-table-head-font-weight: 750;
+  --doc-sidebar-width: 275px;
+  --docs-border: #4b372333;
+  --docs-serif: 'Cormorant Garamond Variable', Georgia, serif;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+:root[data-theme='dark'] {
+  --ifm-color-primary: #c9a96a;
+  --ifm-color-primary-dark: #bf9a50;
+  --ifm-color-primary-darker: #ba9346;
+  --ifm-color-primary-darkest: #997737;
+  --ifm-color-primary-light: #d3b884;
+  --ifm-color-primary-lighter: #d8bf91;
+  --ifm-color-primary-lightest: #e6d5b8;
+  --ifm-background-color: #0f0e0c;
+  --ifm-background-surface-color: #13100e;
+  --ifm-font-color-base: #ece6da;
+  --ifm-font-color-secondary: #b3a597;
+  --ifm-navbar-background-color: #12100d;
+  --ifm-footer-background-color: #12100d;
+  --ifm-footer-color: #b3a597;
+  --ifm-footer-link-color: #b3a597;
+  --ifm-menu-color: #b3a597;
+  --ifm-menu-color-active: #c9a96a;
+  --ifm-menu-color-background-active: #c9a96a16;
+  --ifm-menu-color-background-hover: #c9a96a0a;
+  --ifm-toc-border-color: #d2b4782b;
+  --ifm-hr-border-color: #d2b4782b;
+  --ifm-code-background: #25282d;
+  --docs-inline-code-color: #afcdea;
+  --ifm-table-border-color: #d2b4782b;
+  --ifm-table-stripe-background: transparent;
+  --ifm-table-head-background: #332a1c;
+  --docs-border: #d2b4782b;
+}
+
+body { text-rendering: optimizeLegibility; }
+/* Balance DM Mono's text and background without changing the surrounding line box */
+:not(pre) > code {
+  position: relative;
+  top: -0.06em;
+  color: var(--docs-inline-code-color);
+  vertical-align: baseline;
+  padding-block: 0.15em 0.08em;
+}
+.navbar { border-bottom: 1px solid var(--docs-border); padding-inline: 1.5rem; }
+.navbar__title { font-weight: 550; letter-spacing: -0.035em; }
+.navbar__logo { height: 2rem; }
+.navbar__link { font-size: 0.9rem; font-weight: 500; }
+.theme-doc-sidebar-container { border-right-color: var(--docs-border) !important; }
+.theme-doc-sidebar-menu { padding: 1.25rem 0.5rem; }
+.theme-doc-sidebar-menu .menu__list,
+.table-of-contents ul { position: relative; }
+.theme-doc-sidebar-menu .menu__list::before,
+.table-of-contents ul::before { content: ''; position: absolute; inset-block: 0.3rem; inset-inline-start: 0.35rem; width: 1px; background: color-mix(in srgb, var(--ifm-font-color-secondary) 18%, transparent); pointer-events: none; }
+.docs-sidebar-section { margin: 1.8rem 0.8rem 0.6rem; }
+.docs-sidebar-section h2 { display: flex; align-items: center; gap: 0.65rem; margin: 0; color: var(--ifm-color-primary); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.065em; line-height: 1.5; text-transform: uppercase; }
+.docs-sidebar-section h2::after { content: ''; flex: 1 0 1rem; max-width: 2.5rem; height: 1px; background: currentColor; opacity: 0.35; }
+.menu__link { font-size: 0.9rem; line-height: 1.5; padding: 0.6rem 0.8rem; }
+.theme-doc-markdown h1 { font-family: var(--docs-serif); font-size: clamp(2.6rem, 5vw, 3.5rem); font-weight: 500; letter-spacing: -0.035em; margin-bottom: 1.25rem; }
+.theme-doc-markdown > h2 { font-size: 1.75rem; font-weight: 650; line-height: 1.3; letter-spacing: -0.02em; margin-top: 3.5rem; margin-bottom: 1.25rem; padding-bottom: 0.65rem; border-bottom: 1px solid var(--docs-border); }
+.theme-doc-markdown > h3 { font-size: 1.3rem; font-weight: 600; line-height: 1.4; margin-top: 2.25rem; margin-bottom: 0.85rem; }
+.theme-doc-markdown > h4 { font-size: 1.08rem; font-weight: 600; line-height: 1.5; margin-top: 1.75rem; margin-bottom: 0.6rem; }
+.theme-doc-markdown > h5 { font-size: 1rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+.theme-doc-markdown > h6 { font-size: 0.95rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+.docs-tagline { font-size: 1.1rem; color: var(--ifm-font-color-secondary); }
+.theme-doc-markdown a { text-decoration: underline; text-underline-offset: 0.15em; }
+/* Override the built-in card's important padding utility */
+.docs-category-cards .theme-doc-card-container { position: relative; padding: 1.15rem !important; border: 1px solid var(--docs-border); border-radius: 0.5rem; background: var(--ifm-background-color); color: var(--ifm-font-color-base); box-shadow: none; text-decoration: none; }
+.docs-category-cards .theme-doc-card-container:is(:hover, :focus-visible) { border-color: var(--ifm-color-primary); background: var(--ifm-menu-color-background-hover); box-shadow: none; }
+.docs-category-cards .theme-doc-card-container::after { content: ''; position: absolute; inset-block-start: 1.55rem; inset-inline-end: 1.25rem; width: 0.4rem; height: 0.4rem; border-block-start: 1.5px solid var(--ifm-color-primary); border-inline-end: 1.5px solid var(--ifm-color-primary); transform: rotate(45deg); }
+.docs-category-cards .theme-doc-card-icon { display: none; }
+.docs-category-cards .theme-doc-card-heading { margin: 0 1.5rem 0.45rem 0; font-size: 1.05rem; font-weight: 600; line-height: 1.4; }
+.docs-category-cards :is(.theme-doc-card-title, .theme-doc-card-description) { overflow: visible; white-space: normal; }
+.docs-category-cards .theme-doc-card-description { color: var(--ifm-font-color-secondary); font-size: 0.88rem; line-height: 1.6; }
+.theme-doc-markdown li { margin-block: 0.4rem; }
+.theme-doc-markdown img { display: block; border: 1px solid var(--docs-border); border-radius: 0.6rem; height: auto; }
+.theme-doc-markdown table { width: fit-content; max-width: 100%; margin-inline: auto; font-size: 0.9rem; }
+.theme-doc-markdown thead tr { border-bottom-color: var(--ifm-color-primary); }
+.theme-doc-markdown td { overflow-wrap: anywhere; }
+.theme-doc-markdown pre { border: 1px solid var(--docs-border); box-shadow: none; }
+.theme-doc-toc-desktop { font-size: 0.85rem; }
+.table-of-contents__link { color: var(--ifm-font-color-secondary); }
+.pagination-nav__link { border-color: var(--docs-border); background: var(--ifm-background-surface-color); }
+.pagination-nav__sublabel { color: var(--ifm-font-color-secondary); }
+.docs-home { width: min(66rem, 100%); margin-inline: auto; padding: 4.5rem 2rem; }
+.docs-eyebrow { color: var(--ifm-color-primary); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; }
+.docs-home h1 { font-family: var(--docs-serif); font-size: clamp(3rem, 6vw, 4.8rem); font-weight: 500; letter-spacing: -0.04em; line-height: 1.03; margin: 1rem 0; }
+.docs-home-hero { margin-block: 2.5rem; }
+.docs-home-hero img { width: 100%; height: auto; vertical-align: middle; }
+.docs-home-about { margin-top: 2.5rem; }
+.docs-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+.docs-path { display: flex; flex-direction: column; padding: 1.75rem; border: 1px solid var(--docs-border); border-radius: 0.75rem; background: var(--ifm-background-surface-color); color: var(--ifm-font-color-base); transition: border-color 150ms; }
+.docs-path:hover { border-color: var(--ifm-color-primary); color: var(--ifm-font-color-base); text-decoration: none; }
+.docs-path h2 { font-size: 1.4rem; }
+.docs-path p { color: var(--ifm-font-color-secondary); margin-bottom: 1.5rem; }
+.docs-path-action { margin-top: auto; color: var(--ifm-color-primary); font-size: 0.9rem; font-weight: 600; }
+:focus-visible { outline: 2px solid var(--ifm-color-primary); outline-offset: 4px; }
+
+@media (max-width: 996px) {
+  .navbar { padding-inline: 1rem; }
+  .theme-doc-toc-mobile { border: 1px solid var(--docs-border); border-radius: 0.5rem; }
+}
+
+@media (max-width: 600px) {
+  .docs-home { padding: 2.5rem 1.25rem; }
+  .docs-paths { grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
+  .docs-path { padding: 1.25rem; }
+  .navbar__title { font-size: 0.9rem; }
+  .theme-doc-markdown h1 { font-size: 2.6rem; }
+  .theme-doc-markdown > h2 { font-size: 1.5rem; margin-top: 2.75rem; }
+  .theme-doc-markdown > h3 { font-size: 1.2rem; margin-top: 1.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
