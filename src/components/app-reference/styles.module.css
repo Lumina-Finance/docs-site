@@ -1,0 +1,89 @@
+.reference { display: inline; }
+
+/* Keep following punctuation attached outside the atomic inline flex box */
+.reference::after { content: '\2060'; }
+
+.element,
+.path {
+  --reference-border: #d7cfc4;
+  --reference-background: #f0efec;
+  --reference-accent: #80551d;
+
+  /* Each row occupies one paragraph line, with the decoration inset inside it */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  font-size: 0.88em;
+  line-height: 1lh;
+  vertical-align: top;
+}
+
+.element::before,
+.path::before {
+  content: '';
+  position: absolute;
+  inset: 0.18em 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+:global([data-theme='dark']) .element,
+:global([data-theme='dark']) .path {
+  --reference-border: #413728;
+  --reference-background: #211d18;
+  --reference-accent: #d3b884;
+}
+
+.element {
+  gap: 0.4em;
+  padding: 0 0.65em;
+  border-radius: 999px;
+  color: var(--reference-accent);
+  font-weight: 500;
+}
+
+.element::before { border: 1px solid var(--reference-border); }
+
+.path {
+  flex-wrap: wrap;
+  column-gap: 0.35em;
+  padding: 0 0.5em;
+  border-radius: 0.5em;
+  color: var(--ifm-font-color-secondary);
+}
+
+.path::before { background: var(--reference-background); }
+
+.step {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.step:last-child .label {
+  color: var(--reference-accent);
+  font-weight: 500;
+}
+
+.label { position: relative; min-width: 0; overflow-wrap: anywhere; }
+.icon {
+  position: relative;
+  flex: none;
+  align-self: flex-start;
+  width: 1em;
+  height: 1em;
+  margin-top: calc((1lh - 1em) / 2);
+}
+
+/* Keep a readable separator when the decorative chevron is not announced */
+.separatorText {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
