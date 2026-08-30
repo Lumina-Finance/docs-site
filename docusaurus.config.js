@@ -15,6 +15,7 @@ const config = {
     docs: {
       routeBasePath: '/',
       sidebarPath: './sidebars.js',
+      admonitions: {keywords: ['example'], extendDefaults: true},
 
     },
     blog: false,
