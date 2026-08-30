@@ -20,6 +20,14 @@ const config = {
     blog: false,
     theme: {customCss: ['./src/css/custom.css']},
   }]],
+  themes: [['@easyops-cn/docusaurus-search-local', {
+    hashed: true,
+    indexBlog: false,
+    indexPages: true,
+    docsRouteBasePath: '/',
+    highlightSearchTermsOnTargetPage: true,
+    searchBarShortcutHint: false,
+  }]],
   themeConfig: {
     colorMode: {defaultMode: 'light', respectPrefersColorScheme: true},
     navbar: {
