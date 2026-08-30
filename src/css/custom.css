@@ -100,6 +100,10 @@ body { text-rendering: optimizeLegibility; }
   vertical-align: baseline;
   padding-block: 0.15em 0.08em;
 }
+/* Callout titles use uppercase text, whose visual centre is above body text */
+.theme-admonition > :first-child code {
+  top: -0.12em;
+}
 .navbar { border-bottom: 1px solid var(--docs-border); padding-inline: 1.5rem; }
 .navbar__title { font-weight: 550; letter-spacing: -0.035em; }
 .navbar__logo { height: 2rem; }
