@@ -1,0 +1,7 @@
+@import 'katex/dist/katex.min.css';
+
+.theme-doc-markdown .katex { font-size: 1.05em; }
+.theme-doc-markdown .katex-display { margin-block: 1.5rem; padding-block: 0.35rem; overflow-x: auto; overflow-y: hidden; }
+
+/* Keep wide equations fully reachable when they scroll on a narrow screen */
+.theme-doc-markdown .katex-display > .katex { width: max-content; min-width: 100%; }
