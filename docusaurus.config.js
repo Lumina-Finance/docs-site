@@ -1,4 +1,6 @@
 import {themes} from 'prism-react-renderer';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -17,9 +19,12 @@ const config = {
       sidebarPath: './sidebars.js',
       admonitions: {keywords: ['example'], extendDefaults: true},
 
+      // Keep dollar amounts in financial examples as ordinary text
+      remarkPlugins: [[remarkMath, {singleDollarTextMath: false}]],
+      rehypePlugins: [rehypeKatex],
     },
     blog: false,
-    theme: {customCss: ['./src/css/custom.css']},
+    theme: {customCss: ['./src/css/custom.css', './src/css/math.css']},
   }]],
   themes: [['@easyops-cn/docusaurus-search-local', {
     hashed: true,
