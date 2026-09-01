@@ -1,0 +1,63 @@
+.container {
+  max-height: calc(100vh - (var(--ifm-navbar-height) + 2rem));
+  overflow-y: auto;
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
+.rail {
+  position: relative;
+  padding-left: 3px;
+}
+
+.rail::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  left: 1.5px;
+  width: 1px;
+  transform: translateX(-50%);
+  background: var(--ifm-toc-border-color);
+}
+
+.rail > :global(.table-of-contents) {
+  border-left: 0;
+}
+
+.indicator {
+  position: absolute;
+  top: 0;
+  bottom: 100%;
+  left: 1.5px;
+  width: 3px;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  background: var(--ifm-color-primary);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.container[data-ready] .indicator {
+  transition: top 180ms ease, bottom 180ms ease, opacity 120ms ease;
+}
+
+.container[data-ready] .rail :global(.table-of-contents__link) {
+  transition: color 180ms ease;
+}
+
+.rail :global(.table-of-contents__link[data-in-view]) {
+  color: var(--ifm-color-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container[data-ready] .indicator,
+  .container[data-ready] .rail :global(.table-of-contents__link) {
+    transition: none;
+  }
+}
+
+@media (max-width: 996px) {
+  .container {
+    display: none;
+  }
+}
