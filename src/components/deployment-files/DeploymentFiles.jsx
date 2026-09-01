@@ -72,7 +72,7 @@ export function ComposeFile() {
         <span>compose.yml</span>
         <span className={styles.language}>YAML</span>
       </div>
-      <CodeBlock language="yaml" showLineNumbers className={styles.composeBlock}>{content}</CodeBlock>
+      <CodeBlock language="yaml" showLineNumbers className={`${styles.composeBlock} docs-persistent-wrap`}>{content}</CodeBlock>
     </div>
   );
 }
