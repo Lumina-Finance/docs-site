@@ -1,0 +1,118 @@
+.composeFile {
+  --file-background: #f7f7f5;
+  --file-header: #efefeb;
+  --file-text: #353a35;
+  --file-muted: #787d75;
+  --file-key: #84591f;
+  --file-string: #32684a;
+  --file-number: #925445;
+  position: relative;
+  margin-bottom: var(--ifm-leading);
+  overflow: hidden;
+  border: 1px solid var(--docs-border);
+  border-radius: 10px;
+  background: var(--file-background);
+}
+
+:global([data-theme='dark']) .composeFile {
+  --file-background: #191a17;
+  --file-header: #22231f;
+  --file-text: #e0e2d9;
+  --file-muted: #8e9388;
+  --file-key: #dbb77a;
+  --file-string: #9bc7a8;
+  --file-number: #e0ad90;
+}
+
+.fileHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-height: 48px;
+  padding: 0.6rem 6rem 0.6rem 1rem;
+  border-bottom: 1px solid var(--docs-border);
+  background: var(--file-header);
+  color: var(--file-text);
+  font: 500 0.82rem / 1.4 var(--ifm-font-family-monospace);
+}
+
+.language {
+  color: var(--file-muted);
+  font: 500 0.62rem / 1 var(--ifm-font-family-base);
+  letter-spacing: 0.07em;
+}
+
+.composeBlock {
+  --prism-background-color: var(--file-background);
+  --prism-color: var(--file-text);
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Anchor Docusaurus's existing copy and wrap controls to the file header */
+.composeBlock > div {
+  position: static;
+}
+
+.composeFile .composeBlock pre {
+  max-height: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--file-background) !important;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  scrollbar-color: var(--docs-border) transparent;
+}
+
+.composeBlock button,
+.composeBlock:hover button {
+  /* Keep the actions visible on touchscreens and before hovering */
+  opacity: 1 !important;
+  background: var(--file-header);
+  color: var(--file-text);
+  border-color: var(--docs-border);
+}
+
+.composeBlock button:hover {
+  background: var(--file-background);
+}
+
+.composeBlock :global(.token) {
+  color: var(--file-text) !important;
+}
+
+.composeBlock :global(.token.key) {
+  color: var(--file-key) !important;
+}
+
+.composeBlock :global(.token.string) {
+  color: var(--file-string) !important;
+}
+
+.composeBlock :global(.token.number),
+.composeBlock :global(.token.boolean) {
+  color: var(--file-number) !important;
+}
+
+.composeBlock :global(.token.punctuation),
+.composeBlock :global(.token.comment),
+.composeBlock :global(.token-line > span:first-child::before) {
+  color: var(--file-muted) !important;
+}
+
+.composeBlock :global(.token-line > span:first-child::before) {
+  opacity: 1;
+}
+
+.status {
+  padding: 1rem;
+  margin-bottom: var(--ifm-leading);
+  border: 1px solid var(--docs-border);
+  border-radius: var(--ifm-global-radius);
+}
+
+.status p {
+  margin-bottom: 0.75rem;
+}
