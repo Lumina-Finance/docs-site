@@ -1,0 +1,61 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 2.5rem;
+  padding: 0.6rem 0.9rem;
+  margin-inline-end: 0.75rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 999px;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.25;
+  white-space: nowrap;
+  transition: border-color 150ms, background-color 150ms, transform 150ms;
+}
+
+.pill:hover {
+  border-color: var(--ifm-color-primary);
+  background: var(--ifm-menu-color-background-hover);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .pill:hover { transform: translateY(-1px); }
+}
+
+.githubIcon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding-inline-start: 0.65rem;
+  border-inline-start: 1px solid var(--docs-border);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.count svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--ifm-color-primary);
+
+  /* Align the star optically with the neighbouring text, without changing layout */
+  transform: translateY(-1px);
+}
+
+.count span { min-width: 3ch; text-align: end; }
+.mobileItem { padding: 0.75rem; }
+.mobileItem .pill { margin: 0; min-height: 2.75rem; }
+
+@media (max-width: 996px) {
+  .pill:global(.navbar__item) { display: none; }
+}
