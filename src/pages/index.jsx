@@ -3,9 +3,12 @@ import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import ThemedImage from '@theme/ThemedImage';
+import LastUpdated from '@theme/LastUpdated';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 /** Give readers a direct starting point for using or operating the app */
 export default function Home() {
+  const {siteConfig: {customFields}} = useDocusaurusContext();
   const heroSources = {
     light: useBaseUrl('/img/hero_light.png'),
     dark: useBaseUrl('/img/hero_dark.png'),
@@ -53,6 +56,9 @@ export default function Home() {
             </span>
           </Link>
         </div>
+        <footer className="margin-top--lg">
+          <LastUpdated lastUpdatedAt={customFields.homeLastUpdatedAt} />
+        </footer>
       </main>
     </Layout>
   );
