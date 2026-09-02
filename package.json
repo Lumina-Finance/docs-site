@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prestart": "python3 scripts/page-history.py",
     "start": "docusaurus start --no-open",
+    "prebuild": "python3 scripts/page-history.py",
     "build": "docusaurus build",
     "serve": "docusaurus serve --no-open"
   },
@@ -21,7 +23,5 @@
     "rehype-katex": "7.0.1",
     "remark-math": "6.0.0"
   },
-  "engines": {
-    "node": ">=20.18.1"
-  }
+  "engines": { "node": ">=20.18.1" }
 }

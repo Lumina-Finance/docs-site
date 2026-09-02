@@ -1,6 +1,8 @@
 import {themes} from 'prism-react-renderer';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import path from 'node:path';
+import pageHistory from './.page-history/last-updated.json';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -13,10 +15,22 @@ const config = {
   onBrokenAnchors: 'throw',
   markdown: {hooks: {onBrokenMarkdownLinks: 'throw', onBrokenMarkdownImages: 'throw'}},
   i18n: {defaultLocale: 'en', locales: ['en'], localeConfigs: {en: {htmlLang: 'en-CA', label: 'English (Canada)'}}},
+  customFields: {homeLastUpdatedAt: pageHistory['src/pages/index.jsx']},
+  future: {
+    experimental_vcs: {
+      initialize: (_params) => {},
+      getFileCreationInfo: async (_filePath) => null,
+      getFileLastUpdateInfo: async (filePath) => {
+        const timestamp = pageHistory[path.relative(__dirname, filePath)];
+        return timestamp ? {timestamp, author: ''} : null;
+      },
+    },
+  },
   presets: [['classic', {
     docs: {
       routeBasePath: '/',
       sidebarPath: './sidebars.js',
+      showLastUpdateTime: true,
       admonitions: {keywords: ['example'], extendDefaults: true},
 
       // Keep dollar amounts in financial examples as ordinary text
