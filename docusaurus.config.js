@@ -60,7 +60,8 @@ const config = {
     footer: {
       style: 'light',
       links: [
-        {label: 'Self-hosting', to: '/self-hosting/getting-started/'},
+        {label: 'Buy me a coffee', href: 'https://www.buymeacoffee.com/lumina.finance', className: 'footer__coffee'},
+        {label: 'GitHub stars', href: 'https://github.com/Lumina-Finance/lumina-finance', className: 'footer__github'},
       ],
       copyright: `© ${new Date().getFullYear()} Lumina Software Inc.`,
     },
