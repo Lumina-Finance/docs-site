@@ -194,9 +194,21 @@ body { text-rendering: optimizeLegibility; }
 .table-of-contents__link { color: var(--ifm-font-color-secondary); }
 .pagination-nav__link { border-color: var(--docs-border); background: var(--ifm-background-surface-color); }
 .pagination-nav__sublabel { color: var(--ifm-font-color-secondary); }
+.footer { border-top: 1px solid var(--docs-border); padding-block: 1rem; }
+.footer > .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.65rem 2rem; }
+.footer__bottom { order: -1; }
+.footer .footer__links { margin-left: auto; }
+.footer__links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; margin-bottom: 0; text-align: left; }
 .footer__link-item { display: inline-flex; align-items: center; gap: 0.3rem; min-height: 2.6rem; font-size: 0.85rem; }
+.footer__link-separator { display: none; }
 :is(.footer__coffee, .footer__github) { --coffee-background: #f4d447; --coffee-foreground: #302409; gap: 0.35rem; min-height: 0; height: 24px; padding: 0 7px; border: 1px solid #d9b82d; border-radius: 4px; background: var(--coffee-background); color: var(--coffee-foreground); font-family: var(--ifm-font-family-base); font-size: 12px; font-weight: 400; line-height: 1; white-space: nowrap; transition: filter 150ms ease; }
 [data-theme='dark'] .footer__coffee { --coffee-background: #24221d; --coffee-foreground: #f4d447; border-color: #665a32; }
+.footer__github { --coffee-background: #f0f0ef; --coffee-foreground: #252421; border-color: #c9c7c2; }
+[data-theme='dark'] .footer__github { --coffee-background: #24221d; --coffee-foreground: #ece6da; border-color: #514b41; }
+.footer__github svg { width: 14px; height: 14px; }
+.footer__github-count { display: inline-flex; align-items: center; gap: 2px; height: 16px; line-height: 16px; font-variant-numeric: tabular-nums; }
+.footer__github-count > span { display: block; }
+.footer__github-count svg { display: block; flex: none; }
 .footer__coffee svg { flex: none; width: auto; height: 16px; }
 .footer__coffee svg path { fill: currentColor; }
 .footer__coffee .logo-coffee { fill: var(--coffee-background); }
@@ -223,6 +235,12 @@ body { text-rendering: optimizeLegibility; }
   border-color: var(--ifm-color-primary);
   color: var(--ifm-font-color-base);
   filter: none;
+}
+.footer__copyright { text-align: left; font-size: 0.85rem; }
+@media (max-width: 640px) {
+  .footer > .container { flex-direction: column; gap: 0.75rem; }
+  .footer__copyright { text-align: center; }
+  .footer .footer__links { margin-inline: 0; justify-content: center; }
 }
 .docs-home { width: min(66rem, 100%); margin-inline: auto; padding: 4.5rem 2rem; }
 .docs-eyebrow { color: var(--ifm-color-primary); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; }
