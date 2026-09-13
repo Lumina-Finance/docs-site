@@ -9,7 +9,7 @@ This guide walks you through how to set up your own Lumina Finance instance at h
 
 ## Getting the necessary files
 
-Before you begin, make sure Docker and the Docker Compose plugin are installed. Create a directory for LF, then copy the Compose file below into the directory:
+Before you begin, make sure Docker and the Docker Compose plugin are installed. Create a directory for Lumina Finance, then copy the Compose file below into the directory:
 
 <ComposeFile />
 
@@ -29,23 +29,18 @@ Then, replace `DB_PASSWORD` with the generated password.
 
 ### Setting encryption keys and db role passwords
 
-:::info
-This isn't a required step, though we still highly recommend it.
-:::
-
-:::danger[You must persist `/data/secrets` directory inside the container if you skip this step]
-If you leave the following configurations unset, Lumina Finance will automatically generate them and save them in `/data/secrets` folder.
-
-**Failure to persist the contents in the directory can result in permanent data corruption and/or data loss.**
+:::danger[Persisting the secrets directory]
+If secrets are auto generated, you must persist the data in the `/data/secrets` directory inside the container. Failure to so can result in permanent data corruption and/or data loss.
 :::
 
 Lumina Finance uses 3 additional secrets in addition to the database password: `APP_ENCRYPTION_KEY`, `MIGRATOR_DB_PASSWORD`, and `APP_DB_PASSWORD`. They are used to encrypt sensitive data like the OIDC client secrets and for enforcing RLS for db level user data separation.
 
-Before you start using LF, we recommend setting your application encryption key and database role passwords explicitly. **If you leave them unset, LF generates them and saves them in `/data/secrets` inside the app container. Make sure to persist this directory and keep it safe. Losing it can result in permanent data corruption and/or data loss.**
+Before you start using Lumina Finance, we recommend setting your application encryption key and database role passwords explicitly. If you leave them unset, Lumina Finance will generate them and save them in `/data/secrets` inside the app container. 
 
 #### Generating the key and passwords
 
-For encrypting things like OIDC client secrets, LF uses a Fernet key. You can either generate your own or use the builtin generator:
+For encrypting things like OIDC client secrets, Lumina Finance uses a Fernet key. You can either generate your own or use the builtin generator:
+
 ```bash
 docker compose run --rm --no-deps app generate-app-encryption-key
 ```
