@@ -15,6 +15,7 @@ const sidebars = {
       link: {type: 'doc', id: 'self-hosting/advanced-configurations'},
       items: ['self-hosting/signing-keys', 'self-hosting/single-sign-on', 'self-hosting/encryption-keys'],
     },
+    'self-hosting/environment-variables',
   ],
 };
 
