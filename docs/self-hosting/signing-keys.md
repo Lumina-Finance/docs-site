@@ -1,6 +1,6 @@
 ---
 title: Signing keys and JWKS
-description: Use your own signing keys and find the public keys LF publishes for token verification.
+description: Use your own signing keys and find the public keys Lumina Finance publishes for token verification.
 ---
 
 Lumina Finance uses signing keys to verify that your session tokens came from your instance and haven't been altered. These keys are separate from [`APP_ENCRYPTION_KEY`](environment-variables.md#app_encryption_key), which encrypts secrets stored in the database.
