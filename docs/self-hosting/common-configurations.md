@@ -5,7 +5,7 @@ description: Configure your instance's address, email delivery, and version sett
 
 import DocCardList from '@theme/DocCardList';
 
-The guides in this section cover some basic configuration options, with explanations of what each setting does and how to configure it.
+The guides in this section cover the basic configuration options, with explanations of what each setting does and how to configure it.
 
 <DocCardList className="docs-category-cards" />
 
