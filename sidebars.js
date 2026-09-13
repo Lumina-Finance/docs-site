@@ -7,7 +7,7 @@ const sidebars = {
       label: 'Common configurations',
       collapsed: false,
       link: {type: 'doc', id: 'self-hosting/common-configurations'},
-      items: ['self-hosting/instance-url', 'self-hosting/email', 'self-hosting/version-settings'],
+      items: ['self-hosting/instance-url', 'self-hosting/email', 'self-hosting/update-checks'],
     },
     {
       type: 'category',

@@ -12,7 +12,7 @@ Environment variables are the settings you put in `.env` to configure your LF in
 <dl>
 <EnvironmentVariable name="APP_IMAGE_TAG" type="Text" defaultValue={<code>latest</code>}>
 
-The Lumina Finance Docker image tag. Pinning a version doesn't disable [update checks](version-settings.md).
+The Lumina Finance Docker image tag. Pinning a version doesn't disable [update checks](update-checks.md).
 
 </EnvironmentVariable>
 
@@ -78,7 +78,7 @@ This address is also included in LF's allowed browser origins. See [Setting the 
 
 <EnvironmentVariable name="UPDATE_CHECKS_ENABLED" type="Boolean" defaultValue={<code>true</code>} values={<><code>true</code> · <code>false</code></>} example="true">
 
-Controls whether LF checks GitHub releases and Docker Hub for a newer version. Set it to `false` to turn off the checks and their notices. [Automatic update checks](version-settings.md) explains when you'll see an update.
+Controls whether LF checks GitHub releases and Docker Hub for a newer version. Set it to `false` to turn off the checks and their notices. [Automatic update checks](update-checks.md) explains when you'll see an update.
 
 </EnvironmentVariable>
 </dl>
