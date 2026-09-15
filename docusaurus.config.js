@@ -3,6 +3,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import path from 'node:path';
 import pageHistory from './.page-history/last-updated.json';
+import pageContributors from './.page-history/contributors.json';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -15,7 +16,7 @@ const config = {
   onBrokenAnchors: 'throw',
   markdown: {hooks: {onBrokenMarkdownLinks: 'throw', onBrokenMarkdownImages: 'throw'}},
   i18n: {defaultLocale: 'en', locales: ['en'], localeConfigs: {en: {htmlLang: 'en-CA', label: 'English (Canada)'}}},
-  customFields: {homeLastUpdatedAt: pageHistory['src/pages/index.jsx']},
+  customFields: {homeLastUpdatedAt: pageHistory['src/pages/index.jsx'], pageContributors},
   future: {
     experimental_vcs: {
       initialize: (_params) => {},
