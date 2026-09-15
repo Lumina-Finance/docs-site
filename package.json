@@ -7,7 +7,8 @@
     "start": "docusaurus start --no-open",
     "prebuild": "python3 scripts/page-history.py",
     "build": "docusaurus build",
-    "serve": "docusaurus serve --no-open"
+    "serve": "docusaurus serve --no-open",
+    "test": "node --test src/components/special-thanks/credits.test.mjs src/components/special-thanks/components.test.cjs && python3 -m unittest discover -s scripts -p test_page_history.py"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",
@@ -23,5 +24,13 @@
     "rehype-katex": "7.0.1",
     "remark-math": "6.0.0"
   },
-  "engines": { "node": ">=20.18.1" }
+  "engines": {
+    "node": ">=20.18.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/plugin-transform-modules-commonjs": "^7.29.7",
+    "@babel/plugin-transform-react-jsx": "^7.29.7",
+    "jsdom": "^26.1.0"
+  }
 }
