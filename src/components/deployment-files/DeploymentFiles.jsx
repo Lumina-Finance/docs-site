@@ -2,14 +2,13 @@ import React, {useEffect, useState} from 'react';
 import CodeBlock from '@theme/CodeBlock';
 import styles from './styles.module.css';
 
-// Retrieve both deployment files from the same verified revision
-const RELEASE_COMMIT = '1d14fe446a3ee5c96a5b6547eea9cdc0aa3ddefa';
-const RAW_DIRECTORY = `https://raw.githubusercontent.com/Lumina-Finance/lumina-finance/${RELEASE_COMMIT}/docker`;
+import {loadDeploymentFiles} from './deployment-files';
+
 const REQUEST_TIMEOUT_MS = 8000;
 
-/** Retrieve a release file in the browser, with cancellation and an explicit retry */
-function useGitHubFile(filename, format) {
-  const [content, setContent] = useState(null);
+/** Load a matching pair from the latest tag each time the guide opens */
+export function DeploymentFiles() {
+  const [files, setFiles] = useState(null);
   const [hasError, setHasError] = useState(false);
   const [attempt, setAttempt] = useState(0);
 
@@ -17,55 +16,51 @@ function useGitHubFile(filename, format) {
     let isMounted = true;
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-    setContent(null);
+    setFiles(null);
     setHasError(false);
 
-    fetch(`${RAW_DIRECTORY}/${filename}`, {
-      cache: 'no-cache',
-      credentials: 'omit',
-      referrerPolicy: 'no-referrer',
-      signal: controller.signal,
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
-        return format === 'blob' ? response.blob() : response.text();
-      })
-      .then((file) => {
-        if (!(format === 'blob' ? file.size : file.trim().length)) throw new Error('The file is empty');
-        if (isMounted) setContent(file);
+    loadDeploymentFiles(controller.signal)
+      .then((result) => {
+        if (isMounted) setFiles(result);
       })
       .catch(() => {
         if (isMounted) setHasError(true);
       })
-      .finally(() => clearTimeout(timeout));
+      .finally(() => {
+        clearTimeout(timeout);
+        controller.abort();
+      });
 
     return () => {
       isMounted = false;
       clearTimeout(timeout);
       controller.abort();
     };
-  }, [filename, format, attempt]);
-
-  return {content, hasError, retry: () => setAttempt((value) => value + 1)};
-}
-
-/** Render the release's Compose file after retrieving it in the reader's browser */
-export function ComposeFile() {
-  const {content, hasError, retry} = useGitHubFile('compose.yml', 'text');
+  }, [attempt]);
 
   if (hasError) {
     return (
       <div className={styles.status} role="alert">
-        <p>The Compose file could not be loaded from GitHub.</p>
-        <button type="button" className="button button--secondary button--sm" onClick={retry}>Retry</button>
+        <p>The deployment files could not be loaded from GitHub.</p>
+        <button type="button" className="button button--secondary button--sm" onClick={() => setAttempt((value) => value + 1)}>Retry</button>
       </div>
     );
   }
 
-  if (content === null) {
-    return <p className={styles.status} role="status">Loading compose.yml from GitHub…</p>;
+  if (files === null) {
+    return <p className={styles.status} role="status">Loading deployment files from GitHub…</p>;
   }
 
+  return (
+    <>
+      <ComposeFile content={files.compose} />
+      <EnvironmentDownload content={files.environment} />
+    </>
+  );
+}
+
+/** Render the release's Compose file after retrieving it in the reader's browser */
+function ComposeFile({content}) {
   return (
     <div className={styles.composeFile} role="region" aria-label="Docker Compose file">
       <div className={styles.fileHeader}>
@@ -78,8 +73,7 @@ export function ComposeFile() {
 }
 
 /** Prepare a same-origin download so a real link click saves GitHub's unchanged bytes */
-export function EnvironmentDownload() {
-  const {content, hasError, retry} = useGitHubFile('.env.example', 'blob');
+function EnvironmentDownload({content}) {
   const [downloadUrl, setDownloadUrl] = useState(null);
 
   useEffect(() => {
@@ -91,15 +85,6 @@ export function EnvironmentDownload() {
     setDownloadUrl(objectUrl);
     return () => URL.revokeObjectURL(objectUrl);
   }, [content]);
-
-  if (hasError) {
-    return (
-      <div className={styles.status} role="alert">
-        <p>The environment example could not be loaded from GitHub.</p>
-        <button type="button" className="button button--secondary button--sm" onClick={retry}>Retry</button>
-      </div>
-    );
-  }
 
   if (downloadUrl === null) {
     return <p role="status">Preparing the .env.example download…</p>;
