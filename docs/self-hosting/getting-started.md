@@ -3,7 +3,7 @@ title: Getting started
 description: Download the Docker Compose and environment files, set your database password, and start Lumina Finance.
 ---
 
-import {ComposeFile, EnvironmentDownload} from '@site/src/components/deployment-files/DeploymentFiles';
+import {DeploymentFiles} from '@site/src/components/deployment-files/DeploymentFiles';
 
 This guide walks you through how to set up your own Lumina Finance instance at home.
 
@@ -11,9 +11,7 @@ This guide walks you through how to set up your own Lumina Finance instance at h
 
 Before you begin, make sure Docker and the Docker Compose plugin are installed. Create a directory for Lumina Finance, then copy the Compose file below into the directory:
 
-<ComposeFile />
-
-<EnvironmentDownload />
+<DeploymentFiles />
 
 ## Setting up the environment
 
