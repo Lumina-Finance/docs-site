@@ -190,6 +190,39 @@ body { text-rendering: optimizeLegibility; }
 .theme-doc-markdown thead tr { border-bottom-color: var(--ifm-color-primary); }
 .theme-doc-markdown td { overflow-wrap: anywhere; }
 .theme-doc-markdown pre { border: 1px solid var(--docs-border); box-shadow: none; }
+/* Keep the reading column narrow while the desktop TOC follows the right edge */
+@media (min-width: 997px) {
+  main > .container:has(.theme-doc-markdown) {
+    max-width: none !important;
+    padding-inline: 1.5rem;
+  }
+
+  main > .container > .row:has(.theme-doc-markdown) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 2rem;
+    margin-inline: 0;
+  }
+
+  main > .container > .row:has(.theme-doc-toc-desktop) {
+    grid-template-columns: minmax(0, 1fr) clamp(12rem, 14vw, 16rem);
+  }
+
+  main > .container > .row > .col:has(.theme-doc-markdown) {
+    justify-self: center;
+    width: 100%;
+    min-width: 0;
+    max-width: 42rem !important;
+    padding-inline: 0;
+  }
+
+  main > .container > .row > .col:has(> .theme-doc-toc-desktop) {
+    width: auto;
+    max-width: none;
+    padding-inline: 0;
+  }
+}
+
 .theme-doc-toc-desktop { font-size: 0.85rem; }
 .table-of-contents__link { color: var(--ifm-font-color-secondary); }
 .pagination-nav__link { border-color: var(--docs-border); background: var(--ifm-background-surface-color); }
