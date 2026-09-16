@@ -267,8 +267,6 @@ body { text-rendering: optimizeLegibility; }
 .footer__github-count > span { display: block; }
 .footer__github-count svg { display: block; flex: none; }
 .footer__coffee svg { flex: none; width: auto; height: 16px; }
-.footer__coffee svg path { fill: currentColor; }
-.footer__coffee .logo-coffee { fill: var(--coffee-background); }
 :is(.footer__coffee, .footer__github):is(:hover, :focus-visible) { background: var(--coffee-background); color: var(--coffee-foreground); filter: brightness(1.08); text-decoration: none; }
 @media (pointer: coarse) { :is(.footer__coffee, .footer__github) { position: relative; } :is(.footer__coffee, .footer__github)::after { content: ''; position: absolute; inset: -10px 0; } }
 .docs-sidebar-stars .docs-sidebar-coffee .footer__coffee {
