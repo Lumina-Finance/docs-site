@@ -13,24 +13,35 @@
   "dependencies": {
     "@docusaurus/core": "3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
-    "@easyops-cn/docusaurus-search-local": "0.55.1",
+    "@easyops-cn/docusaurus-search-local": "0.55.3",
     "@fontsource-variable/cormorant-garamond": "5.3.0",
     "@fontsource-variable/dm-sans": "5.3.0",
     "@fontsource/dm-mono": "5.3.0",
-    "katex": "0.16.47",
+    "katex": "0.18.7",
     "prism-react-renderer": "2.4.1",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
     "rehype-katex": "7.0.1",
     "remark-math": "6.0.0"
   },
   "engines": {
-    "node": ">=20.18.1"
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.7",
-    "@babel/plugin-transform-modules-commonjs": "^7.29.7",
-    "@babel/plugin-transform-react-jsx": "^7.29.7",
-    "jsdom": "^26.1.0"
+    "@babel/core": "^8.0.5",
+    "@babel/plugin-transform-modules-commonjs": "^8.0.1",
+    "@babel/plugin-transform-react-jsx": "^8.0.1",
+    "jsdom": "^30.0.1"
+  },
+  "overrides": {
+    "copy-webpack-plugin": {
+      "serialize-javascript": "7.1.1"
+    },
+    "css-minimizer-webpack-plugin": {
+      "serialize-javascript": "7.1.1"
+    },
+    "sockjs": {
+      "uuid": "11.1.1"
+    }
   }
 }
