@@ -1,0 +1,32 @@
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block: 3rem;
+  text-align: center;
+}
+
+.content h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.content p {
+  max-width: 38rem;
+}
+
+.photo {
+  display: block;
+  width: min(100%, 32rem);
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 65%;
+  margin: 1.5rem auto;
+  border-radius: 1rem;
+}
+
+.link {
+  display: inline-block;
+}
