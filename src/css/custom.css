@@ -101,13 +101,16 @@
 }
 
 body { text-rendering: optimizeLegibility; }
-/* Balance DM Mono's text and background without changing the surrounding line box */
+/* Align DM Mono with the surrounding text without changing the line box */
 :not(pre) > code {
   position: relative;
   top: -0.06em;
   color: var(--docs-inline-code-color);
+  font-weight: 700;
+  background: transparent;
+  border: 0;
   vertical-align: baseline;
-  padding-block: 0.15em 0.08em;
+  padding: 0;
 }
 /* Callout titles use uppercase text, whose visual centre is above body text */
 .theme-admonition > :first-child code {
