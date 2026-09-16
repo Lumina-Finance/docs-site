@@ -172,6 +172,24 @@ body { text-rendering: optimizeLegibility; }
 .theme-doc-markdown > h6 { font-size: 0.95rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; }
 .docs-tagline { font-size: 1.1rem; color: var(--ifm-font-color-secondary); }
 .theme-doc-markdown a { text-decoration: underline; text-underline-offset: 0.15em; }
+.theme-doc-markdown a:not(.hash-link):not(.theme-doc-card-container) {
+  --docs-link-highlight: color-mix(in srgb, var(--ifm-color-primary) 8%, transparent);
+  text-decoration-thickness: 1px;
+  border-radius: 0.15em;
+  background-color: transparent;
+  box-shadow: 0 0 0 0.12em transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: color 280ms ease, background-color 280ms ease, box-shadow 280ms ease;
+}
+.theme-doc-markdown a:not(.hash-link):not(.theme-doc-card-container):is(:hover, :focus-visible) {
+  color: var(--ifm-color-primary-dark);
+  background-color: var(--docs-link-highlight);
+  box-shadow: 0 0 0 0.12em var(--docs-link-highlight);
+}
+[data-theme='dark'] .theme-doc-markdown a:not(.hash-link):not(.theme-doc-card-container):is(:hover, :focus-visible) {
+  color: var(--ifm-color-primary-light);
+}
 /* Override the built-in card's important padding utility */
 .docs-category-cards .theme-doc-card-container { position: relative; padding: 1.15rem !important; border: 1px solid var(--docs-border); border-radius: 0.5rem; background: var(--ifm-background-color); color: var(--ifm-font-color-base); box-shadow: none; text-decoration: none; }
 .docs-category-cards .theme-doc-card-container:is(:hover, :focus-visible) { border-color: var(--ifm-color-primary); background: var(--ifm-menu-color-background-hover); box-shadow: none; }
