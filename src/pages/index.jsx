@@ -37,14 +37,17 @@ export default function Home() {
           </p>
         </header>
 
-        <div className="docs-home-hero">
+        <figure className="docs-home-hero">
           <ThemedImage
             sources={heroSources}
             alt="Lumina Finance shown on desktop, tablet, and mobile"
             width={3200}
             height={1800}
           />
-        </div>
+          <figcaption className="docs-home-hero-note">
+            <em>*Psst. Change the doc site to dark mode to see the hero image in dark mode!</em>
+          </figcaption>
+        </figure>
 
 
         <div className="docs-paths">
