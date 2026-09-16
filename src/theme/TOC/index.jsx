@@ -49,12 +49,18 @@ function ViewportTOC({className, ...props}) {
         section.link.toggleAttribute('data-in-view', visible);
         if (visible) active.push(section.link);
       }
+      const railBounds = currentRail.getBoundingClientRect();
+      const origin = railBounds.top;
+      const firstLink = sections[0]?.link.getBoundingClientRect();
+      const lastLink = sections[sections.length - 1]?.link.getBoundingClientRect();
+
+      // Match the rail to the same link bounds used by the highlight
+      currentRail.style.setProperty('--toc-rail-top', `${firstLink ? firstLink.top - origin : railBounds.height}px`);
+      currentRail.style.setProperty('--toc-rail-bottom', `${lastLink ? railBounds.bottom - lastLink.bottom : 0}px`);
       if (!active.length) {
         marker.style.opacity = '0';
         return;
       }
-      const railBounds = currentRail.getBoundingClientRect();
-      const origin = railBounds.top;
       const first = active[0].getBoundingClientRect().top - origin;
       const last = active[active.length - 1].getBoundingClientRect().bottom - origin;
       marker.style.top = `${first}px`;
