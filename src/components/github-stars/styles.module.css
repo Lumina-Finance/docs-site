@@ -14,7 +14,7 @@
   font-weight: 500;
   line-height: 1.25;
   white-space: nowrap;
-  transition: border-color 150ms, background-color 150ms, transform 150ms;
+  transition: border-color 280ms ease, background-color 280ms ease;
 }
 
 .pill:hover {
@@ -22,10 +22,6 @@
   background: var(--ifm-menu-color-background-hover);
   color: var(--ifm-font-color-base);
   text-decoration: none;
-}
-
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .pill:hover { transform: translateY(-1px); }
 }
 
 .githubIcon {
