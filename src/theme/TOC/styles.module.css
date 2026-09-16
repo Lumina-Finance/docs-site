@@ -13,7 +13,7 @@
 .rail::before {
   content: '';
   position: absolute;
-  inset-block: 0;
+  inset-block: var(--toc-rail-top, 100%) var(--toc-rail-bottom, 0);
   left: 1.5px;
   width: 1px;
   transform: translateX(-50%);
