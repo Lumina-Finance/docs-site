@@ -58,6 +58,10 @@ export default function Home() {
               Read more <span aria-hidden="true">→</span>
             </span>
           </Link>
+          <section className="docs-path">
+            <h2>User guide</h2>
+            <p>User guide is coming!</p>
+          </section>
         </div>
         <footer className="margin-top--lg">
           <LastUpdated lastUpdatedAt={customFields.homeLastUpdatedAt} />

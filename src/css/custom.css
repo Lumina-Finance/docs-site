@@ -315,7 +315,7 @@ body { text-rendering: optimizeLegibility; }
 .docs-home-about { margin-top: 2.5rem; }
 .docs-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
 .docs-path { display: flex; flex-direction: column; padding: 1.75rem; border: 1px solid var(--docs-border); border-radius: 0.75rem; background: var(--ifm-background-surface-color); color: var(--ifm-font-color-base); transition: border-color 150ms; }
-.docs-path:hover { border-color: var(--ifm-color-primary); color: var(--ifm-font-color-base); text-decoration: none; }
+a.docs-path:hover { border-color: var(--ifm-color-primary); color: var(--ifm-font-color-base); text-decoration: none; }
 .docs-path h2 { font-size: 1.4rem; }
 .docs-path p { color: var(--ifm-font-color-secondary); margin-bottom: 1.5rem; }
 .docs-path-action { margin-top: auto; color: var(--ifm-color-primary); font-size: 0.9rem; font-weight: 600; }
