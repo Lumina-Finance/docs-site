@@ -212,7 +212,7 @@ body { text-rendering: optimizeLegibility; }
     justify-self: center;
     width: 100%;
     min-width: 0;
-    max-width: 42rem !important;
+    max-width: 52.5rem !important;
     padding-inline: 0;
   }
 
