@@ -14,10 +14,10 @@
   font-weight: 500;
   line-height: 1.25;
   white-space: nowrap;
-  transition: border-color 280ms ease, background-color 280ms ease;
+  transition: border-color 280ms ease, background-color 280ms ease, color 280ms ease;
 }
 
-.pill:hover {
+.pill:is(:hover, :focus-visible) {
   border-color: var(--ifm-color-primary);
   background: var(--ifm-menu-color-background-hover);
   color: var(--ifm-font-color-base);

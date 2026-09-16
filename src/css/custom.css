@@ -286,6 +286,7 @@ body { text-rendering: optimizeLegibility; }
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1.25;
+  transition: border-color 280ms ease, background-color 280ms ease, color 280ms ease;
 }
 .docs-sidebar-coffee .footer__coffee::after { display: none; }
 .docs-sidebar-stars .docs-sidebar-coffee .footer__coffee:is(:hover, :focus-visible) {
