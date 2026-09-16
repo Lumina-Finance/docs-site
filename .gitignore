@@ -2,3 +2,8 @@ node_modules/
 .docusaurus/
 build/
 .page-history/
+
+# Local settings and macOS metadata
+**/.env
+.env*.local
+**/.DS_Store
