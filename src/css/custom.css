@@ -259,13 +259,13 @@ body { text-rendering: optimizeLegibility; }
 :is(.footer__github, .footer__docker) { --coffee-background: #f0f0ef; --coffee-foreground: #252421; border-color: #c9c7c2; }
 [data-theme='dark'] :is(.footer__github, .footer__docker) { --coffee-background: #24221d; --coffee-foreground: #ece6da; border-color: #514b41; }
 :is(.footer__github, .footer__docker) svg { width: 14px; height: 14px; }
-.footer__docker { --coffee-background: #eaf2ff; --coffee-foreground: #204f99; border-color: #cbdcf5; }
-[data-theme='dark'] .footer__docker { --coffee-background: #1c293d; --coffee-foreground: #a9caff; border-color: #344c70; }
+.footer__docker { --coffee-background: #eaf2ff; --coffee-foreground: #204f99; }
+[data-theme='dark'] .footer__docker { --coffee-background: #1c293d; --coffee-foreground: #a9caff; }
 .footer__docker > svg { flex: none; color: #1d63ed; }
 [data-theme='dark'] .footer__docker > svg { color: #6da3ff; }
 .footer__reddit { --coffee-background: #fff0e8; --coffee-foreground: #9b310b; }
 [data-theme='dark'] .footer__reddit { --coffee-background: #35251e; --coffee-foreground: #ffbb98; }
-.footer__reddit { border: 0; padding-inline: 8px; }
+:is(.footer__docker, .footer__reddit) { border: 0; padding-inline: 8px; }
 .footer__reddit svg { flex: none; width: 14px; height: 14px; }
 @media (prefers-reduced-motion: reduce) { :is(.footer__docker, .footer__reddit) { transition: none; } }
 :is(.footer__github-count, .footer__docker-count) { display: inline-flex; align-items: center; gap: 2px; height: 16px; line-height: 16px; font-variant-numeric: tabular-nums; }
