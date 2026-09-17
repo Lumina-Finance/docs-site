@@ -42,7 +42,7 @@ export default function Home() {
         </figure>
 
         <p>
-          This is the documentation site for Lumina Finance. Here, you will find some helpful articles and write-ups on using Lumina Finance and for self-hosting Lumina Finance at home. We hope you will enjoy using Lumina Finance!
+          This is the documentation site for Lumina Finance. Here, you will find some helpful articles and write-ups on using the application and self-hosting it at home. We hope you will enjoy using Lumina Finance!
         </p>
 
         <div className="docs-paths">
