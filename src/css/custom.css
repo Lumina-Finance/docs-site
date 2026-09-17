@@ -280,6 +280,7 @@ body { text-rendering: optimizeLegibility; }
 :is(.footer__coffee, .footer__github, .footer__docker, .footer__reddit):is(:hover, :focus-visible) { background: var(--coffee-background); color: var(--coffee-foreground); filter: brightness(1.08); text-decoration: none; }
 @media (pointer: coarse) { :is(.footer__coffee, .footer__github, .footer__docker, .footer__reddit) { position: relative; } :is(.footer__coffee, .footer__github, .footer__docker, .footer__reddit)::after { content: ''; position: absolute; inset: -10px 0; } }
 .docs-sidebar-stars .docs-sidebar-coffee .footer__coffee {
+  display: inline-flex;
   --coffee-background: var(--ifm-background-color);
   --coffee-foreground: var(--ifm-font-color-secondary);
   justify-content: center;
