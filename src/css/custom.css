@@ -294,7 +294,7 @@ body { text-rendering: optimizeLegibility; }
   transition: border-color 280ms ease, background-color 280ms ease, color 280ms ease;
 }
 .docs-sidebar-coffee .footer__coffee::after { display: none; }
-[data-theme='dark'] .docs-sidebar-coffee .footer__coffee svg path:not(.logo-coffee) { fill: #fff; }
+[data-theme='dark'] .footer__coffee svg path:not(.logo-coffee) { fill: #fff; }
 .docs-sidebar-stars .docs-sidebar-coffee .footer__coffee:is(:hover, :focus-visible) {
   background: var(--ifm-menu-color-background-hover);
   border-color: var(--ifm-color-primary);
