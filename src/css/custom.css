@@ -263,8 +263,9 @@ body { text-rendering: optimizeLegibility; }
 [data-theme='dark'] .footer__docker { --coffee-background: #1c293d; --coffee-foreground: #a9caff; border-color: #344c70; }
 .footer__docker > svg { flex: none; color: #1d63ed; }
 [data-theme='dark'] .footer__docker > svg { color: #6da3ff; }
-.footer__reddit { --coffee-background: #fff0e8; --coffee-foreground: #9b310b; border-color: #f0d6c8; }
-[data-theme='dark'] .footer__reddit { --coffee-background: #35251e; --coffee-foreground: #ffbb98; border-color: #593a2b; }
+.footer__reddit { --coffee-background: #fff0e8; --coffee-foreground: #9b310b; }
+[data-theme='dark'] .footer__reddit { --coffee-background: #35251e; --coffee-foreground: #ffbb98; }
+.footer__reddit { border: 0; padding-inline: 8px; }
 .footer__reddit svg { flex: none; width: 14px; height: 14px; }
 @media (prefers-reduced-motion: reduce) { :is(.footer__docker, .footer__reddit) { transition: none; } }
 :is(.footer__github-count, .footer__docker-count) { display: inline-flex; align-items: center; gap: 2px; height: 16px; line-height: 16px; font-variant-numeric: tabular-nums; }
