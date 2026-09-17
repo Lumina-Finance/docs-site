@@ -311,6 +311,7 @@ body { text-rendering: optimizeLegibility; }
 .footer__copyright { text-align: left; font-size: 0.85rem; }
 @media (max-width: 640px) {
   .footer > .container { flex-direction: column; gap: 0.75rem; }
+  .footer .footer__bottom { order: 1; }
   .footer__copyright { text-align: center; }
   .footer .footer__links { margin-inline: 0; justify-content: center; }
 }
