@@ -247,6 +247,9 @@ body { text-rendering: optimizeLegibility; }
 .table-of-contents__link { color: var(--ifm-font-color-secondary); }
 .pagination-nav__link { border-color: var(--docs-border); background: var(--ifm-background-surface-color); }
 .pagination-nav__sublabel { color: var(--ifm-font-color-secondary); }
+@media (max-width: 640px) {
+  .pagination-nav > .pagination-nav__link:only-child { grid-column: 1 / -1; }
+}
 .footer { border-top: 1px solid var(--docs-border); padding-block: 1rem; }
 .footer > .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.65rem 2rem; }
 .footer__bottom { order: -1; }
