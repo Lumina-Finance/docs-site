@@ -125,6 +125,7 @@ body { text-rendering: optimizeLegibility; }
   .navbar .navbar__search-input { transition: width 180ms ease, border-radius 180ms ease, padding 180ms ease, background-position 180ms ease, color 180ms ease; }
   .navbar .navbar__search-input:not(:focus) { width: 2rem; height: 2rem; padding: 0; border-radius: 1rem; background-position: center; color: transparent; }
   .navbar .navbar__search-input:not(:focus)::placeholder { color: transparent; }
+  .navbar .navbar__search:has(.navbar__search-input:not(:focus)) > svg[aria-hidden] { left: 0.5rem; }
 }
 @media (max-width: 576px) and (prefers-reduced-motion: reduce) {
   .navbar .navbar__search-input { transition: none; }
