@@ -60,6 +60,6 @@ Without these settings, the generated values are saved as `app_encryption_key`, 
 
 Simply run: `docker compose up -d`, and open `http://localhost:8080` once it is ready.
 
-Check out the [common configurations page](common-configurations.md) and the [advanced configurations page](advanced-configurations.md) for further available config options. A full list of env vars are also provided in the [environment variables page](environment-variables.md) as reference.
+Check out the guides under Common configurations and Advanced configurations in the sidebar for further available config options. A full list of env vars are also provided in the [environment variables page](environment-variables.md) as reference.
 
 Happy tinkering and we hope you enjoy using Lumina Finance!

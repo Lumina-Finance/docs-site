@@ -64,6 +64,7 @@ const config = {
         {label: 'Buy me a coffee', href: 'https://www.buymeacoffee.com/lumina.finance', className: 'footer__coffee'},
         {label: 'GitHub stars', href: 'https://github.com/Lumina-Finance/lumina-finance', className: 'footer__github'},
         {label: 'Docker Hub pulls', href: 'https://hub.docker.com/r/luminahq/lumina-finance', className: 'footer__docker'},
+        {label: 'r/LuminaFinance', href: 'https://www.reddit.com/r/LuminaFinance/', className: 'footer__reddit'},
       ],
       copyright: `© ${new Date().getFullYear()} Lumina Software Inc.`,
     },
