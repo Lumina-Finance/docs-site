@@ -254,20 +254,29 @@ body { text-rendering: optimizeLegibility; }
 .footer__links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; margin-bottom: 0; text-align: left; }
 .footer__link-item { display: inline-flex; align-items: center; gap: 0.3rem; min-height: 2.6rem; font-size: 0.85rem; }
 .footer__link-separator { display: none; }
-:is(.footer__coffee, .footer__github, .footer__docker) { --coffee-background: #f4d447; --coffee-foreground: #302409; gap: 0.35rem; min-height: 0; height: 24px; padding: 0 7px; border: 1px solid #d9b82d; border-radius: 4px; background: var(--coffee-background); color: var(--coffee-foreground); font-family: var(--ifm-font-family-base); font-size: 12px; font-weight: 400; line-height: 1; white-space: nowrap; transition: filter 150ms ease; }
+:is(.footer__coffee, .footer__github, .footer__docker, .footer__reddit) { --coffee-background: #f4d447; --coffee-foreground: #302409; gap: 0.35rem; min-height: 0; height: 24px; padding: 0 7px; border: 1px solid #d9b82d; border-radius: 4px; background: var(--coffee-background); color: var(--coffee-foreground); font-family: var(--ifm-font-family-base); font-size: 12px; font-weight: 400; line-height: 1; white-space: nowrap; transition: filter 150ms ease; }
 [data-theme='dark'] .footer__coffee { --coffee-background: #24221d; --coffee-foreground: #f4d447; border-color: #665a32; }
 :is(.footer__github, .footer__docker) { --coffee-background: #f0f0ef; --coffee-foreground: #252421; border-color: #c9c7c2; }
 [data-theme='dark'] :is(.footer__github, .footer__docker) { --coffee-background: #24221d; --coffee-foreground: #ece6da; border-color: #514b41; }
 :is(.footer__github, .footer__docker) svg { width: 14px; height: 14px; }
-.footer__docker,
-[data-theme='dark'] .footer__docker { --coffee-background: #1d63ed; --coffee-foreground: #fff; border-color: #1d63ed; }
-.footer__docker > svg { flex: none; }
+.footer .footer__coffee { --coffee-background: #f9e9a5; --coffee-foreground: #765b16; }
+[data-theme='dark'] .footer .footer__coffee { --coffee-background: #44391f; --coffee-foreground: #ead494; }
+.footer__docker { --coffee-background: #eaf2ff; --coffee-foreground: #204f99; }
+[data-theme='dark'] .footer__docker { --coffee-background: #1c293d; --coffee-foreground: #a9caff; }
+.footer__docker > svg { flex: none; color: #1d63ed; }
+[data-theme='dark'] .footer__docker > svg { color: #6da3ff; }
+.footer__reddit { --coffee-background: #fff0e8; --coffee-foreground: #9b310b; }
+[data-theme='dark'] .footer__reddit { --coffee-background: #35251e; --coffee-foreground: #ffbb98; }
+.footer .footer__coffee,
+:is(.footer__github, .footer__docker, .footer__reddit) { border: 0; padding-inline: 8px; }
+.footer__reddit svg { flex: none; width: 14px; height: 14px; }
+@media (prefers-reduced-motion: reduce) { .footer .footer__coffee, :is(.footer__github, .footer__docker, .footer__reddit) { transition: none; } }
 :is(.footer__github-count, .footer__docker-count) { display: inline-flex; align-items: center; gap: 2px; height: 16px; line-height: 16px; font-variant-numeric: tabular-nums; }
 :is(.footer__github-count, .footer__docker-count) > span { display: block; }
 :is(.footer__github-count, .footer__docker-count) svg { display: block; flex: none; }
 .footer__coffee svg { flex: none; width: auto; height: 16px; }
-:is(.footer__coffee, .footer__github, .footer__docker):is(:hover, :focus-visible) { background: var(--coffee-background); color: var(--coffee-foreground); filter: brightness(1.08); text-decoration: none; }
-@media (pointer: coarse) { :is(.footer__coffee, .footer__github, .footer__docker) { position: relative; } :is(.footer__coffee, .footer__github, .footer__docker)::after { content: ''; position: absolute; inset: -10px 0; } }
+:is(.footer__coffee, .footer__github, .footer__docker, .footer__reddit):is(:hover, :focus-visible) { background: var(--coffee-background); color: var(--coffee-foreground); filter: brightness(1.08); text-decoration: none; }
+@media (pointer: coarse) { :is(.footer__coffee, .footer__github, .footer__docker, .footer__reddit) { position: relative; } :is(.footer__coffee, .footer__github, .footer__docker, .footer__reddit)::after { content: ''; position: absolute; inset: -10px 0; } }
 .docs-sidebar-stars .docs-sidebar-coffee .footer__coffee {
   --coffee-background: var(--ifm-background-color);
   --coffee-foreground: var(--ifm-font-color-secondary);
@@ -285,7 +294,7 @@ body { text-rendering: optimizeLegibility; }
   transition: border-color 280ms ease, background-color 280ms ease, color 280ms ease;
 }
 .docs-sidebar-coffee .footer__coffee::after { display: none; }
-[data-theme='dark'] .docs-sidebar-coffee .footer__coffee svg path:not(.logo-coffee) { fill: #fff; }
+[data-theme='dark'] .footer__coffee svg path:not(.logo-coffee) { fill: #fff; }
 .docs-sidebar-stars .docs-sidebar-coffee .footer__coffee:is(:hover, :focus-visible) {
   background: var(--ifm-menu-color-background-hover);
   border-color: var(--ifm-color-primary);

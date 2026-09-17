@@ -23,19 +23,11 @@ export default function Home() {
         <header className="docs-home-intro">
           <p className="docs-eyebrow">Documentation</p>
           <h1><span aria-hidden="true">👋🏻 </span>Welcome to Lumina Finance</h1>
-          <p>
-            Lumina Finance is modern, self-hostable personal finance software designed to make
-            managing your money and understanding your spending behaviour easy and intuitive.
-          </p>
-          <p>
-            This is the documentation site for LF. Here, you can find tutorials and explanations
-            on self-hosting Lumina Finance, from getting an instance running to configuring
-            email, encryption keys, and single sign-on.
-          </p>
-          <p>
-            Thank you for choosing Lumina Finance for your personal finances!
-          </p>
         </header>
+
+        <p>
+          Lumina Finance is modern and easy to use personal finance software designed to make managing your money and understanding your spending behaviour easy and intuitive.
+        </p>
 
         <figure className="docs-home-hero">
           <ThemedImage
@@ -49,6 +41,9 @@ export default function Home() {
           </figcaption>
         </figure>
 
+        <p>
+          This is the documentation site for Lumina Finance. Here, you will find some helpful articles and write-ups on using Lumina Finance and for self-hosting Lumina Finance at home. We hope you will enjoy using Lumina Finance!
+        </p>
 
         <div className="docs-paths">
           <Link className="docs-path" to="/self-hosting/getting-started/">
