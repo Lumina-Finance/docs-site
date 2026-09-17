@@ -121,6 +121,10 @@ body { text-rendering: optimizeLegibility; }
 .navbar__logo { height: 2rem; }
 .navbar__link { font-size: 0.9rem; font-weight: 500; }
 .navbar__search-input { background-color: var(--ifm-background-color); border: 1px solid var(--docs-border); border-radius: 0.5rem; }
+/* Keep touch input text large enough to avoid Safari focus zoom without disabling pinch zoom */
+@media (pointer: coarse) {
+  .navbar .navbar__search-input { font-size: max(16px, 1rem); }
+}
 @media (max-width: 576px) {
   .navbar .navbar__search-input { transition: width 180ms ease, border-radius 180ms ease, padding 180ms ease, background-position 180ms ease, color 180ms ease; }
   .navbar .navbar__search-input:not(:focus) { width: 2rem; height: 2rem; padding: 0; border-radius: 1rem; background-position: center; color: transparent; }
