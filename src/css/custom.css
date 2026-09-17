@@ -259,6 +259,8 @@ body { text-rendering: optimizeLegibility; }
 :is(.footer__github, .footer__docker) { --coffee-background: #f0f0ef; --coffee-foreground: #252421; border-color: #c9c7c2; }
 [data-theme='dark'] :is(.footer__github, .footer__docker) { --coffee-background: #24221d; --coffee-foreground: #ece6da; border-color: #514b41; }
 :is(.footer__github, .footer__docker) svg { width: 14px; height: 14px; }
+.footer .footer__coffee { --coffee-background: #f9e9a5; --coffee-foreground: #765b16; }
+[data-theme='dark'] .footer .footer__coffee { --coffee-background: #44391f; --coffee-foreground: #ead494; }
 .footer__docker { --coffee-background: #eaf2ff; --coffee-foreground: #204f99; }
 [data-theme='dark'] .footer__docker { --coffee-background: #1c293d; --coffee-foreground: #a9caff; }
 .footer__docker > svg { flex: none; color: #1d63ed; }
