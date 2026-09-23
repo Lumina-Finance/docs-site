@@ -15,6 +15,10 @@ Set [`APP_URL`](environment-variables.md#app_url) to the full address you use to
 
 Lumina Finance uses this address for password-reset links and sign-in redirects, and includes it in its allowed browser origins (CORS). We recommend setting `APP_URL` explicitly, since leaving it empty will default to allowing all origins. Lumina Finance also works out the passkey settings, `WEBAUTHN_RP_ID` and `WEBAUTHN_ORIGINS`, from `APP_URL`. As long as you open Lumina Finance at the address in `APP_URL`, you don't need to set either of them.
 
+:::info[Passkeys need HTTPS and a domain name]
+Passkeys only work over HTTPS or at `http://localhost`. They also don't work at a bare IP address, such as `http://192.168.1.10:8080`.
+:::
+
 ## Changing an existing URL
 
 :::danger[Ensure you have multiple MFA methods set up]
