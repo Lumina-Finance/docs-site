@@ -56,6 +56,12 @@ APP_DB_PASSWORD=replace-with-another-generated-password
 
 Without these settings, the generated values are saved as `app_encryption_key`, `migrator_db_password`, and `app_db_password` under `/data/secrets`.
 
+### Setting the instance URL
+
+Set [`APP_URL`](environment-variables.md#app_url) to the address you'll use to open Lumina Finance, such as `https://lumina-finance.example.com`. It's needed for passkeys, single sign-on and password reset emails, and we recommend setting it even if you don't use them. [Setting the instance URL](instance-url.md) explains the format and what it's used for.
+
+Lumina Finance doesn't serve HTTPS on its own, so you'll want to put it behind a reverse proxy. Keep in mind that passkeys won't work without HTTPS, even with `APP_URL` set.
+
 ## Starting Lumina Finance
 
 Simply run: `docker compose up -d`, and open `http://localhost:8080` once it is ready.
