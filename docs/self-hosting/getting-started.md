@@ -35,6 +35,8 @@ Lumina Finance uses 3 additional secrets in addition to the database password: `
 
 Before you start using Lumina Finance, we recommend setting your application encryption key and database role passwords explicitly. If you leave them unset, Lumina Finance will generate them and save them in `/data/secrets` inside the app container. 
 
+If you'd like to set the encryption key after Lumina Finance has generated one, copy the generated key from `/data/secrets/app_encryption_key` into `.env`. Lumina Finance won't start with a different key, so to change it, follow [Rotating the encryption key](encryption-keys.md) instead.
+
 #### Generating the key and passwords
 
 For encrypting things like OIDC client secrets, Lumina Finance uses a Fernet key. You can either generate your own or use the builtin generator:
