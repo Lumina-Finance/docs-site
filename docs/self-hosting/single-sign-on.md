@@ -17,7 +17,11 @@ For an instance at `https://lumina-finance.example.com`, the redirect URI is `ht
 
 ## Configuring the provider in LF {#configure-lf}
 
-Once you have Lumina Finance registered as a client, add the provider's values to your `.env` file. SSO is then enabled when you set [`OIDC_GENERIC_CLIENT_ID`](environment-variables.md#oidc_generic_client_id), the `OIDC_GENERIC_ISSUER`, `OIDC_GENERIC_CLIENT_SECRET`, and `APP_URL`.
+Once you have Lumina Finance registered as a client, add the provider's values to your `.env` file. Setting [`OIDC_GENERIC_CLIENT_ID`](environment-variables.md#oidc_generic_client_id) turns SSO on, so add `OIDC_GENERIC_ISSUER`, `OIDC_GENERIC_CLIENT_SECRET` and `APP_URL` at the same time.
+
+:::warning[Incomplete SSO settings stop the app from starting]
+Once `OIDC_GENERIC_CLIENT_ID` is set, Lumina Finance checks the rest of the SSO settings when it starts. If the issuer, client secret or `APP_URL` is missing, the issuer doesn't use `https://`, or the scopes don't include `openid`, the app won't start. Check the app's logs with `docker compose logs app` to see which setting needs fixing.
+:::
 
 :::example
 

@@ -237,20 +237,20 @@ The maximum number of password-reset emails a user account can receive in a roll
 
 ## Single sign-on
 
-:::warning[APP_URL is required for SSO]
-`APP_URL` must be set correctly before SSO will be turned on. An incorrect `APP_URL` will prevent SSO from being enabled even if all the following variables contain the correct values.
+:::warning[SSO settings are checked when LF starts]
+Setting `OIDC_GENERIC_CLIENT_ID` turns SSO on. From then on, `OIDC_GENERIC_ISSUER`, `OIDC_GENERIC_CLIENT_SECRET` and `APP_URL` must all be set, the issuer must use `https://`, and `OIDC_GENERIC_SCOPES` must include `openid`. If any of these is missing or invalid, LF won't start, and its logs name the setting at fault. An `APP_URL` that's set but wrong lets LF start, but sign-in fails when the provider sends you back.
 :::
 
 <dl>
 <EnvironmentVariable name="OIDC_GENERIC_CLIENT_ID" type="Text" defaultValue="Blank" example="lumina-finance">
 
-The client ID you receive when you register LF with your identity provider.
+The client ID you receive when you register LF with your identity provider. Setting it turns SSO on.
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="OIDC_GENERIC_ISSUER" dependsOn="OIDC_GENERIC_CLIENT_ID" type="URL" defaultValue="None" required={<>When <code>OIDC_GENERIC_CLIENT_ID</code> is set</>} example="https://auth.example.com/application/o/lumina-finance/">
 
-The issuer URL published by your provider. Copy it exactly from your OIDC provider, including any trailing slash.
+The issuer URL published by your provider. Copy it exactly from your OIDC provider, including any trailing slash. It must use `https://`, unless the provider runs on `localhost`.
 
 </EnvironmentVariable>
 
