@@ -70,7 +70,7 @@ If you leave it unset, LF generates a password and saves it in `/data/secrets/ap
 <dl>
 <EnvironmentVariable name="APP_URL" type="URL" defaultValue="Blank" example="https://example.com">
 
-The FQDN you use to open LF. LF uses it for password-reset links, the single sign-on callback, and default passkey settings.
+The full address you use to open LF, including `https://` and any port, without a path or trailing slash. LF uses it for password-reset links, the single sign-on callback, and default passkey settings.
 
 This address is also included in LF's allowed browser origins. See [Setting the URL](instance-url.md#setting-the-url) for the matching `.env` configuration.
 
