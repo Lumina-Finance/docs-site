@@ -96,13 +96,13 @@ Keep this key safe, since losing it makes those secrets unreadable. To replace a
 
 <EnvironmentVariable name="JWT_ACCESS_PRIVATE_KEY_PATH" type="File path" defaultValue={<code>/data/keys/access_private.pem</code>} example="/data/keys/access_private.pem">
 
-The path inside the app container to the RSA private key used to sign access tokens. LF generates a key at this location if one isn't provided. To use your own file, see [Signing keys and JWKS](signing-keys.md#using-your-own-keys).
+The path inside the app container to the RSA private key used to sign access tokens. LF generates a key at this location if the file is missing or invalid, and deletes an invalid file first. To use your own file, see [Signing keys and JWKS](signing-keys.md#using-your-own-keys).
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="JWT_REFRESH_PRIVATE_KEY_PATH" type="File path" defaultValue={<code>/data/keys/refresh_private.pem</code>} example="/data/keys/refresh_private.pem">
 
-The path inside the app container to the RSA private key used to sign refresh tokens. LF generates this key separately from the access-token key, and both files need to remain available when you recreate the container.
+The path inside the app container to the RSA private key used to sign refresh tokens. LF generates this key separately from the access-token key, in the same way. Both files need to remain available when you recreate the container, since replacing the refresh key signs everyone out.
 
 </EnvironmentVariable>
 
