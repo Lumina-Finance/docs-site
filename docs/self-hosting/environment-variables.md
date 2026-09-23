@@ -63,7 +63,7 @@ If you leave it unset, LF generates a password and saves it in `/data/secrets/ap
 </EnvironmentVariable>
 </dl>
 
-## Instance URL and update checks {#public-address-and-network-access}
+## Instance URL and update checks
 
 <dl>
 <EnvironmentVariable name="APP_URL" type="URL" defaultValue="Blank" example="https://example.com">
