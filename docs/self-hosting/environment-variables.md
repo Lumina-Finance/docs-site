@@ -160,13 +160,13 @@ How long a passkey prompt stays valid.
 
 <EnvironmentVariable name="MFA_CHALLENGE_TOKEN_EXPIRE_SECONDS" type="Duration in seconds" defaultValue={<code>120</code>}>
 
-How long you have to complete the second-factor step after entering your password during sign-in.
+How long you have to complete the second-factor step after entering your password during sign-in, or after choosing a new password during a password reset.
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="TWO_FACTOR_STAGING_EXPIRE_SECONDS" type="Duration in seconds" defaultValue={<code>1800</code>}>
 
-How long an unconfirmed first passkey and pending recovery codes are kept during setup.
+How long unfinished MFA setups are kept. This covers authenticator apps and passkeys that were added but not confirmed, and recovery codes that haven't been saved yet. Once they're older than this, LF removes them the next time you sign in with your password, and you'll need to start the setup again.
 
 </EnvironmentVariable>
 </dl>
