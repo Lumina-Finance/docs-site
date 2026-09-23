@@ -206,7 +206,7 @@ The port LF connects to on your SMTP server.
 
 <EnvironmentVariable name="SMTP_USE_TLS" type="Boolean" defaultValue={<code>true</code>} values={<><code>true</code> · <code>false</code></>} usedWith={<code>EMAIL_BACKEND=smtp</code>} example="true">
 
-Whether LF uses TLS for its connection to the SMTP server.
+Whether LF switches its connection to the SMTP server to TLS using STARTTLS. If you set it to `false`, emails are sent unencrypted. Servers that only accept TLS from the start, usually on port 465, aren't supported.
 
 </EnvironmentVariable>
 

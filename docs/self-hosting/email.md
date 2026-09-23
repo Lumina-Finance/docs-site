@@ -25,6 +25,8 @@ SMTP_USE_TLS=true
 MAIL_FROM=optional
 ```
 
+Lumina Finance connects to the server and then switches the connection to TLS, which is known as STARTTLS and is usually offered on port 587. Servers that only accept TLS from the start, usually on port 465, aren't supported.
+
 ### Setting the sender address
 
 [`MAIL_FROM`](environment-variables.md#mail_from) defaults to your SMTP username. If that username isn't an email address, or your provider requires a different sender address, set `MAIL_FROM` explicitly. Outgoing messages will always use the display name `Lumina Finance (Self-Hosted)` alongside that address.
