@@ -51,7 +51,7 @@ With the **app still stopped**, run the following command, replacing `your-new-k
 docker compose run --rm --no-deps app rotate-app-encryption-key "your-new-key"
 ```
 
-The command re-encrypts the stored secrets. If it reports an error, keep the app stopped and keep both keys while you establish whether the database changes were saved.
+The command re-encrypts all the stored secrets in one go, so if it reports an error, nothing has been changed. Keep the app stopped, fix the problem it reports, and run the command again.
 
 ### Saving the replacement key
 
@@ -61,7 +61,7 @@ Once the rotation succeeds, set `APP_ENCRYPTION_KEY` in `.env` to the exact repl
 APP_ENCRYPTION_KEY=your-new-key
 ```
 
-The rotation command removes the old `/data/secrets/app_encryption_key` file after saving the database changes, and from this point onward, it will use the new key you set in the `APP_ENCRYPTION_KEY` variable.
+If Lumina Finance generated your old key, the rotation command also removes the old `/data/secrets/app_encryption_key` file. If it can't, it prints a note saying so, and Lumina Finance won't start until the file is gone. Running the rotation command again with the same key retries the removal. From this point onward, Lumina Finance uses the new key you set in `APP_ENCRYPTION_KEY`.
 
 ### Starting the app with the new key
 
