@@ -33,3 +33,8 @@ To switch to another address:
 2. If you set `WEBAUTHN_ORIGINS` explicitly, update its list to include the new address
 3. If you set `WEBAUTHN_RP_ID` explicitly, only replace it if the new hostname is neither that domain nor one of its subdomains. Use the new domain name, without a scheme, port, or path (e.g., `example.com`)
 4. If you use single sign-on, update the [callback URL registered with your provider](single-sign-on.md#register-lf-with-the-provider) to `<APP_URL>/auth/oidc/callback`, using the new `APP_URL`.
+5. Recreate the app to load the new address:
+
+    ```bash
+    docker compose up -d --force-recreate app
+    ```
