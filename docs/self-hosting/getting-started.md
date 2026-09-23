@@ -39,7 +39,7 @@ If you'd like to set the encryption key after Lumina Finance has generated one, 
 
 #### Generating the key and passwords
 
-For encrypting things like OIDC client secrets, Lumina Finance uses a Fernet key. You can either generate your own or use the builtin generator:
+For encrypting things like OIDC client secrets, Lumina Finance uses a Fernet key. You can either generate your own or use the built-in generator:
 
 ```bash
 docker compose run --rm --no-deps app generate-app-encryption-key

@@ -36,8 +36,8 @@ Lumina Finance connects to the server and then switches the connection to TLS, w
 
 Once you've saved the `.env` file, recreate the app to load the new settings. Then, request a password reset on the login screen to see if you can receive the email. Clicking on the link sent in the email should bring you to the password reset screen.
 
-If the email doesn't arrive, double check to make sure your credentials are correct, and that you have set a sensible value for [the relevant password reset enviroment variables](environment-variables.md#password-reset-and-email). Check the logs for any potential errors and feedback.
+If the email doesn't arrive, double check to make sure your credentials are correct, and that you have set a sensible value for [the relevant password reset environment variables](environment-variables.md#password-reset-and-email). Check the logs for any potential errors and feedback.
 
-### Builtin rate limiter
+### Built-in rate limiter
 
-Lumina Finance has a builtin rate limiter for password reset emails, and it limits repeated requests to prevent abuse and won't send another email while an unused, unexpired reset link exists. By default, a reset link is valid for 15 minutes and each user account can receive up to 3 reset emails in a rolling 24-hour period. If you'd like to twaek these settings, please reference [the relevant password reset enviroment variables](environment-variables.md#password-reset-and-email).
+Lumina Finance has a built-in rate limiter for password reset emails, and it limits repeated requests to prevent abuse and won't send another email while an unused, unexpired reset link exists. By default, a reset link is valid for 15 minutes and each user account can receive up to 3 reset emails in a rolling 24-hour period. If you'd like to tweak these settings, please reference [the relevant password reset environment variables](environment-variables.md#password-reset-and-email).

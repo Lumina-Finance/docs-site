@@ -223,7 +223,7 @@ The sender address for outgoing emails. It defaults to `SMTP_USERNAME`, and mess
 </EnvironmentVariable>
 
 :::info[Email rate limiter]
-Lumina Finance has a builtin rate limiter for the number of emails that can be sent in a given period, which is controlled by the following two env vars. If you ever have any issues receiving email reset links, please make sure you have set a sensible value for the following two variables.
+Lumina Finance has a built-in rate limiter for the number of emails that can be sent in a given period, which is controlled by the following two env vars. If you ever have any issues receiving email reset links, please make sure you have set a sensible value for the following two variables.
 :::
 
 <EnvironmentVariable name="PASSWORD_RESET_TOKEN_EXPIRE_SECONDS" type="Duration in seconds" defaultValue={<code>900</code>}>
@@ -303,8 +303,8 @@ How long a fresh confirmation with your provider remains valid for a sensitive a
 
 ## Exchange rates
 
-:::note[Instances with no No access to Frankfurter]
-If Lumina Finance cannot access any frankfurter servers **and** you have accounts in multiple currencies, you may experience a significant delay caused by the app retrying FX requests in the background. You may also see an increase in total bandwidths used by the app, as data involving FX conversions are not cached when FX requests fail. This is an expected behaviour and currently we do not have an option to disable FX completely.
+:::note[Instances with no access to Frankfurter]
+If Lumina Finance cannot access any Frankfurter servers **and** you have accounts in multiple currencies, you may experience a significant delay caused by the app retrying FX requests in the background. You may also see an increase in the bandwidth used by the app, as data involving FX conversions are not cached when FX requests fail. This is an expected behaviour and currently we do not have an option to disable FX completely.
 :::
 
 <dl>

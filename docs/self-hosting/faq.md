@@ -28,7 +28,7 @@ We are building Lumina Finance because we want a modern, feature-rich, and acces
 
 We are committed to keeping Lumina Finance free to self-host for non-commercial personal use, excluding features and services that require external data, paid APIs, or external compute.
 
-Our goal is to eventually make Lumina Finance open source, and we are evaluating the best licensing structure with legal professionals. We want to choose a license that supports community use while keeping the project sustainable.
+Our goal is to eventually make Lumina Finance open source, and we are evaluating the best licensing structure with legal professionals. We want to choose a licence that supports community use while keeping the project sustainable.
 
 For now, any commercial, organizational, or business related use is not permitted unless explicitly authorized in writing. This includes, but is not limited to, self hosting Lumina Finance for employees, friends, clients, customers, contractors, teams, or any business operations.
 
