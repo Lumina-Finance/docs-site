@@ -268,7 +268,7 @@ The provider name on the sign-in button. Use a name you'll recognize, such as `A
 
 <EnvironmentVariable name="OIDC_GENERIC_SCOPES" type="Space-separated list" defaultValue={<code>openid email profile</code>} usedWith={<>An enabled OIDC provider</>} example="'openid email profile'">
 
-The information LF requests from your provider. The default includes your email address and profile information. **The minimum scope is `openid`.**
+The information LF requests from your provider. The default includes your email address and profile information. **Keep `openid` and `email`.** LF won't start without `openid`, and it needs an email address from your provider to create or link an account.
 
 </EnvironmentVariable>
 

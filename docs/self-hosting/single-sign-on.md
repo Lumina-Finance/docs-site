@@ -40,7 +40,9 @@ OIDC_REQUIRE_VERIFIED_EMAIL=true
 
 `OIDC_GENERIC_DISPLAY_NAME` sets the provider's name on the sign-in button. It will also use this name to retrieve the OIDC provider's logo from selfh.st’s icon collection. 
 
-The scopes, defined in `OIDC_GENERIC_SCOPES`, tell the provider what information Lumina Finance requests. The default, `openid email profile`, includes your email address and profile information alongside the required `openid` scope. You can reduce this scope to control what information is passed on to Lumina Finance, however you must keep `openid` within the requested scope.
+The scopes, defined in `OIDC_GENERIC_SCOPES`, tell the provider what information Lumina Finance requests. The default, `openid email profile`, requests your email address and profile information alongside the required `openid` scope.
+
+You can remove `profile` if you'd rather not share your name, and enter it on the sign-up form instead. Keep `openid` and `email`, though. Lumina Finance won't start without `openid`, and it needs an email address from your provider to create an account or link one. Most providers only send the email address when `email` is requested, so without it, new sign-ups and new links fail, although people who have already linked their account can still sign in.
 
 ### Requiring a verified email address
 
