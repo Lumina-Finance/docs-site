@@ -46,7 +46,7 @@ You can remove `profile` if you'd rather not share your name, and enter it on th
 
 ### Requiring a verified email address
 
-By default, Lumina Finance requires the provider to confirm that your email address is verified before it can create a user account through single sign-on. If your OIDC provider doesn't verify email addresses, set [`OIDC_REQUIRE_VERIFIED_EMAIL`](environment-variables.md#oidc_require_verified_email) to `false` to bypass this requirement.
+By default, Lumina Finance requires the provider to confirm that your email address is verified before it can create a user account through single sign-on. Some self-hosted providers may not verify email addresses, or may not report them as verified. If new sign-ups show <UiElement>Sign-in failed</UiElement> with "Identity provider did not verify the email address", set [`OIDC_REQUIRE_VERIFIED_EMAIL`](environment-variables.md#oidc_require_verified_email) to `false`.
 
 ## Existing accounts
 
