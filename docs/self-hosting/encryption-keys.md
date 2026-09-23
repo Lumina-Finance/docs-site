@@ -11,9 +11,13 @@ Your application encryption key protects stored secrets, including those used fo
 Please back up your entire instance, including the current encryption keys, before you begin.
 :::
 
-Lumina Finance uses [`APP_ENCRYPTION_KEY`](environment-variables.md#app_encryption_key) to encrypt stored secrets, including authenticator secrets and OIDC client secrets. As a result of changing your key, your secrets will be re-encrypted with the new key. To make sure that you can still roll back to your backup, you must retain your old encryption keys alongside your backup. If you lose the encryption key, you will be permanently locked out of your account. 
+Lumina Finance uses [`APP_ENCRYPTION_KEY`](environment-variables.md#app_encryption_key) to encrypt stored secrets, including authenticator secrets and OIDC client secrets. As a result of changing your key, your secrets will be re-encrypted with the new key. To make sure that you can still roll back to your backup, you must retain your old encryption keys alongside your backup.
 
-Please double check to make sure that the encryption keys are backed up along with the database in a safe and secure place before continuing.
+:::danger[Losing the key permanently locks you out]
+If you lose the encryption key, you and everyone else on your instance will be permanently locked out, and there's no way to recover without the original key. Lumina Finance checks the key every time it starts, and won't start at all if the key is missing or doesn't match the one your stored secrets were encrypted with.
+:::
+
+If you didn't set `APP_ENCRYPTION_KEY` yourself, the key is saved in `/data/secrets/app_encryption_key`, in the app's data volume rather than the database, so a database backup on its own doesn't include it. Please double check to make sure that the encryption keys are backed up along with the database in a safe and secure place before continuing.
 
 ## Rotating the key {#rotate-the-key}
 

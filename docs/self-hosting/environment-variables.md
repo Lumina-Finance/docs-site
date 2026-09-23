@@ -90,7 +90,7 @@ Controls whether LF checks GitHub releases and Docker Hub for a newer version. S
 
 The Fernet key LF uses to encrypt stored secrets, such as authenticator secrets and OIDC client secrets. If you don't supply one, LF generates it on first start and saves it in `/data/secrets/app_encryption_key`.
 
-Keep this key safe, since losing it makes those secrets unreadable. To replace an existing key, follow [Rotating the encryption key](encryption-keys.md).
+Keep this key safe, since losing it permanently locks everyone out of your instance. LF checks the key every time it starts, and won't start if it's missing or doesn't match the one your stored secrets were encrypted with. To replace an existing key, follow [Rotating the encryption key](encryption-keys.md).
 
 </EnvironmentVariable>
 
