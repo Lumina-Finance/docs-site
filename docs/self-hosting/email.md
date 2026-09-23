@@ -22,7 +22,8 @@ SMTP_PORT=587
 SMTP_USERNAME=replace-with-your-smtp-username
 SMTP_PASSWORD='replace-with-your-smtp-password'
 SMTP_USE_TLS=true
-MAIL_FROM=optional
+# Optional, see "Setting the sender address"
+#MAIL_FROM=lumina-finance@example.com
 ```
 
 Lumina Finance connects to the server and then switches the connection to TLS, which is known as STARTTLS and is usually offered on port 587. Servers that only accept TLS from the start, usually on port 465, aren't supported.
