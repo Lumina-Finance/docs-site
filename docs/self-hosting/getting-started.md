@@ -28,7 +28,7 @@ Then, replace `DB_PASSWORD` with the generated password.
 ### Setting encryption keys and db role passwords
 
 :::danger[Persisting the secrets directory]
-If secrets are auto generated, you must persist the data in the `/data/secrets` directory inside the container. Failure to so can result in permanent data corruption and/or data loss.
+If Lumina Finance generates the encryption key for you, you must persist the `/data/secrets` directory inside the container, since that's where the key is saved. Losing the key permanently locks everyone out of your instance, as explained in [Rotating the encryption key](encryption-keys.md).
 :::
 
 Lumina Finance uses 3 additional secrets in addition to the database password: `APP_ENCRYPTION_KEY`, `MIGRATOR_DB_PASSWORD`, and `APP_DB_PASSWORD`. They are used to encrypt sensitive data like the OIDC client secrets and for enforcing RLS for db level user data separation.
