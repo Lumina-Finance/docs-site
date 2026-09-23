@@ -116,6 +116,12 @@ How long a refresh token is valid.
 
 </EnvironmentVariable>
 
+<EnvironmentVariable name="JWT_REFRESH_ROTATION_GRACE_SECONDS" type="Duration in seconds" defaultValue={<code>5</code>}>
+
+How long a refresh token keeps working after LF replaces it with a new one. The short overlap means that a request made at the same moment, for example from another open tab, doesn't sign you out.
+
+</EnvironmentVariable>
+
 <EnvironmentVariable name="JWT_ISSUER" type="Text" defaultValue={<code>lumina-finance</code>}>
 
 The issuer LF includes in its signed tokens.
