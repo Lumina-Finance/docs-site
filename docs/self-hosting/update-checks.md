@@ -14,5 +14,5 @@ UPDATE_CHECKS_ENABLED=false
 ```
 
 :::note[Update checks are not in real time]
-Lumina Finance caches the update check results in the frontend for 6 hours. Therefore, depending on how frequently you use the app and when the last check was, you may experience a delay of up to 6 hours before you receive the notification.
+Lumina Finance checks for a new release at most once every 6 hours, and reuses the last result until then, even if that check failed. So it can take a little over 6 hours after a release before you see the notice.
 :::
