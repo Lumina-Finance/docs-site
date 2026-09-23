@@ -48,7 +48,7 @@ For the two database role passwords, you can generate your own or run `openssl r
 
 #### Saving the key and passwords
 
-Add all three values to their respective entry in the `.env` file:
+The example `.env` file doesn't include these entries, so add all three values to it as new lines:
 
 ```dotenv
 APP_ENCRYPTION_KEY=replace-with-the-generated-fernet-key
