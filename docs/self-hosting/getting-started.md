@@ -5,7 +5,7 @@ description: Download the Docker Compose and environment files, set your databas
 
 import {DeploymentFiles} from '@site/src/components/deployment-files/DeploymentFiles';
 
-This guide walks you through how to set up your own Lumina Finance instance at home.
+Thanks for giving Lumina Finance a try! Getting your own instance running is pretty straightforward. If you've used Docker Compose before, you'll feel right at home, and if you haven't, don't worry, we'll take it one step at a time.
 
 ## Checking your system
 
