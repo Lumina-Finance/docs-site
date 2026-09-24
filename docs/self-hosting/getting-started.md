@@ -7,6 +7,18 @@ import {DeploymentFiles} from '@site/src/components/deployment-files/DeploymentF
 
 This guide walks you through how to set up your own Lumina Finance instance at home.
 
+## Checking your system
+
+Lumina Finance only runs on 64-bit systems, using the `linux/amd64` or `linux/arm64` images. 32-bit systems, such as the 32-bit version of Raspberry Pi OS, aren't supported.
+
+Once Docker is installed, you can check which platform it uses by running:
+
+```bash
+docker version --format '{{.Server.Os}}/{{.Server.Arch}}'
+```
+
+This should print `linux/amd64` or `linux/arm64`. The latter is sometimes shown as `arm64/v8` or `aarch64`. On a Linux host, also run `getconf LONG_BIT`, which should print `64`. Don't rely on `uname -m` on its own, since it only reports the kernel, which can be 64-bit even when the rest of the system is 32-bit.
+
 ## Getting the necessary files
 
 Before you begin, make sure Docker and the Docker Compose plugin are installed. Create a directory for Lumina Finance, then copy the Compose file below into the directory:
