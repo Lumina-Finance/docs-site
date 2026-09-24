@@ -11,9 +11,13 @@ Even if you don’t use these features, we still recommend setting `APP_URL`, as
 
 ## Setting the URL
 
-Set [`APP_URL`](environment-variables.md#app_url) to an address that you will use to access Lumina Finance. For example, `https://lumina-finance.example.com`.
+Set [`APP_URL`](environment-variables.md#app_url) to the full address you use to access the app, such as `https://lumina-finance.example.com`. Include the scheme (`https://`) and the port if it isn't the default, and leave off any path or trailing slash. The app uses the value exactly as written, so a trailing slash, as in `https://lumina-finance.example.com/`, stops passkeys from working, since your browser reports the address without one.
 
-Lumina Finance uses this address for password-reset links and sign-in redirects, and includes it in its allowed browser origins (CORS). We recommend setting `APP_URL` explicitly, since leaving it empty will default to allowing all origins. `WEBAUTHN_RP_ID` and `WEBAUTHN_ORIGINS` will be derived from `APP_URL` unless you set them explicitly, and you do not need to make any further adjustments if you access Lumina Finance at the address set in `APP_URL`.
+The app uses this address for password-reset links and sign-in redirects, and includes it in its allowed browser origins (CORS). We recommend setting `APP_URL` explicitly, since leaving it empty will default to allowing all origins. The app also works out the passkey settings, `WEBAUTHN_RP_ID` and `WEBAUTHN_ORIGINS`, from `APP_URL`. As long as you open the app at the address in `APP_URL`, you don't need to set either of them.
+
+:::info[Passkeys need HTTPS and a domain name]
+Passkeys only work over HTTPS or at `http://localhost`. They also don't work at a bare IP address, such as `http://192.168.1.10:8080`.
+:::
 
 ## Changing an existing URL
 
@@ -29,3 +33,8 @@ To switch to another address:
 2. If you set `WEBAUTHN_ORIGINS` explicitly, update its list to include the new address
 3. If you set `WEBAUTHN_RP_ID` explicitly, only replace it if the new hostname is neither that domain nor one of its subdomains. Use the new domain name, without a scheme, port, or path (e.g., `example.com`)
 4. If you use single sign-on, update the [callback URL registered with your provider](single-sign-on.md#register-lf-with-the-provider) to `<APP_URL>/auth/oidc/callback`, using the new `APP_URL`.
+5. Recreate the app to load the new address:
+
+    ```bash
+    docker compose up -d --force-recreate app
+    ```

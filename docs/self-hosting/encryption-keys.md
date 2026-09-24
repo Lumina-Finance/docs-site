@@ -11,9 +11,13 @@ Your application encryption key protects stored secrets, including those used fo
 Please back up your entire instance, including the current encryption keys, before you begin.
 :::
 
-Lumina Finance uses [`APP_ENCRYPTION_KEY`](environment-variables.md#app_encryption_key) to encrypt stored secrets, including authenticator secrets and OIDC client secrets. As a result of changing your key, your secrets will be re-encrypted with the new key. To make sure that you can still roll back to your backup, you must retain your old encryption keys alongside your backup. If you lose the encryption key, you will be permanently locked out of your account. 
+Lumina Finance uses [`APP_ENCRYPTION_KEY`](environment-variables.md#app_encryption_key) to encrypt stored secrets, including authenticator secrets and OIDC client secrets. As a result of changing your key, your secrets will be re-encrypted with the new key. To make sure that you can still roll back to your backup, you must retain your old encryption keys alongside your backup.
 
-Please double check to make sure that the encryption keys are backed up along with the database in a safe and secure place before continuing.
+:::danger[Losing the key permanently locks you out]
+If you lose the encryption key, you and everyone else on your instance will be permanently locked out, and there's no way to recover without the original key. The app checks the key every time it starts, and won't start at all if the key is missing or doesn't match the one your stored secrets were encrypted with.
+:::
+
+If you didn't set `APP_ENCRYPTION_KEY` yourself, the key is saved in `/data/secrets/app_encryption_key`, in the app's data volume rather than the database, so a database backup on its own doesn't include it. Please double check to make sure that the encryption keys are backed up along with the database in a safe and secure place before continuing.
 
 ## Rotating the key {#rotate-the-key}
 
@@ -37,7 +41,7 @@ You can either generate your own replacement Fernet key, or use the built-in gen
 docker compose run --rm --no-deps app generate-app-encryption-key
 ```
 
-Save the generated value somewhere secure before continuing. You'll need the same value for both the rotation command and your `.env` file, and LF does not automatically save the encryption key.
+Save the generated value somewhere secure before continuing. You'll need the same value for both the rotation command and your `.env` file, and the app does not automatically save the encryption key.
 
 ### Re-encrypting the stored secrets
 
@@ -47,7 +51,12 @@ With the **app still stopped**, run the following command, replacing `your-new-k
 docker compose run --rm --no-deps app rotate-app-encryption-key "your-new-key"
 ```
 
-The command re-encrypts the stored secrets. If it reports an error, keep the app stopped and keep both keys while you establish whether the database changes were saved.
+The command re-encrypts all the stored secrets in one go, so if it reports an error, nothing has been changed. Keep the app stopped, fix the problem it reports, and run the command again.
+
+If the command refuses to rotate because the new key is already in use, check where you are in the process:
+
+- If you've already finished the rotation, there's nothing left to do. Start the app and check that your two-factor sign-in still works.
+- If you set `APP_ENCRYPTION_KEY` to the new key before running the command, put the old key back in `.env` and run the command again.
 
 ### Saving the replacement key
 
@@ -57,7 +66,7 @@ Once the rotation succeeds, set `APP_ENCRYPTION_KEY` in `.env` to the exact repl
 APP_ENCRYPTION_KEY=your-new-key
 ```
 
-The rotation command removes the old `/data/secrets/app_encryption_key` file after saving the database changes, and from this point onward, it will use the new key you set in the `APP_ENCRYPTION_KEY` variable.
+If the app generated your old key, the rotation command also removes the old `/data/secrets/app_encryption_key` file. If it can't, it prints a note saying so, and the app won't start until you delete the file yourself. From this point onward, the app uses the new key you set in `APP_ENCRYPTION_KEY`.
 
 ### Starting the app with the new key
 
@@ -67,4 +76,4 @@ Recreate the app to load the replacement key:
 docker compose up -d --force-recreate app
 ```
 
-Then, check that Lumina Finance starts and that you can use your existing TOTP authenticator and SSO. Keep the old key with any database backup made before the rotation, as the replacement key cannot decrypt that backup's secrets.
+Then, check that the app starts and that you can use your existing TOTP authenticator and SSO. Keep the old key with any database backup made before the rotation, as the replacement key cannot decrypt that backup's secrets.
