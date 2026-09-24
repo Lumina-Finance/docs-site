@@ -53,6 +53,11 @@ docker compose run --rm --no-deps app rotate-app-encryption-key "your-new-key"
 
 The command re-encrypts all the stored secrets in one go, so if it reports an error, nothing has been changed. Keep the app stopped, fix the problem it reports, and run the command again.
 
+If the command refuses to rotate because the new key is already in use, check where you are in the process:
+
+- If you've already finished the rotation, there's nothing left to do. Start the app and check that your two-factor sign-in still works.
+- If you set `APP_ENCRYPTION_KEY` to the new key before running the command, put the old key back in `.env` and run the command again.
+
 ### Saving the replacement key
 
 Once the rotation succeeds, set `APP_ENCRYPTION_KEY` in `.env` to the exact replacement key, **while the app is still stopped**:
