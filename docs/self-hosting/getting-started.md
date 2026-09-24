@@ -9,7 +9,7 @@ Thanks for giving Lumina Finance a try! Getting your own instance running is pre
 
 ## Checking your system
 
-Lumina Finance only runs on 64-bit systems, using the `linux/amd64` or `linux/arm64` images. 32-bit systems, such as the 32-bit version of Raspberry Pi OS, aren't supported.
+The app only runs on 64-bit systems, using the `linux/amd64` or `linux/arm64` images. 32-bit systems, such as the 32-bit version of Raspberry Pi OS, aren't supported.
 
 Once Docker is installed, you can check which platform it uses by running:
 
@@ -21,7 +21,7 @@ This should print `linux/amd64` or `linux/arm64`. The latter is sometimes shown 
 
 ## Getting the necessary files
 
-Before you begin, make sure Docker and the Docker Compose plugin are installed. Create a directory for Lumina Finance, then copy the Compose file below into the directory:
+Before you begin, make sure Docker and the Docker Compose plugin are installed. Create a new directory, then copy the Compose file below into the directory:
 
 <DeploymentFiles />
 
@@ -40,18 +40,18 @@ Then, replace `DB_PASSWORD` with the generated password.
 ### Setting encryption keys and db role passwords
 
 :::danger[Persisting the secrets directory]
-If Lumina Finance generates the encryption key for you, you must persist the `/data/secrets` directory inside the container, since that's where the key is saved. Losing the key permanently locks everyone out of your instance, as explained in [Rotating the encryption key](encryption-keys.md).
+If the app generates the encryption key for you, you must persist the `/data/secrets` directory inside the container, since that's where the key is saved. Losing the key permanently locks everyone out of your instance, as explained in [Rotating the encryption key](encryption-keys.md).
 :::
 
-Lumina Finance uses 3 additional secrets in addition to the database password: `APP_ENCRYPTION_KEY`, `MIGRATOR_DB_PASSWORD`, and `APP_DB_PASSWORD`. They are used to encrypt sensitive data like the OIDC client secrets and for enforcing RLS for db level user data separation.
+The app uses 3 additional secrets in addition to the database password: `APP_ENCRYPTION_KEY`, `MIGRATOR_DB_PASSWORD`, and `APP_DB_PASSWORD`. They are used to encrypt sensitive data like the OIDC client secrets and for enforcing RLS for db level user data separation.
 
-Before you start using Lumina Finance, we recommend setting your application encryption key and database role passwords explicitly. If you leave them unset, Lumina Finance will generate them and save them in `/data/secrets` inside the app container. 
+Before you start using the app, we recommend setting your application encryption key and database role passwords explicitly. If you leave them unset, the app will generate them and save them in `/data/secrets` inside its container. 
 
-If you'd like to set the encryption key after Lumina Finance has generated one, copy the generated key from `/data/secrets/app_encryption_key` into `.env`. Lumina Finance won't start with a different key, so to change it, follow [Rotating the encryption key](encryption-keys.md) instead.
+If you'd like to set the encryption key after the app has generated one, copy the generated key from `/data/secrets/app_encryption_key` into `.env`. It won't start with a different key, so to change it, follow [Rotating the encryption key](encryption-keys.md) instead.
 
 #### Generating the key and passwords
 
-For encrypting things like OIDC client secrets, Lumina Finance uses a Fernet key. You can either generate your own or use the built-in generator:
+For encrypting things like OIDC client secrets, the app uses a Fernet key. You can either generate your own or use the built-in generator:
 
 ```bash
 docker compose run --rm --no-deps app generate-app-encryption-key
@@ -72,11 +72,11 @@ Without these settings, the generated values are saved as `app_encryption_key`, 
 
 ### Setting the instance URL
 
-Set [`APP_URL`](environment-variables.md#app_url) to the address you'll use to open Lumina Finance, such as `https://lumina-finance.example.com`. It's needed for passkeys, single sign-on and password reset emails, and we recommend setting it even if you don't use them. [Setting the instance URL](instance-url.md) explains the format and what it's used for.
+Set [`APP_URL`](environment-variables.md#app_url) to the address you'll use to open the app, such as `https://lumina-finance.example.com`. It's needed for passkeys, single sign-on and password reset emails, and we recommend setting it even if you don't use them. [Setting the instance URL](instance-url.md) explains the format and what it's used for.
 
-Lumina Finance doesn't serve HTTPS on its own, so you'll want to put it behind a reverse proxy. Keep in mind that passkeys won't work without HTTPS, even with `APP_URL` set.
+The app doesn't serve HTTPS on its own, so you'll want to put it behind a reverse proxy. Keep in mind that passkeys won't work without HTTPS, even with `APP_URL` set.
 
-## Starting Lumina Finance
+## Starting the app
 
 Simply run: `docker compose up -d`, and open `http://localhost:8080` once it is ready.
 

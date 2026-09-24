@@ -5,7 +5,7 @@ description: Look up the public environment variables, their defaults, and what 
 
 import EnvironmentVariable from '@site/src/components/environment-reference/EnvironmentVariable';
 
-Environment variables are the settings you put in `.env` to configure your LF instance. This reference lists the available variables, their defaults, and what each one does.
+Environment variables are the settings you put in `.env` to configure your Lumina Finance instance. This reference lists the available variables, their defaults, and what each one does.
 
 ## Container and database
 
@@ -24,19 +24,19 @@ The hostname or IP address of your PostgreSQL server.
 
 <EnvironmentVariable name="DB_PORT" type="Port" defaultValue="None" required="Always" example="5432">
 
-The port LF uses to connect to PostgreSQL.
+The port the app uses to connect to PostgreSQL.
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="DB_NAME" type="Text" defaultValue="None" required="Always" example="lumina">
 
-The database LF connects to.
+The database the app connects to.
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="DB_USER" type="Text" defaultValue="None" required="Always" example="lumina">
 
-The PostgreSQL admin role LF uses at startup to create its separate migration and application roles.
+The PostgreSQL admin role the app uses at startup to create its separate migration and application roles.
 
 </EnvironmentVariable>
 
@@ -50,15 +50,15 @@ For an existing database, this value must match its **admin** password.
 
 <EnvironmentVariable name="MIGRATOR_DB_PASSWORD" type="Secret" defaultValue="Generated if absent">
 
-The password for `lumina_migrator`, the role that owns LF's database schema and runs migrations. If you leave it unset, LF generates a password and saves it in `/data/secrets/migrator_db_password` to reuse on later starts. If that file is lost, LF generates a new password and updates the role the next time it starts.
+The password for `lumina_migrator`, the role that owns the app's database schema and runs migrations. If you leave it unset, the app generates a password and saves it in `/data/secrets/migrator_db_password` to reuse on later starts. If that file is lost, it generates a new password and updates the role the next time it starts.
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="APP_DB_PASSWORD" type="Secret" defaultValue="Generated if absent">
 
-The password for `lumina_app`, the role LF uses for app requests. This role follows the database's row-level security rules to keep each user's data separate.
+The password for `lumina_app`, the role the app uses to handle requests. This role follows the database's row-level security rules to keep each user's data separate.
 
-If you leave it unset, LF generates a password and saves it in `/data/secrets/app_db_password`. If that file is lost, LF generates a new password and updates the role the next time it starts.
+If you leave it unset, the app generates a password and saves it in `/data/secrets/app_db_password`. If that file is lost, it generates a new password and updates the role the next time it starts.
 
 </EnvironmentVariable>
 </dl>
@@ -68,15 +68,15 @@ If you leave it unset, LF generates a password and saves it in `/data/secrets/ap
 <dl>
 <EnvironmentVariable name="APP_URL" type="URL" defaultValue="Blank" example="https://example.com">
 
-The full address you use to open LF, including `https://` and any port, without a path or trailing slash. LF uses it for password-reset links, the single sign-on callback, and default passkey settings.
+The full address you use to open the app, including `https://` and any port, without a path or trailing slash. The app uses it for password-reset links, the single sign-on callback, and default passkey settings.
 
-This address is also included in LF's allowed browser origins. See [Setting the URL](instance-url.md#setting-the-url) for the matching `.env` configuration.
+This address is also included in the app's allowed browser origins. See [Setting the URL](instance-url.md#setting-the-url) for the matching `.env` configuration.
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="UPDATE_CHECKS_ENABLED" type="Boolean" defaultValue={<code>true</code>} values={<><code>true</code> · <code>false</code></>} example="true">
 
-Controls whether LF checks GitHub releases and Docker Hub for a newer version. Set it to `false` to turn off the checks and their notices. [Automatic update checks](update-checks.md) explains when you'll see an update.
+Controls whether the app checks GitHub releases and Docker Hub for a newer version. Set it to `false` to turn off the checks and their notices. [Automatic update checks](update-checks.md) explains when you'll see an update.
 
 </EnvironmentVariable>
 </dl>
@@ -86,21 +86,21 @@ Controls whether LF checks GitHub releases and Docker Hub for a newer version. S
 <dl>
 <EnvironmentVariable name="APP_ENCRYPTION_KEY" type="Secret" defaultValue="Generated on a new installation">
 
-The Fernet key LF uses to encrypt stored secrets, such as authenticator secrets and OIDC client secrets. If you don't supply one, LF generates it on first start and saves it in `/data/secrets/app_encryption_key`.
+The Fernet key the app uses to encrypt stored secrets, such as authenticator secrets and OIDC client secrets. If you don't supply one, the app generates it on first start and saves it in `/data/secrets/app_encryption_key`.
 
-Keep this key safe, since losing it permanently locks everyone out of your instance. LF checks the key every time it starts, and won't start if it's missing or doesn't match the one your stored secrets were encrypted with. To replace an existing key, follow [Rotating the encryption key](encryption-keys.md).
+Keep this key safe, since losing it permanently locks everyone out of your instance. The app checks the key every time it starts, and won't start if it's missing or doesn't match the one your stored secrets were encrypted with. To replace an existing key, follow [Rotating the encryption key](encryption-keys.md).
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="JWT_ACCESS_PRIVATE_KEY_PATH" type="File path" defaultValue={<code>/data/keys/access_private.pem</code>} example="/data/keys/access_private.pem">
 
-The path inside the app container to the RSA private key used to sign access tokens. LF generates a key at this location if the file is missing or invalid, and deletes an invalid file first. To use your own file, see [Signing keys and JWKS](signing-keys.md#using-your-own-keys).
+The path inside the app container to the RSA private key used to sign access tokens. The app generates a key at this location if the file is missing or invalid, and deletes an invalid file first. To use your own file, see [Signing keys and JWKS](signing-keys.md#using-your-own-keys).
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="JWT_REFRESH_PRIVATE_KEY_PATH" type="File path" defaultValue={<code>/data/keys/refresh_private.pem</code>} example="/data/keys/refresh_private.pem">
 
-The path inside the app container to the RSA private key used to sign refresh tokens. LF generates this key separately from the access-token key, in the same way. Both files need to remain available when you recreate the container, since replacing the refresh key signs everyone out.
+The path inside the app container to the RSA private key used to sign refresh tokens. The app generates this key separately from the access-token key, in the same way. Both files need to remain available when you recreate the container, since replacing the refresh key signs everyone out.
 
 </EnvironmentVariable>
 
@@ -118,13 +118,13 @@ How long a refresh token is valid.
 
 <EnvironmentVariable name="JWT_REFRESH_ROTATION_GRACE_SECONDS" type="Duration in seconds" defaultValue={<code>5</code>}>
 
-How long a refresh token keeps working after LF replaces it with a new one. The short overlap means that a request made at the same moment, for example from another open tab, doesn't sign you out.
+How long a refresh token keeps working after the app replaces it with a new one. The short overlap means that a request made at the same moment, for example from another open tab, doesn't sign you out.
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="JWT_ISSUER" type="Text" defaultValue={<code>lumina-finance</code>}>
 
-The issuer LF includes in its signed tokens.
+The issuer the app includes in its signed tokens.
 
 </EnvironmentVariable>
 
@@ -154,7 +154,7 @@ The domain your passkeys are tied to, called the relying-party ID. Specify a dom
 
 <EnvironmentVariable name="WEBAUTHN_ORIGINS" type="Comma-separated list" defaultValue={<code>APP_URL</code>} example="https://example.com">
 
-The browser origins LF accepts for passkey registration and sign-in. Values given here will replace the `APP_URL` default.
+The browser origins the app accepts for passkey registration and sign-in. Values given here will replace the `APP_URL` default.
 
 </EnvironmentVariable>
 
@@ -172,7 +172,7 @@ How long you have to complete the second-factor step after entering your passwor
 
 <EnvironmentVariable name="TWO_FACTOR_STAGING_EXPIRE_SECONDS" type="Duration in seconds" defaultValue={<code>1800</code>}>
 
-How long unfinished MFA setups are kept. This covers authenticator apps and passkeys that were added but not confirmed, and recovery codes that haven't been saved yet. Once they're older than this, LF removes them the next time you sign in with your password, and you'll need to start the setup again.
+How long unfinished MFA setups are kept. This covers authenticator apps and passkeys that were added but not confirmed, and recovery codes that haven't been saved yet. Once they're older than this, the app removes them the next time you sign in with your password, and you'll need to start the setup again.
 
 </EnvironmentVariable>
 </dl>
@@ -182,7 +182,7 @@ How long unfinished MFA setups are kept. This covers authenticator apps and pass
 <dl>
 <EnvironmentVariable name="EMAIL_BACKEND" type="Choice" defaultValue={<code>logging</code>} values={<><code>logging</code> · <code>smtp</code></>} example="smtp">
 
-How LF handles outgoing password-reset emails. Set it to `smtp` to send them through your email provider. The default, `logging`, writes the messages and their reset links to log.
+How the app handles outgoing password-reset emails. Set it to `smtp` to send them through your email provider. The default, `logging`, writes the messages and their reset links to log.
 
 </EnvironmentVariable>
 
@@ -206,13 +206,13 @@ The password your provider supplies for SMTP authentication.
 
 <EnvironmentVariable name="SMTP_PORT" type="Port" defaultValue={<code>587</code>} usedWith={<code>EMAIL_BACKEND=smtp</code>} example="587">
 
-The port LF connects to on your SMTP server.
+The port the app connects to on your SMTP server.
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="SMTP_USE_TLS" type="Boolean" defaultValue={<code>true</code>} values={<><code>true</code> · <code>false</code></>} usedWith={<code>EMAIL_BACKEND=smtp</code>} example="true">
 
-Whether LF switches its connection to the SMTP server to TLS using STARTTLS. If you set it to `false`, emails are sent unencrypted. Servers that only accept TLS from the start, usually on port 465, aren't supported.
+Whether the app switches its connection to the SMTP server to TLS using STARTTLS. If you set it to `false`, emails are sent unencrypted. Servers that only accept TLS from the start, usually on port 465, aren't supported.
 
 </EnvironmentVariable>
 
@@ -223,7 +223,7 @@ The sender address for outgoing emails. It defaults to `SMTP_USERNAME`, and mess
 </EnvironmentVariable>
 
 :::info[Email rate limiter]
-Lumina Finance has a built-in rate limiter for the number of emails that can be sent in a given period, which is controlled by the following two env vars. If you ever have any issues receiving email reset links, please make sure you have set a sensible value for the following two variables.
+The app has a built-in rate limiter for the number of emails that can be sent in a given period, which is controlled by the following two env vars. If you ever have any issues receiving email reset links, please make sure you have set a sensible value for the following two variables.
 :::
 
 <EnvironmentVariable name="PASSWORD_RESET_TOKEN_EXPIRE_SECONDS" type="Duration in seconds" defaultValue={<code>900</code>}>
@@ -241,14 +241,14 @@ The maximum number of password-reset emails a user account can receive in a roll
 
 ## Single sign-on
 
-:::warning[SSO settings are checked when LF starts]
-Setting `OIDC_GENERIC_CLIENT_ID` turns SSO on. From then on, `OIDC_GENERIC_ISSUER`, `OIDC_GENERIC_CLIENT_SECRET` and `APP_URL` must all be set, the issuer must use `https://`, and `OIDC_GENERIC_SCOPES` must include `openid`. If any of these is missing or invalid, LF won't start, and its logs name the setting at fault. An `APP_URL` that's set but wrong lets LF start, but sign-in fails when the provider sends you back.
+:::warning[SSO settings are checked when the app starts]
+Setting `OIDC_GENERIC_CLIENT_ID` turns SSO on. From then on, `OIDC_GENERIC_ISSUER`, `OIDC_GENERIC_CLIENT_SECRET` and `APP_URL` must all be set, the issuer must use `https://`, and `OIDC_GENERIC_SCOPES` must include `openid`. If any of these is missing or invalid, the app won't start, and its logs name the setting at fault. An `APP_URL` that's set but wrong lets the app start, but sign-in fails when the provider sends you back.
 :::
 
 <dl>
 <EnvironmentVariable name="OIDC_GENERIC_CLIENT_ID" type="Text" defaultValue="Blank" example="lumina-finance">
 
-The client ID you receive when you register LF with your identity provider. Setting it turns SSO on.
+The client ID you receive when you register the app with your identity provider. Setting it turns SSO on.
 
 </EnvironmentVariable>
 
@@ -266,25 +266,25 @@ The client secret issued with your client ID.
 
 <EnvironmentVariable name="OIDC_GENERIC_DISPLAY_NAME" type="Text" defaultValue={<code>OIDC</code>} usedWith={<>An enabled OIDC provider</>} example="'Authentik'">
 
-The provider name on the sign-in button. Use a name you'll recognize, such as `Authentik`. When the name matches a supported self-hosted app, LF uses its logo on the button.
+The provider name on the sign-in button. Use a name you'll recognize, such as `Authentik`. When the name matches a supported self-hosted app, its logo appears on the button.
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="OIDC_GENERIC_SCOPES" type="Space-separated list" defaultValue={<code>openid email profile</code>} usedWith={<>An enabled OIDC provider</>} example="'openid email profile'">
 
-The information LF requests from your provider. The default includes your email address and profile information. **Keep `openid` and `email`.** LF won't start without `openid`, and it needs an email address from your provider to create or link an account.
+The information the app requests from your provider. The default includes your email address and profile information. **Keep `openid` and `email`.** The app won't start without `openid`, and it needs an email address from your provider to create or link an account.
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="OIDC_REQUIRE_VERIFIED_EMAIL" type="Boolean" defaultValue={<code>true</code>} values={<><code>true</code> · <code>false</code></>} example="true">
 
-Whether your provider must confirm a verified email address before a first sign-in can create an LF user account. If your self-hosted provider doesn't verify email addresses, set this to `false` to allow user account creation without that confirmation.
+Whether your provider must confirm a verified email address before a first sign-in can create a user account. If your self-hosted provider doesn't verify email addresses, set this to `false` to allow user account creation without that confirmation.
 
 </EnvironmentVariable>
 
 <EnvironmentVariable name="OIDC_AUTHORIZATION_REQUEST_EXPIRE_SECONDS" type="Duration in seconds" defaultValue={<code>600</code>}>
 
-How long a pending sign-in, user account linking, or reauthentication request stays valid while you visit the provider and return to LF.
+How long a pending sign-in, user account linking, or reauthentication request stays valid while you visit the provider and return to the app.
 
 </EnvironmentVariable>
 
@@ -304,13 +304,13 @@ How long a fresh confirmation with your provider remains valid for a sensitive a
 ## Exchange rates
 
 :::note[Instances with no access to Frankfurter]
-If Lumina Finance cannot access any Frankfurter servers **and** you have accounts in multiple currencies, you may experience a significant delay caused by the app retrying FX requests in the background. You may also see an increase in the bandwidth used by the app, as data involving FX conversions are not cached when FX requests fail. This is an expected behaviour and currently we do not have an option to disable FX completely.
+If the app cannot access any Frankfurter servers **and** you have accounts in multiple currencies, you may experience a significant delay caused by it retrying FX requests in the background. You may also see an increase in the bandwidth used by the app, as data involving FX conversions are not cached when FX requests fail. This is an expected behaviour and currently we do not have an option to disable FX completely.
 :::
 
 <dl>
 <EnvironmentVariable name="FRANKFURTER_URL" type="URL" defaultValue={<code>https://api.frankfurter.dev/v2</code>} example="https://api.frankfurter.dev/v2">
 
-The URL LF uses to retrieve exchange rates. To use your own Frankfurter instance, set this to its API address including the version path, such as `/v2`. It must provide a compatible API, and the value can't be blank.
+The URL the app uses to retrieve exchange rates. To use your own Frankfurter instance, set this to its API address including the version path, such as `/v2`. It must provide a compatible API, and the value can't be blank.
 
 </EnvironmentVariable>
 </dl>

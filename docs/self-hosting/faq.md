@@ -22,7 +22,7 @@ Yes, for a few things:
 
 There are already great personal finance tools out there, including some that are self-hostable, but many feel outdated, too simplistic, overly complicated, or too focused on one specific workflow.
 
-We are building Lumina Finance because we want a modern, feature-rich, and accessible alternative that helps people understand their finances more clearly without fighting the software. Our goal is to combine strong financial tracking, a clean and modern user experience, privacy conscious design, and practical insights in one product. Essentially, we want to build something that "just works."
+We are building it because we want a modern, feature-rich, and accessible alternative that helps people understand their finances more clearly without fighting the software. Our goal is to combine strong financial tracking, a clean and modern user experience, privacy conscious design, and practical insights in one product. Essentially, we want to build something that "just works."
 
 ## Is this open source, and will self-hosting be free?
 
@@ -40,7 +40,7 @@ We go through all of your comments and requests, no matter how small or long it 
 
 ## How can I support Lumina Finance's development?
 
-We have a buy me a coffee page set up [here](https://buymeacoffee.com/lumina.finance), which you can donate to help support the development of Lumina Finance.
+We have a buy me a coffee page set up [here](https://buymeacoffee.com/lumina.finance), which you can donate to help support its development.
 
 You can also support us by [giving us a star on GitHub](https://github.com/Lumina-Finance/lumina-finance), or by sharing this project with others!
 
