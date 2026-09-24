@@ -61,7 +61,7 @@ Once the rotation succeeds, set `APP_ENCRYPTION_KEY` in `.env` to the exact repl
 APP_ENCRYPTION_KEY=your-new-key
 ```
 
-If Lumina Finance generated your old key, the rotation command also removes the old `/data/secrets/app_encryption_key` file. If it can't, it prints a note saying so, and Lumina Finance won't start until the file is gone. Running the rotation command again with the same key retries the removal. From this point onward, Lumina Finance uses the new key you set in `APP_ENCRYPTION_KEY`.
+If Lumina Finance generated your old key, the rotation command also removes the old `/data/secrets/app_encryption_key` file. If it can't, it prints a note saying so, and Lumina Finance won't start until you delete the file yourself. From this point onward, Lumina Finance uses the new key you set in `APP_ENCRYPTION_KEY`.
 
 ### Starting the app with the new key
 
