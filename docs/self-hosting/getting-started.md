@@ -7,17 +7,9 @@ import {DeploymentFiles} from '@site/src/components/deployment-files/DeploymentF
 
 Thanks for giving Lumina Finance a try! Getting your own instance running is pretty straightforward. If you've used Docker Compose before, you'll feel right at home, and if you haven't, don't worry, we'll take it one step at a time.
 
-## Checking your system
+## Checking the compatibility of your system
 
-The app only runs on 64-bit systems, using the `linux/amd64` or `linux/arm64` images. 32-bit systems, such as the 32-bit version of Raspberry Pi OS, aren't supported.
-
-Once Docker is installed, you can check which platform it uses by running:
-
-```bash
-docker version --format '{{.Server.Os}}/{{.Server.Arch}}'
-```
-
-This should print `linux/amd64` or `linux/arm64`. The latter is sometimes shown as `arm64/v8` or `aarch64`. On a Linux host, also run `getconf LONG_BIT`, which should print `64`. Don't rely on `uname -m` on its own, since it only reports the kernel, which can be 64-bit even when the rest of the system is 32-bit.
+The app runs on 64-bit systems only, though it comes with images for both `x86` (`linux/amd64`) and `ARM` (`linux/arm64`). That covers most modern computers and servers, including a Raspberry Pi running the 64-bit version of Raspberry Pi OS.
 
 ## Getting the necessary files
 
