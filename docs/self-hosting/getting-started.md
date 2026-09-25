@@ -32,7 +32,7 @@ Then, replace `DB_PASSWORD` with the generated password.
 ### Setting encryption keys and db role passwords
 
 :::danger[Persisting the secrets directory]
-If the app generates the encryption key for you, you must persist the `/data/secrets` directory inside the container, since that's where the key is saved. Losing the key permanently locks everyone out of your instance, as explained in [Rotating the encryption key](encryption-keys.md).
+If the app generates the encryption key and db role passwords for you (i.e., you choose not to specify the following env vars), you must persist the `/data/secrets` directory inside the container, since that's where the generated secrets are stored. Losing these secrets will permanently lock everyone out of your instance, and you may lose all your data. More is explained in [Rotating the encryption key](encryption-keys.md).
 :::
 
 The app uses 3 additional secrets in addition to the database password: `APP_ENCRYPTION_KEY`, `MIGRATOR_DB_PASSWORD`, and `APP_DB_PASSWORD`. They are used to encrypt sensitive data like the OIDC client secrets and for enforcing RLS for db level user data separation.
