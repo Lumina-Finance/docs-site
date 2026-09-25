@@ -7,7 +7,7 @@ description: Answers about Lumina Finance, its funding, and running a personal i
 
 ## What data does Lumina Finance collect for the self-hosted instances?
 
-Nothing.
+Nothing :)
 
 ## Does Lumina Finance connect to any outside services?
 
