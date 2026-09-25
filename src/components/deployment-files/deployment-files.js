@@ -23,8 +23,8 @@ export async function loadDeploymentFiles(signal) {
   const directory = `${RAW_REPOSITORY_URL}/refs/tags/${encodeURIComponent(tag)}/docker`;
   const [compose, environment] = await Promise.all([
     fetchGitHub(`${directory}/compose.yml`, signal).then((file) => file.text()),
-    fetchGitHub(`${directory}/.env.example`, signal).then((file) => file.blob()),
+    fetchGitHub(`${directory}/.env.example`, signal).then((file) => file.text()),
   ]);
-  if (!compose.trim() || !environment.size) throw new Error('A deployment file is empty');
+  if (!compose.trim() || !environment.trim()) throw new Error('A deployment file is empty');
   return {compose, environment};
 }

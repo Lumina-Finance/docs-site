@@ -54,14 +54,32 @@ export function DeploymentFiles() {
 
   return (
     <>
-      <ComposeFile content={files?.compose ?? null} />
-      {files !== null && <EnvironmentDownload content={files.environment} />}
+      <FilePanel
+        name="compose.yml"
+        label="Docker Compose file"
+        language="yaml"
+        languageLabel="YAML"
+        placeholderLines={32}
+        content={files?.compose ?? null}
+      />
+      <p>Then, copy the example env file below into a file named <code>.env</code> in the same directory:</p>
+      <FilePanel
+        name=".env.example"
+        label="Example environment file"
+        language="ini"
+        languageLabel="ENV"
+        placeholderLines={47}
+        content={files?.environment ?? null}
+      />
     </>
   );
 }
 
-/** Render the release's Compose file after retrieving it in the reader's browser, holding its place while it loads */
-function ComposeFile({content}) {
+/**
+ * Render one of the release's files after retrieving it in the reader's browser, holding about
+ * its length while it loads. placeholderLines is the file's usual line count
+ */
+function FilePanel({name, label, language, languageLabel, placeholderLines, content}) {
   const loaded = content !== null;
   const [showLoading, setShowLoading] = useState(!loaded);
 
@@ -75,14 +93,19 @@ function ComposeFile({content}) {
   }, [loaded]);
 
   return (
-    <div className={styles.composeFile} role="region" aria-label="Docker Compose file" aria-busy={!loaded}>
+    <div
+      className={styles.file}
+      role="region"
+      aria-label={label}
+      aria-busy={!loaded}
+      style={{'--placeholder-lines': placeholderLines}}>
       <div className={styles.fileHeader}>
-        <span>compose.yml</span>
-        <span className={styles.language}>YAML</span>
+        <span>{name}</span>
+        <span className={styles.language}>{languageLabel}</span>
       </div>
       <div className={styles.fileBody}>
         {loaded && (
-          <CodeBlock language="yaml" showLineNumbers className={`${styles.composeBlock} ${styles.reveal} docs-persistent-wrap`}>{content}</CodeBlock>
+          <CodeBlock language={language} showLineNumbers className={`${styles.fileBlock} ${styles.reveal} docs-persistent-wrap`}>{content}</CodeBlock>
         )}
         {showLoading && (
           <div className={styles.loading} data-state={loaded ? 'fading' : 'shown'} role="status">
@@ -101,29 +124,3 @@ const Spinner = () => (
     <circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="36 96" />
   </svg>
 );
-
-/** Prepare a same-origin download so a real link click saves GitHub's unchanged bytes */
-function EnvironmentDownload({content}) {
-  const [downloadUrl, setDownloadUrl] = useState(null);
-
-  useEffect(() => {
-    if (content === null) {
-      setDownloadUrl(null);
-      return undefined;
-    }
-    const objectUrl = URL.createObjectURL(content);
-    setDownloadUrl(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [content]);
-
-  if (downloadUrl === null) {
-    return <p role="status">Preparing the .env.example download…</p>;
-  }
-
-  return (
-    <p>
-      <a href={downloadUrl} download=".env.example">Download the example env file</a>
-      {' '}and rename it to <code>.env</code> in the same directory as the Docker Compose file.
-    </p>
-  );
-}

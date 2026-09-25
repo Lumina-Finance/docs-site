@@ -1,6 +1,6 @@
 ---
 title: Getting started
-description: Download the Docker Compose and environment files, set your database password, and start Lumina Finance.
+description: Copy the Docker Compose and environment files, set your database password, and start Lumina Finance.
 ---
 
 import {DeploymentFiles} from '@site/src/components/deployment-files/DeploymentFiles';
