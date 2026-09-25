@@ -2,9 +2,9 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
-import ThemedImage from '@theme/ThemedImage';
 import LastUpdated from '@theme/LastUpdated';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {HeroImage} from '@site/src/components/hero-image/HeroImage';
 import {TourVideo} from '@site/src/components/tour-video/TourVideo';
 
 // The same demo the main repository's README shows, served from GitHub rather than bundled here
@@ -34,7 +34,7 @@ export default function Home() {
         </p>
 
         <figure className="docs-home-hero">
-          <ThemedImage
+          <HeroImage
             sources={heroSources}
             alt="Lumina Finance shown on desktop, tablet, and mobile"
             width={3200}

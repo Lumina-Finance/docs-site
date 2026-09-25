@@ -1,0 +1,46 @@
+.frame {
+  position: relative;
+  display: block;
+}
+
+/* Only the reveal is animated, so hiding a not yet loaded image is instant */
+.frame[data-state='revealing'] .image {
+  transition: opacity 300ms ease;
+}
+
+.frame[data-state='loading'] .image {
+  opacity: 0;
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+
+.frame[data-state='revealing'] .loading {
+  opacity: 0;
+}
+
+.spinner {
+  width: 2.6rem;
+  height: 2.6rem;
+  color: var(--ifm-color-primary);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame[data-state='revealing'] .image,
+  .loading {
+    transition: none;
+  }
+}
