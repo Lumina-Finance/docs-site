@@ -1,18 +1,22 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
-import ThemedImage from '@theme/ThemedImage';
 import LastUpdated from '@theme/LastUpdated';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {HeroImage} from '@site/src/components/hero-image/HeroImage';
+import {TourVideo} from '@site/src/components/tour-video/TourVideo';
+
+// The same demo the main repository's README shows, served from GitHub rather than bundled here
+const DEMO_VIDEO_URL = 'https://github.com/user-attachments/assets/0674ffa8-a16e-4460-a82a-fc039aba6d30';
+// The README's hero screenshots, also served from GitHub
+const HERO_SOURCES = {
+  light: 'https://raw.githubusercontent.com/Lumina-Finance/lumina-finance/main/docs/screenshots/hero_light.png',
+  dark: 'https://raw.githubusercontent.com/Lumina-Finance/lumina-finance/main/docs/screenshots/hero_dark.png',
+};
 
 /** Give readers a direct starting point for using or operating the app */
 export default function Home() {
   const {siteConfig: {customFields}} = useDocusaurusContext();
-  const heroSources = {
-    light: useBaseUrl('/img/hero_light.png'),
-    dark: useBaseUrl('/img/hero_dark.png'),
-  };
 
   return (
     <Layout
@@ -30,8 +34,8 @@ export default function Home() {
         </p>
 
         <figure className="docs-home-hero">
-          <ThemedImage
-            sources={heroSources}
+          <HeroImage
+            sources={HERO_SOURCES}
             alt="Lumina Finance shown on desktop, tablet, and mobile"
             width={3200}
             height={1800}
@@ -44,6 +48,10 @@ export default function Home() {
         <p>
           This is the documentation site for Lumina Finance. Here, you will find some helpful articles and write-ups on using the application and self-hosting it at home. We hope you will enjoy using Lumina Finance!
         </p>
+
+        <section className="docs-home-tour">
+          <TourVideo src={DEMO_VIDEO_URL} title="Take a quick tour" duration={97} label="A tour of Lumina Finance's main pages" />
+        </section>
 
         <div className="docs-paths">
           <Link className="docs-path" to="/self-hosting/getting-started/">

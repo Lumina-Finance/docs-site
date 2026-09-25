@@ -5,8 +5,12 @@ import styles from './styles.module.css';
 import {loadDeploymentFiles} from './deployment-files';
 
 const REQUEST_TIMEOUT_MS = 8000;
+// Matches the loading overlay's fade in styles.module.css
+const FADE_MS = 300;
+// Keeps the loading state up long enough to read as intentional rather than a flicker
+const MIN_LOADING_MS = 800;
 
-/** Load a matching pair from the latest tag each time the guide opens */
+/** Load both files from GitHub each time the guide opens */
 export function DeploymentFiles() {
   const [files, setFiles] = useState(null);
   const [hasError, setHasError] = useState(false);
@@ -19,8 +23,9 @@ export function DeploymentFiles() {
     setFiles(null);
     setHasError(false);
 
-    loadDeploymentFiles(controller.signal)
-      .then((result) => {
+    const minimumWait = new Promise((resolve) => setTimeout(resolve, MIN_LOADING_MS));
+    Promise.all([loadDeploymentFiles(controller.signal), minimumWait])
+      .then(([result]) => {
         if (isMounted) setFiles(result);
       })
       .catch(() => {
@@ -47,53 +52,75 @@ export function DeploymentFiles() {
     );
   }
 
-  if (files === null) {
-    return <p className={styles.status} role="status">Loading deployment files from GitHub…</p>;
-  }
-
   return (
     <>
-      <ComposeFile content={files.compose} />
-      <EnvironmentDownload content={files.environment} />
+      <FilePanel
+        name="compose.yml"
+        label="Docker Compose file"
+        language="yaml"
+        languageLabel="YAML"
+        placeholderLines={32}
+        content={files?.compose ?? null}
+      />
+      <p>Then, copy the example env file below into a file named <code>.env</code> in the same directory:</p>
+      <FilePanel
+        name=".env.example"
+        label="Example environment file"
+        language="ini"
+        languageLabel="ENV"
+        placeholderLines={47}
+        content={files?.environment ?? null}
+      />
     </>
   );
 }
 
-/** Render the release's Compose file after retrieving it in the reader's browser */
-function ComposeFile({content}) {
+/**
+ * Render one of the repository's deployment files after retrieving it in the reader's browser, holding about
+ * its length while it loads. placeholderLines is the file's usual line count
+ */
+function FilePanel({name, label, language, languageLabel, placeholderLines, content}) {
+  const loaded = content !== null;
+  const [showLoading, setShowLoading] = useState(!loaded);
+
+  useEffect(() => {
+    if (!loaded) {
+      setShowLoading(true);
+      return undefined;
+    }
+    const timer = setTimeout(() => setShowLoading(false), FADE_MS);
+    return () => clearTimeout(timer);
+  }, [loaded]);
+
   return (
-    <div className={styles.composeFile} role="region" aria-label="Docker Compose file">
+    <div
+      className={styles.file}
+      role="region"
+      aria-label={label}
+      aria-busy={!loaded}
+      style={{'--placeholder-lines': placeholderLines}}>
       <div className={styles.fileHeader}>
-        <span>compose.yml</span>
-        <span className={styles.language}>YAML</span>
+        <span>{name}</span>
+        <span className={styles.language}>{languageLabel}</span>
       </div>
-      <CodeBlock language="yaml" showLineNumbers className={`${styles.composeBlock} docs-persistent-wrap`}>{content}</CodeBlock>
+      <div className={styles.fileBody}>
+        {loaded && (
+          <CodeBlock language={language} showLineNumbers className={`${styles.fileBlock} ${styles.reveal} docs-persistent-wrap`}>{content}</CodeBlock>
+        )}
+        {showLoading && (
+          <div className={styles.loading} data-state={loaded ? 'fading' : 'shown'} role="status">
+            <Spinner />
+            <span>Loading from GitHub…</span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
-/** Prepare a same-origin download so a real link click saves GitHub's unchanged bytes */
-function EnvironmentDownload({content}) {
-  const [downloadUrl, setDownloadUrl] = useState(null);
-
-  useEffect(() => {
-    if (content === null) {
-      setDownloadUrl(null);
-      return undefined;
-    }
-    const objectUrl = URL.createObjectURL(content);
-    setDownloadUrl(objectUrl);
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [content]);
-
-  if (downloadUrl === null) {
-    return <p role="status">Preparing the .env.example download…</p>;
-  }
-
-  return (
-    <p>
-      <a href={downloadUrl} download=".env.example">Download the example env file</a>
-      {' '}and rename it to <code>.env</code> in the same directory as the Docker Compose file.
-    </p>
-  );
-}
+const Spinner = () => (
+  <svg className={styles.spinner} viewBox="0 0 48 48" aria-hidden="true">
+    <circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" strokeOpacity="0.18" strokeWidth="2.5" />
+    <circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="36 96" />
+  </svg>
+);
