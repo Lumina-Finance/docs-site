@@ -10,7 +10,7 @@ const FADE_MS = 300;
 // Keeps the loading state up long enough to read as intentional rather than a flicker
 const MIN_LOADING_MS = 800;
 
-/** Load a matching pair from the latest tag each time the guide opens */
+/** Load both files from GitHub each time the guide opens */
 export function DeploymentFiles() {
   const [files, setFiles] = useState(null);
   const [hasError, setHasError] = useState(false);
@@ -76,7 +76,7 @@ export function DeploymentFiles() {
 }
 
 /**
- * Render one of the release's files after retrieving it in the reader's browser, holding about
+ * Render one of the repository's deployment files after retrieving it in the reader's browser, holding about
  * its length while it loads. placeholderLines is the file's usual line count
  */
 function FilePanel({name, label, language, languageLabel, placeholderLines, content}) {
