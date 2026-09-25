@@ -1,27 +1,19 @@
 ---
 title: Getting started
-description: Download the Docker Compose and environment files, set your database password, and start Lumina Finance.
+description: Copy the Docker Compose and environment files, set your database password, and start Lumina Finance.
 ---
 
 import {DeploymentFiles} from '@site/src/components/deployment-files/DeploymentFiles';
 
 Thanks for giving Lumina Finance a try! Getting your own instance running is pretty straightforward. If you've used Docker Compose before, you'll feel right at home, and if you haven't, don't worry, we'll take it one step at a time.
 
-## Checking your system
+## Checking the compatibility of your system
 
-The app only runs on 64-bit systems, using the `linux/amd64` or `linux/arm64` images. 32-bit systems, such as the 32-bit version of Raspberry Pi OS, aren't supported.
-
-Once Docker is installed, you can check which platform it uses by running:
-
-```bash
-docker version --format '{{.Server.Os}}/{{.Server.Arch}}'
-```
-
-This should print `linux/amd64` or `linux/arm64`. The latter is sometimes shown as `arm64/v8` or `aarch64`. On a Linux host, also run `getconf LONG_BIT`, which should print `64`. Don't rely on `uname -m` on its own, since it only reports the kernel, which can be 64-bit even when the rest of the system is 32-bit.
+The app runs on 64-bit systems only, though it comes with images for both `x86` (`linux/amd64`) and `ARM` (`linux/arm64`). That covers most modern computers and servers, including a Raspberry Pi running the 64-bit version of Raspberry Pi OS.
 
 ## Getting the necessary files
 
-Before you begin, make sure Docker and the Docker Compose plugin are installed. Create a new directory, then copy the Compose file below into the directory:
+Before you begin, make sure Docker and the Docker Compose plugin are installed. Then, create a new directory, and copy the compose file below into the directory:
 
 <DeploymentFiles />
 
@@ -40,7 +32,7 @@ Then, replace `DB_PASSWORD` with the generated password.
 ### Setting encryption keys and db role passwords
 
 :::danger[Persisting the secrets directory]
-If the app generates the encryption key for you, you must persist the `/data/secrets` directory inside the container, since that's where the key is saved. Losing the key permanently locks everyone out of your instance, as explained in [Rotating the encryption key](encryption-keys.md).
+If the app generates the encryption key and db role passwords for you (i.e., you choose not to specify the following env vars), you must persist the `/data/secrets` directory inside the container, since that's where the generated secrets are stored. Losing these secrets will permanently lock everyone out of your instance, and you may lose all your data. More is explained in [Rotating the encryption key](encryption-keys.md).
 :::
 
 The app uses 3 additional secrets in addition to the database password: `APP_ENCRYPTION_KEY`, `MIGRATOR_DB_PASSWORD`, and `APP_DB_PASSWORD`. They are used to encrypt sensitive data like the OIDC client secrets and for enforcing RLS for db level user data separation.
@@ -78,8 +70,12 @@ The app doesn't serve HTTPS on its own, so you'll want to put it behind a revers
 
 ## Starting the app
 
-Simply run: `docker compose up -d`, and open `http://localhost:8080` once it is ready.
+To start the app, simply run `docker compose up -d`, and open `http://localhost:8080` once it is ready.
+
+## Where to go from here
 
 Check out the guides under Common configurations and Advanced configurations in the sidebar for further available config options. A full list of env vars are also provided in the [environment variables page](environment-variables.md) as reference.
+
+If you have any questions, feedback, or feature requests, please feel free to share your thoughts and reach out to us at [r/LuminaFinance](https://reddit.com/r/LuminaFinance) and [GitHub discussions](https://github.com/Lumina-Finance/lumina-finance/discussions).
 
 Happy tinkering and we hope you enjoy using Lumina Finance!
