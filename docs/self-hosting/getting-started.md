@@ -72,6 +72,10 @@ The app doesn't serve HTTPS on its own, so you'll want to put it behind a revers
 
 To start the app, simply run `docker compose up -d`, and open `http://localhost:8080` once it is ready.
 
+## Where to go from here
+
 Check out the guides under Common configurations and Advanced configurations in the sidebar for further available config options. A full list of env vars are also provided in the [environment variables page](environment-variables.md) as reference.
+
+If you have any questions, feedback, or feature requests, please feel free to share your thoughts and reach out to us at [r/LuminaFinance](https://reddit.com/r/LuminaFinance) and [GitHub discussions](https://github.com/Lumina-Finance/lumina-finance/discussions).
 
 Happy tinkering and we hope you enjoy using Lumina Finance!
