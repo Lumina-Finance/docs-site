@@ -15,8 +15,8 @@ Yes, for a few things:
 
 - **GitHub and Docker Hub**: to check for new releases. You can turn this off with [`UPDATE_CHECKS_ENABLED`](environment-variables.md#update_checks_enabled).
 - **Frankfurter**: for exchange rates. You can point [`FRANKFURTER_URL`](environment-variables.md#frankfurter_url) at your own Frankfurter instance instead.
-- **Google's favicon service**: for the logo of an institution that has a website but no uploaded logo. Your browser sends it the institution's website address.
-- **jsDelivr**: for the logo on the single sign-on button and the emoji list in the category icon picker. These are also loaded by your browser.
+- **Google's favicon service**: for the logo of an institution. This happens on the client side, using your browser. Unfortunately there isn't a way to turn off this call. The only way to prevent this from happening is to not add an institution. An invalid institution website will still trigger the call to Google's favicon service. This may be changed later.
+- **jsDelivr**: for the logo on the single sign-on button and the emoji list in the category icon picker. These are also loaded by your browser and cannot be turned off.
 
 ## Why are you building Lumina Finance when other personal finance tools already exist?
 
