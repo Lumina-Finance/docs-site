@@ -13,7 +13,7 @@ The app runs on 64-bit systems only, though it comes with images for both `x86` 
 
 ## Getting the necessary files
 
-Before you begin, make sure Docker and the Docker Compose plugin are installed. Create a new directory, then copy the Compose file below into the directory:
+Before you begin, make sure Docker and the Docker Compose plugin are installed. Then, create a new directory, and copy the compose file below into the directory:
 
 <DeploymentFiles />
 
