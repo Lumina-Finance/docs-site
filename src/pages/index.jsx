@@ -5,6 +5,10 @@ import Layout from '@theme/Layout';
 import ThemedImage from '@theme/ThemedImage';
 import LastUpdated from '@theme/LastUpdated';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {TourVideo} from '@site/src/components/tour-video/TourVideo';
+
+// The same demo the main repository's README shows, served from GitHub rather than bundled here
+const DEMO_VIDEO_URL = 'https://github.com/user-attachments/assets/0674ffa8-a16e-4460-a82a-fc039aba6d30';
 
 /** Give readers a direct starting point for using or operating the app */
 export default function Home() {
@@ -44,6 +48,10 @@ export default function Home() {
         <p>
           This is the documentation site for Lumina Finance. Here, you will find some helpful articles and write-ups on using the application and self-hosting it at home. We hope you will enjoy using Lumina Finance!
         </p>
+
+        <section className="docs-home-tour">
+          <TourVideo src={DEMO_VIDEO_URL} title="Take a quick tour" duration={97} label="A tour of Lumina Finance's main pages" />
+        </section>
 
         <div className="docs-paths">
           <Link className="docs-path" to="/self-hosting/getting-started/">

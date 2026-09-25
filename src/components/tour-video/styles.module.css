@@ -1,0 +1,302 @@
+.frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1100 / 661;
+  overflow: hidden;
+  border: 1px solid var(--docs-border);
+  border-radius: 0.75rem;
+  background: var(--ifm-background-surface-color);
+}
+
+.poster {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  background: var(--ifm-background-surface-color);
+  cursor: pointer;
+  font: inherit;
+  transition: opacity var(--fade) ease;
+}
+
+/* Clicked but not playing yet: the button eases back while the video loads underneath */
+.poster[data-state='shown'] {
+  cursor: progress;
+}
+
+.poster[data-state='shown'] .bigPlay > svg:first-child {
+  opacity: 0.35;
+}
+
+.poster[data-state='shown'] .spinner {
+  opacity: 1;
+}
+
+.poster[data-state='fading'] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.posterImage {
+  position: absolute;
+  inset: -1.5rem;
+  width: calc(100% + 3rem);
+  height: calc(100% + 3rem);
+  object-fit: cover;
+  filter: blur(8px) saturate(0.8);
+}
+
+/* Soften the screenshot toward the page colour so the title reads in either theme */
+.shade {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--ifm-background-color) 62%, transparent);
+  transition: background-color 200ms ease;
+}
+
+.posterContent {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.8rem;
+  color: var(--ifm-font-color-base);
+  text-align: center;
+}
+
+.bigPlay {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ifm-background-surface-color) 70%, transparent);
+  box-shadow: 0 0.4rem 1.25rem rgb(0 0 0 / 0.08);
+  color: var(--ifm-color-primary);
+  transition: transform 200ms ease, background-color 200ms ease, opacity 200ms ease;
+}
+
+.bigPlay {
+  position: relative;
+}
+
+.bigPlay > svg:first-child {
+  width: 1.9rem;
+  height: 1.9rem;
+  transition: opacity 250ms ease;
+}
+
+/* A ring that runs around the play disc while the video loads */
+.bigPlay .spinner {
+  position: absolute;
+  inset: -0.45rem;
+  width: calc(100% + 0.9rem);
+  height: calc(100% + 0.9rem);
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.spinner {
+  color: var(--ifm-color-primary);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* The same ring over the playing video when it stalls to buffer */
+.buffering {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+
+.buffering[data-visible='true'] {
+  opacity: 1;
+}
+
+.disc {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  background: rgb(20 14 8 / 0.55);
+  backdrop-filter: blur(6px);
+}
+
+.disc .spinner {
+  width: 2.6rem;
+  height: 2.6rem;
+  color: #fff;
+}
+
+.posterTitle {
+  font-family: var(--docs-serif);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.posterLength {
+  color: var(--ifm-font-color-secondary);
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.poster:enabled:hover .bigPlay,
+.poster:focus-visible .bigPlay {
+  transform: scale(1.06);
+  background: var(--ifm-background-surface-color);
+}
+
+.poster:enabled:hover .shade {
+  background: color-mix(in srgb, var(--ifm-background-color) 55%, transparent);
+}
+
+.poster:focus-visible,
+.control:focus-visible,
+.seek:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+  cursor: pointer;
+}
+
+.controls {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.6rem;
+  background: rgb(20 14 8 / 0.72);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+/* While playing, the bar steps aside until the reader points at the video */
+.frame[data-playing='true'] .controls {
+  opacity: 0;
+  transform: translateY(0.4rem);
+}
+
+.frame[data-playing='true']:hover .controls,
+.frame[data-playing='true']:focus-within .controls {
+  opacity: 1;
+  transform: none;
+}
+
+.control {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.control:hover {
+  background: rgb(255 255 255 / 0.14);
+}
+
+.control svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.seek {
+  flex: 1;
+  height: 0.3rem;
+  margin: 0;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--ifm-color-primary) var(--progress), rgb(255 255 255 / 0.3) var(--progress));
+  appearance: none;
+  cursor: pointer;
+}
+
+.seek::-webkit-slider-thumb {
+  width: 0.85rem;
+  height: 0.85rem;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  appearance: none;
+}
+
+.seek::-moz-range-thumb {
+  width: 0.85rem;
+  height: 0.85rem;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.time {
+  flex: none;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.frame:fullscreen {
+  border: 0;
+  border-radius: 0;
+}
+
+@media (max-width: 600px) {
+  .bigPlay {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .bigPlay > svg:first-child {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .time {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poster,
+  .buffering,
+  .bigPlay,
+  .bigPlay > svg,
+  .shade,
+  .controls {
+    transition: none;
+  }
+}
