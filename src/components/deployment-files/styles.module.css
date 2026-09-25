@@ -42,6 +42,63 @@
   letter-spacing: 0.07em;
 }
 
+/* Holds about the file's length while it loads, so the page doesn't jump. The loading state
+   stacks over the file in one grid cell rather than by positioning, which would move the copy and
+   wrap controls off the header */
+.fileBody {
+  display: grid;
+}
+
+/* Sized to match the release's Compose file on a desktop screen */
+.composeFile[aria-busy='true'] .fileBody {
+  min-height: calc(32 * 0.8rem * 1.65 + 2 * var(--ifm-pre-padding));
+}
+
+.fileBody > * {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+
+.loading {
+  z-index: 1;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.85rem;
+  background: var(--file-background);
+  color: var(--file-muted);
+  font-size: 0.85rem;
+  transition: opacity 300ms ease;
+}
+
+.loading[data-state='fading'] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.spinner {
+  width: 2.6rem;
+  height: 2.6rem;
+  color: var(--ifm-color-primary);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.reveal {
+  animation: reveal 300ms ease both;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+  }
+}
+
 .composeBlock {
   --prism-background-color: var(--file-background);
   --prism-color: var(--file-text);
@@ -115,4 +172,14 @@
 
 .status p {
   margin-bottom: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading {
+    transition: none;
+  }
+
+  .reveal {
+    animation: none;
+  }
 }
