@@ -70,7 +70,7 @@ The app doesn't serve HTTPS on its own, so you'll want to put it behind a revers
 
 ## Starting the app
 
-Simply run: `docker compose up -d`, and open `http://localhost:8080` once it is ready.
+To start the app, simply run `docker compose up -d`, and open `http://localhost:8080` once it is ready.
 
 Check out the guides under Common configurations and Advanced configurations in the sidebar for further available config options. A full list of env vars are also provided in the [environment variables page](environment-variables.md) as reference.
 
