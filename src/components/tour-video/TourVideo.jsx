@@ -58,7 +58,10 @@ export function TourVideo({src, title, duration, label}) {
 
   const fullscreen = () => {
     if (document.fullscreenElement) document.exitFullscreen();
-    else frame.current?.requestFullscreen?.();
+    else if (frame.current?.requestFullscreen) frame.current.requestFullscreen();
+    // Safari on iPhone can't put an element in full screen, only the video itself, which then
+    // plays in the system player and leaves full screen from its own controls
+    else video.current?.webkitEnterFullscreen?.();
   };
 
   const progress = length ? (current / length) * 100 : 0;

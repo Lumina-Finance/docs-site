@@ -12,7 +12,9 @@ export function HeroImage({sources, alt, width, height}) {
   const [state, setState] = useState(null);
 
   useEffect(() => {
-    const image = [...frame.current.querySelectorAll('img')].find((element) => element.offsetParent !== null);
+    // Array.from, not spread: the production build compiles spread loosely, which wraps the
+    // NodeList in an array instead of expanding it, so no image would ever be found
+    const image = Array.from(frame.current.querySelectorAll('img')).find((element) => element.offsetParent !== null);
     // An image that loaded before the page became interactive shows without the animation
     setState((current) => current ?? (image?.complete && image.naturalWidth > 0 ? 'loaded' : 'loading'));
   }, []);
