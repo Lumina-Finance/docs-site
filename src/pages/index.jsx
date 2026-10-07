@@ -7,7 +7,7 @@ import {HeroImage} from '@site/src/components/hero-image/HeroImage';
 import {TourVideo} from '@site/src/components/tour-video/TourVideo';
 
 // The same demo the main repository's README shows, served from GitHub rather than bundled here
-const DEMO_VIDEO_URL = 'https://github.com/user-attachments/assets/0674ffa8-a16e-4460-a82a-fc039aba6d30';
+const DEMO_VIDEO_URL = 'https://cdn.jsdelivr.net/gh/Lumina-Finance/lumina-finance@main/docs/demo.mp4';
 // The README's hero screenshots, also served from GitHub
 const HERO_SOURCES = {
   light: 'https://raw.githubusercontent.com/Lumina-Finance/lumina-finance/main/docs/screenshots/hero_light.png',
@@ -50,7 +50,7 @@ export default function Home() {
         </p>
 
         <section className="docs-home-tour">
-          <TourVideo src={DEMO_VIDEO_URL} title="Take a quick tour" duration={97} label="A tour of Lumina Finance's main pages" />
+          <TourVideo src={DEMO_VIDEO_URL} title="Take a quick tour" label="A tour of Lumina Finance's main pages" />
         </section>
 
         <div className="docs-paths">
