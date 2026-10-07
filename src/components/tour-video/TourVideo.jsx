@@ -13,9 +13,9 @@ const formatTime = (seconds) => {
 /** Show a themed thumbnail until the reader asks for the video, then play it with our own controls
 
 The video is only requested on that first click, so the page never downloads it for readers who
-don't watch
+don't watch, apart from its metadata, which gives the length shown on the thumbnail
 */
-export function TourVideo({src, title, duration, label}) {
+export function TourVideo({src, title, label}) {
   const frame = useRef(null);
   const video = useRef(null);
   const [started, setStarted] = useState(false);
@@ -25,7 +25,20 @@ export function TourVideo({src, title, duration, label}) {
   // Set while playback waits for data, such as after a seek or on a slow connection
   const [buffering, setBuffering] = useState(false);
   const [current, setCurrent] = useState(0);
-  const [length, setLength] = useState(duration);
+  const [length, setLength] = useState(0);
+
+  // Read the length from the file itself, so the thumbnail never disagrees with the video
+  useEffect(() => {
+    const probe = document.createElement('video');
+    probe.preload = 'metadata';
+    probe.onloadedmetadata = () => setLength(probe.duration);
+    probe.src = src;
+    return () => {
+      probe.onloadedmetadata = null;
+      probe.removeAttribute('src');
+      probe.load();
+    };
+  }, [src]);
   const posters = {
     light: useBaseUrl('/img/tour-poster-light.jpg'),
     dark: useBaseUrl('/img/tour-poster-dark.jpg'),
@@ -141,7 +154,7 @@ export function TourVideo({src, title, duration, label}) {
               <Spinner />
             </span>
             <span className={styles.posterTitle}>{title}</span>
-            <span className={styles.posterLength}>{formatTime(duration)} · no sound</span>
+            <span className={styles.posterLength}>{length ? `${formatTime(length)} · ` : ''}no sound</span>
           </span>
         </button>
       )}
