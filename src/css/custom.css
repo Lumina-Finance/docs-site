@@ -307,6 +307,28 @@ body { text-rendering: optimizeLegibility; }
   transition: border-color 280ms ease, background-color 280ms ease, color 280ms ease;
 }
 .docs-sidebar-coffee .footer__coffee::after { display: none; }
+/* Two soft beams travel around the pill's border, clipped to the 1px border ring by the mask */
+@property --coffee-beam-angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.docs-sidebar-coffee .footer__coffee {
+  --coffee-beam: rgb(176 120 8);
+  position: relative;
+}
+[data-theme='dark'] .docs-sidebar-coffee .footer__coffee { --coffee-beam: rgb(244 212 71 / 0.55); }
+.docs-sidebar-coffee .footer__coffee::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  padding: 2px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--coffee-beam-angle), transparent 0 2%, var(--coffee-beam) 14%, transparent 26% 52%, var(--coffee-beam) 64%, transparent 76%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+  animation: coffee-beam-slide 6s linear infinite;
+}
+@keyframes coffee-beam-slide { to { --coffee-beam-angle: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .docs-sidebar-coffee .footer__coffee::before { animation: none; } }
 [data-theme='dark'] .footer__coffee svg path:not(.logo-coffee) { fill: #fff; }
 .docs-sidebar-stars .docs-sidebar-coffee .footer__coffee:is(:hover, :focus-visible) {
   background: var(--ifm-menu-color-background-hover);
