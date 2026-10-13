@@ -66,7 +66,7 @@ const config = {
         {label: 'Docker Hub pulls', href: 'https://hub.docker.com/r/luminahq/lumina-finance', className: 'footer__docker'},
         {label: 'r/LuminaFinance', href: 'https://www.reddit.com/r/LuminaFinance/', className: 'footer__reddit'},
       ],
-      copyright: `© ${new Date().getFullYear()} Lumina Software Inc.`,
+      copyright: `© ${new Date().getFullYear()} Lumina Finance`,
     },
     prism: {theme: themes.github, darkTheme: themes.vsDark, additionalLanguages: ['bash', 'docker', 'ini', 'yaml']},
     tableOfContents: {minHeadingLevel: 2, maxHeadingLevel: 3},
