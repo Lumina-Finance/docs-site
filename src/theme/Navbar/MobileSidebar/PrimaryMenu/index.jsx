@@ -1,7 +1,7 @@
 import React from 'react';
 import PrimaryMenu from '@theme-original/Navbar/MobileSidebar/PrimaryMenu';
-import CoffeeBadge from '@site/src/components/coffee-badge/CoffeeBadge';
 import GitHubStars from '@site/src/components/github-stars/GitHubStars';
+import SupportButtons from '@site/src/components/support-buttons/SupportButtons';
 
 export default function MobilePrimaryMenu(props) {
   return (
@@ -9,7 +9,7 @@ export default function MobilePrimaryMenu(props) {
       <PrimaryMenu {...props} />
       <div className="docs-sidebar-stars">
         <GitHubStars sidebar />
-        <div className="docs-sidebar-coffee"><CoffeeBadge /></div>
+        <SupportButtons short />
       </div>
     </div>
   );

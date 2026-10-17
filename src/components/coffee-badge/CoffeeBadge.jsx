@@ -6,12 +6,13 @@ import CoffeeCup from '@site/static/img/buy-me-a-coffee.svg';
 export default function CoffeeBadge({
   href = 'https://www.buymeacoffee.com/lumina.finance',
   label = 'Buy me a coffee',
+  text = label,
 }) {
   return (
     <Link className="footer__link-item footer__coffee" href={href}
       target="_blank" rel="noopener noreferrer" aria-label={`${label} (opens in a new tab)`}>
       <CoffeeCup aria-hidden="true" focusable="false" />
-      <span>{label}</span>
+      <span>{text}</span>
     </Link>
   );
 }

@@ -8,7 +8,7 @@
     "prebuild": "python3 scripts/page-history.py",
     "build": "docusaurus build",
     "serve": "docusaurus serve --no-open",
-    "test": "node --test src/components/special-thanks/credits.test.mjs src/components/special-thanks/components.test.cjs && python3 -m unittest discover -s scripts -p test_page_history.py"
+    "test": "node --test src/components/special-thanks/credits.test.mjs src/components/special-thanks/components.test.cjs src/components/support-buttons/components.test.cjs && python3 -m unittest discover -s scripts -p test_page_history.py"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",
@@ -34,11 +34,14 @@
     "jsdom": "^30.0.1"
   },
   "overrides": {
+    "katex": "$katex",
+    "postcss-selector-parser": "7.1.6",
+    "tinypool": "2.1.2",
     "copy-webpack-plugin": {
-      "serialize-javascript": "7.1.1"
+      "serialize-javascript": "7.1.2"
     },
     "css-minimizer-webpack-plugin": {
-      "serialize-javascript": "7.1.1"
+      "serialize-javascript": "7.1.2"
     },
     "sockjs": {
       "uuid": "11.1.1"

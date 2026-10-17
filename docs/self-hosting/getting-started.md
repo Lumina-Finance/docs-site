@@ -78,4 +78,6 @@ Check out the guides under Common configurations and Advanced configurations in 
 
 If you have any questions, feedback, or feature requests, please feel free to share your thoughts and reach out to us at [r/LuminaFinance](https://reddit.com/r/LuminaFinance) and [GitHub discussions](https://github.com/Lumina-Finance/lumina-finance/discussions).
 
+If Lumina Finance is useful to you, you can support its development by [sponsoring it on GitHub](https://github.com/sponsors/Lumina-Finance) or [buying us a coffee](https://www.buymeacoffee.com/lumina.finance).
+
 Happy tinkering and we hope you enjoy using Lumina Finance!
