@@ -1,4 +1,6 @@
-const DOCKER_DIRECTORY_URL = 'https://raw.githubusercontent.com/Lumina-Finance/lumina-finance/main/docker';
+import {CORE_RAW_URL} from '../../core-release';
+
+const DOCKER_DIRECTORY_URL = `${CORE_RAW_URL}/docker`;
 
 /** Read GitHub without credentials or a cached response hiding a newer file */
 async function fetchGitHub(url, signal) {

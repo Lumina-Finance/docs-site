@@ -11,6 +11,7 @@ const sidebars = {
     'self-hosting/instance-url',
     'self-hosting/email',
     'self-hosting/update-checks',
+    'self-hosting/closing-registration',
     {
       type: 'html',
       value: '<h2>Advanced configurations</h2>',

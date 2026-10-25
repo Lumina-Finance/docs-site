@@ -5,13 +5,14 @@ import LastUpdated from '@theme/LastUpdated';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {HeroImage} from '@site/src/components/hero-image/HeroImage';
 import {TourVideo} from '@site/src/components/tour-video/TourVideo';
+import {CORE_RAW_URL, CORE_RELEASE_TAG} from '@site/src/core-release';
 
 // The same demo the main repository's README shows, served from GitHub rather than bundled here
-const DEMO_VIDEO_URL = 'https://cdn.jsdelivr.net/gh/Lumina-Finance/lumina-finance@main/docs/demo.mp4';
+const DEMO_VIDEO_URL = `https://cdn.jsdelivr.net/gh/Lumina-Finance/lumina-finance@${CORE_RELEASE_TAG}/docs/demo.mp4`;
 // The README's hero screenshots, also served from GitHub
 const HERO_SOURCES = {
-  light: 'https://raw.githubusercontent.com/Lumina-Finance/lumina-finance/main/docs/screenshots/hero_light.png',
-  dark: 'https://raw.githubusercontent.com/Lumina-Finance/lumina-finance/main/docs/screenshots/hero_dark.png',
+  light: `${CORE_RAW_URL}/docs/screenshots/hero_light.png`,
+  dark: `${CORE_RAW_URL}/docs/screenshots/hero_dark.png`,
 };
 
 /** Give readers a direct starting point for using or operating the app */

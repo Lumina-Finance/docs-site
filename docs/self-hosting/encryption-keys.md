@@ -1,9 +1,9 @@
 ---
-title: Rotating the encryption key
-description: Replace your application encryption key and re-encrypt stored secrets with the new key.
+title: Encryption and hash keys
+description: Rotate your application encryption key, and back up or reset the bank transaction hash key.
 ---
 
-Your application encryption key protects stored secrets, including those used for two-factor authentication and single sign-on. This page explains how to rotate the key, re-encrypt those secrets, and apply the replacement to your instance.
+Your application encryption key protects stored secrets, including those used for two-factor authentication and single sign-on. The bank transaction hash key lets the app skip transactions you already have when you import a statement again. This page explains how to rotate the encryption key, re-encrypt those secrets, and apply the replacement to your instance, and how to back up or reset the hash key.
 
 ## Required preparations
 
@@ -77,3 +77,43 @@ docker compose up -d --force-recreate app
 ```
 
 Then, check that the app starts and that you can use your existing TOTP authenticator and SSO. Keep the old key with any database backup made before the rotation, as the replacement key cannot decrypt that backup's secrets.
+
+## The bank transaction hash key {#bank-transaction-hash-key}
+
+When you import an OFX or QFX statement, Lumina Finance doesn't keep your bank account numbers or the bank's transaction IDs. It keeps only a keyed hash of each one, so importing the same statement again skips the transactions you already have. The app makes those hashes with [`BANK_TRANSACTION_HASH_KEY`](environment-variables.md#bank_transaction_hash_key). The key can't be rotated, since the app doesn't keep what the hashes were made from.
+
+### Backing up the key
+
+If you didn't set `BANK_TRANSACTION_HASH_KEY` yourself, the app generates it on first start and saves it in `/data/secrets/bank_transaction_hash_key`, next to the generated encryption key and outside the database. Back it up with your database, and keep it with every database backup you might restore.
+
+The database records which key its hashes were made with, and the app checks the key every time it starts. It won't start if the key is missing or isn't the one your saved transactions were hashed with. If you restore a backup, restore its key as well, either into `BANK_TRANSACTION_HASH_KEY` in `.env` or into `/data/secrets/bank_transaction_hash_key`. If you set both, they must hold the same key.
+
+### Resetting a lost key {#reset-the-bank-transaction-hash-key}
+
+:::warning[Resetting means duplicate transactions on re-import]
+Your transactions and their balances stay as they are, but the app can no longer tell which ones came from a statement. If you import a statement you've already imported, its transactions come in again, so you'll need to remove the duplicates yourself.
+:::
+
+If the key is lost, you can tell the app to start over with a new one. Stop the app container while leaving PostgreSQL running:
+
+```bash
+docker compose stop app
+```
+
+Then run the reset command. It uses the key in `BANK_TRANSACTION_HASH_KEY` if you've set one, or else a key file already at `/data/secrets/bank_transaction_hash_key`. If there's neither, it generates a new key and saves it in that file:
+
+```bash
+docker compose run --rm app reset-bank-transaction-hash-key
+```
+
+The command works even if you've lost the app's data volume or restored your database onto a new host.
+
+If the command reports an error, fix the problem and run it again. The app may not start until the command succeeds.
+
+Once it succeeds, start the app:
+
+```bash
+docker compose up -d app
+```
+
+If the app won't start because the key is missing and you haven't imported an OFX or QFX statement yet, you can reset the key without losing anything.
