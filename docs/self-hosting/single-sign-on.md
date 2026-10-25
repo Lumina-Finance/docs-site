@@ -53,3 +53,9 @@ By default, the app requires the provider to confirm that your email address is 
 The app never links a provider sign-in to an existing account automatically, even when the email addresses match. If someone who already has an account signs in through the provider for the first time, they'll see <UiElement>Account already exists</UiElement> instead.
 
 To use the provider from then on, they sign in with their password, go to <UiPath>Settings → Security</UiPath>, choose <UiElement>Link</UiElement> next to the provider under <UiElement>Sign-in providers</UiElement>, and complete any MFA steps as required.
+
+The email address the provider reports must match the account's email address. If the addresses differ, the link is refused with "The identity provider's email address must match your account's email address" and nothing is linked.
+
+## Closing registration {#closing-registration}
+
+Anyone who can sign in to your provider can create an account in the app on their first sign-in. [Closing registration](closing-registration.md) stops that as well as the sign-up form. People whose accounts already have the provider linked keep signing in with it, and anyone with an account can still link it from their security settings.

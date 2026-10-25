@@ -70,13 +70,23 @@ If you leave it unset, the app generates a password and saves it in `/data/secre
 
 The full address you use to open the app, including `https://` and any port, without a path or trailing slash. The app uses it for password-reset links, the single sign-on callback, and default passkey settings.
 
-This address is also included in the app's allowed browser origins. See [Setting the URL](instance-url.md#setting-the-url) for the matching `.env` configuration.
+See [Setting the URL](instance-url.md#setting-the-url) for the matching `.env` configuration.
 
 </EnvironmentVariable>
 
-<EnvironmentVariable name="UPDATE_CHECKS_ENABLED" type="Boolean" defaultValue={<code>true</code>} values={<><code>true</code> · <code>false</code></>} example="true">
+<EnvironmentVariable name="UPDATE_CHECKS_ENABLED" type="Boolean" defaultValue={<code>false</code>} values={<><code>true</code> · <code>false</code></>} example="true">
 
-Controls whether the app checks GitHub releases and Docker Hub for a newer version. Set it to `false` to turn off the checks and their notices. [Automatic update checks](update-checks.md) explains when you'll see an update.
+Controls whether the app checks GitHub releases and Docker Hub for a newer version. The example `.env` file sets it to `true`. Set it to `false` to turn off the checks and their notices. [Automatic update checks](update-checks.md) explains when you'll see an update.
+
+</EnvironmentVariable>
+</dl>
+
+## Registration
+
+<dl>
+<EnvironmentVariable name="REGISTRATION_ENABLED" type="Boolean" defaultValue={<code>true</code>} values={<><code>true</code> · <code>false</code></>} example="false">
+
+Controls whether anyone can create a new account on your instance, through the sign-up form or a first-time single sign-on sign-in. Set it to `false` once everyone who'll use the app has an account. [Closing registration](closing-registration.md) explains what changes when you do.
 
 </EnvironmentVariable>
 </dl>
@@ -88,7 +98,15 @@ Controls whether the app checks GitHub releases and Docker Hub for a newer versi
 
 The Fernet key the app uses to encrypt stored secrets, such as authenticator secrets and OIDC client secrets. If you don't supply one, the app generates it on first start and saves it in `/data/secrets/app_encryption_key`.
 
-Keep this key safe, since losing it permanently locks everyone out of your instance. The app checks the key every time it starts, and won't start if it's missing or doesn't match the one your stored secrets were encrypted with. To replace an existing key, follow [Rotating the encryption key](encryption-keys.md).
+Keep this key safe, since losing it permanently locks everyone out of your instance. The app checks the key every time it starts, and won't start if it's missing or doesn't match the one your stored secrets were encrypted with. To replace an existing key, follow the steps in [Encryption and hash keys](encryption-keys.md#rotate-the-key).
+
+</EnvironmentVariable>
+
+<EnvironmentVariable name="BANK_TRANSACTION_HASH_KEY" type="Secret" defaultValue="Generated on first start">
+
+The key the app uses to hash the bank account and each transaction's bank ID when you import an OFX or QFX statement, so it can skip transactions you already have without keeping your account numbers or the bank's IDs. It must be 64 lower-case hex characters, such as the output of `openssl rand -hex 32`. If you don't supply one, the app generates it on first start and saves it in `/data/secrets/bank_transaction_hash_key`.
+
+Back this key up with your database. The app checks it every time it starts, and won't start if it's missing or doesn't match the one your saved transactions were hashed with. If you've lost it, follow [Resetting a lost key](encryption-keys.md#reset-the-bank-transaction-hash-key).
 
 </EnvironmentVariable>
 
@@ -172,7 +190,7 @@ How long you have to complete the second-factor step after entering your passwor
 
 <EnvironmentVariable name="TWO_FACTOR_STAGING_EXPIRE_SECONDS" type="Duration in seconds" defaultValue={<code>1800</code>}>
 
-How long unfinished MFA setups are kept. This covers authenticator apps and passkeys that were added but not confirmed, and recovery codes that haven't been saved yet. Once they're older than this, the app removes them the next time you sign in with your password, and you'll need to start the setup again.
+How long you have to confirm an MFA setup. This covers authenticator apps and passkeys that were added but not confirmed, and recovery codes that haven't been saved yet. Once a setup is older than this, it can't be confirmed, and you'll need to start it again.
 
 </EnvironmentVariable>
 </dl>
@@ -212,7 +230,7 @@ The port the app connects to on your SMTP server.
 
 <EnvironmentVariable name="SMTP_USE_TLS" type="Boolean" defaultValue={<code>true</code>} values={<><code>true</code> · <code>false</code></>} usedWith={<code>EMAIL_BACKEND=smtp</code>} example="true">
 
-Whether the app switches its connection to the SMTP server to TLS using STARTTLS. If you set it to `false`, emails are sent unencrypted. Servers that only accept TLS from the start, usually on port 465, aren't supported.
+Whether the app encrypts its connection to the SMTP server. On port 465 it uses TLS, and on other ports it uses STARTTLS. If you set it to `false`, emails are sent unencrypted.
 
 </EnvironmentVariable>
 
@@ -304,13 +322,33 @@ How long a fresh confirmation with your provider remains valid for a sensitive a
 ## Exchange rates
 
 :::note[Instances with no access to Frankfurter]
-If the app cannot access any Frankfurter servers **and** you have accounts in multiple currencies, you may experience a significant delay caused by it retrying FX requests in the background. You may also see an increase in the bandwidth used by the app, as data involving FX conversions are not cached when FX requests fail. This is an expected behaviour and currently we do not have an option to disable FX completely.
+If the app cannot access any Frankfurter servers **and** you have accounts in multiple currencies, pages that convert between currencies may load more slowly while the app retries. You may also see an increase in the bandwidth used by the app, as data involving FX conversions are not cached when FX requests fail. This is an expected behaviour and currently we do not have an option to disable FX completely.
 :::
 
 <dl>
 <EnvironmentVariable name="FRANKFURTER_URL" type="URL" defaultValue={<code>https://api.frankfurter.dev/v2</code>} example="https://api.frankfurter.dev/v2">
 
 The URL the app uses to retrieve exchange rates. To use your own Frankfurter instance, set this to its API address including the version path, such as `/v2`. It must provide a compatible API, and the value can't be blank.
+
+</EnvironmentVariable>
+
+<EnvironmentVariable name="VALKEY_URL" type="URL" defaultValue="Blank" example="valkey://valkey:6379">
+
+The address of the cache the app keeps exchange rates in. Leave it blank to turn the cache off, and the app asks Frankfurter for rates every time it needs them. The example `.env` file points it at the `valkey` service in the packaged `compose.yml`.
+
+If your `compose.yml` has no `valkey` service, add it under `services`, next to `app` and `postgres`:
+
+```yaml
+valkey:
+  image: valkey/valkey:9-alpine
+  restart: unless-stopped
+  command: ["valkey-server", "--save", "", "--appendonly", "no", "--maxmemory", "128mb", "--maxmemory-policy", "allkeys-lru"]
+  healthcheck:
+    test: ["CMD", "valkey-cli", "ping"]
+    interval: 5s
+    timeout: 5s
+    retries: 5
+```
 
 </EnvironmentVariable>
 </dl>

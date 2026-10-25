@@ -32,14 +32,14 @@ Then, replace `DB_PASSWORD` with the generated password.
 ### Setting encryption keys and db role passwords
 
 :::danger[Persisting the secrets directory]
-If the app generates the encryption key and db role passwords for you (i.e., you choose not to specify the following env vars), you must persist the `/data/secrets` directory inside the container, since that's where the generated secrets are stored. Losing these secrets will permanently lock everyone out of your instance, and you may lose all your data. More is explained in [Rotating the encryption key](encryption-keys.md).
+If you let the app generate the encryption key, the db role passwords or the bank transaction hash key for you, you must persist the `/data/secrets` directory inside the container, since that's where the generated secrets are stored. If you lose these secrets, everyone is permanently locked out of your instance, and you may lose all your data. The app also won't start without the bank transaction hash key. More is explained in [Encryption and hash keys](encryption-keys.md).
 :::
 
-The app uses 3 additional secrets in addition to the database password: `APP_ENCRYPTION_KEY`, `MIGRATOR_DB_PASSWORD`, and `APP_DB_PASSWORD`. They are used to encrypt sensitive data like the OIDC client secrets and for enforcing RLS for db level user data separation.
+Besides the database password, the app uses 3 secrets you can set here: `APP_ENCRYPTION_KEY`, `MIGRATOR_DB_PASSWORD`, and `APP_DB_PASSWORD`. They are used to encrypt sensitive data like the OIDC client secrets and for enforcing RLS for db level user data separation. [The bank transaction hash key](#the-bank-transaction-hash-key) covers a fourth.
 
 Before you start using the app, we recommend setting your application encryption key and database role passwords explicitly. If you leave them unset, the app will generate them and save them in `/data/secrets` inside its container. 
 
-If you'd like to set the encryption key after the app has generated one, copy the generated key from `/data/secrets/app_encryption_key` into `.env`. It won't start with a different key, so to change it, follow [Rotating the encryption key](encryption-keys.md) instead.
+If you'd like to set the encryption key after the app has generated one, copy the generated key from `/data/secrets/app_encryption_key` into `.env`. It won't start with a different key, so to change it, follow the steps in [Encryption and hash keys](encryption-keys.md#rotate-the-key) instead.
 
 #### Generating the key and passwords
 
@@ -62,15 +62,23 @@ APP_DB_PASSWORD=replace-with-another-generated-password
 
 Without these settings, the generated values are saved as `app_encryption_key`, `migrator_db_password`, and `app_db_password` under `/data/secrets`.
 
+#### The bank transaction hash key
+
+The app also keeps a fourth secret, [`BANK_TRANSACTION_HASH_KEY`](environment-variables.md#bank_transaction_hash_key). It lets the app skip transactions you already have when you import an OFX or QFX statement again, without storing your account numbers or the bank's transaction IDs. The example `.env` file lists it commented out. If you leave it unset, the app generates it on first start and saves it as `bank_transaction_hash_key` under `/data/secrets`, so back that directory up with your database. [The bank transaction hash key](encryption-keys.md#bank-transaction-hash-key) explains how to set, back up and reset it.
+
 ### Setting the instance URL
 
-Set [`APP_URL`](environment-variables.md#app_url) to the address you'll use to open the app, such as `https://lumina-finance.example.com`. It's needed for passkeys, single sign-on and password reset emails, and we recommend setting it even if you don't use them. [Setting the instance URL](instance-url.md) explains the format and what it's used for.
+Set [`APP_URL`](environment-variables.md#app_url) to the address you'll use to open the app, such as `https://lumina-finance.example.com`. It's needed for passkeys, single sign-on and password reset emails. [Setting the instance URL](instance-url.md) explains the format and what it's used for.
 
 The app doesn't serve HTTPS on its own, so you'll want to put it behind a reverse proxy. Keep in mind that passkeys won't work without HTTPS, even with `APP_URL` set.
 
 ## Starting the app
 
 To start the app, simply run `docker compose up -d`, and open `http://localhost:8080` once it is ready.
+
+## Closing registration
+
+Once the app is running, anyone who can reach it can create an account. After you and everyone else who'll use the app have created accounts, you can [close registration](closing-registration.md) so nobody else can.
 
 ## Where to go from here
 

@@ -3,17 +3,13 @@ title: Setting instance URL
 description: Set or change your instance URL and keep access to your account when using passkeys.
 ---
 
-Lumina Finance uses `APP_URL` to configure CORS and is required if you want to use Passkeys, SSO, or enable password reset emails. This guide covers setting that address and updating your configuration when it changes.
-
-:::tip
-Even if you don’t use these features, we still recommend setting `APP_URL`, as leaving it unset allows all origins by default.
-:::
+Lumina Finance needs `APP_URL` if you want to use Passkeys, SSO, or enable password reset emails. This guide covers setting that address and updating your configuration when it changes.
 
 ## Setting the URL
 
 Set [`APP_URL`](environment-variables.md#app_url) to the full address you use to access the app, such as `https://lumina-finance.example.com`. Include the scheme (`https://`) and the port if it isn't the default, and leave off any path or trailing slash. The app uses the value exactly as written, so a trailing slash, as in `https://lumina-finance.example.com/`, stops passkeys from working, since your browser reports the address without one.
 
-The app uses this address for password-reset links and sign-in redirects, and includes it in its allowed browser origins (CORS). We recommend setting `APP_URL` explicitly, since leaving it empty will default to allowing all origins. The app also works out the passkey settings, `WEBAUTHN_RP_ID` and `WEBAUTHN_ORIGINS`, from `APP_URL`. As long as you open the app at the address in `APP_URL`, you don't need to set either of them.
+The app uses this address for password-reset links and sign-in redirects. The app also works out the passkey settings, `WEBAUTHN_RP_ID` and `WEBAUTHN_ORIGINS`, from `APP_URL`. As long as you open the app at the address in `APP_URL`, you don't need to set either of them.
 
 :::info[Passkeys need HTTPS and a domain name]
 Passkeys only work over HTTPS or at `http://localhost`. They also don't work at a bare IP address, such as `http://192.168.1.10:8080`.

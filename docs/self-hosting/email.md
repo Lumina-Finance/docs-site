@@ -26,7 +26,7 @@ SMTP_USE_TLS=true
 #MAIL_FROM=lumina-finance@example.com
 ```
 
-The app connects to the server and then switches the connection to TLS, which is known as STARTTLS and is usually offered on port 587. Servers that only accept TLS from the start, usually on port 465, aren't supported.
+On port 465, the app uses TLS. On other ports, such as 587, it uses STARTTLS.
 
 ### Setting the sender address
 
@@ -37,6 +37,10 @@ The app connects to the server and then switches the connection to TLS, which is
 Once you've saved the `.env` file, recreate the app to load the new settings. Then, request a password reset on the login screen to see if you can receive the email. Clicking on the link sent in the email should bring you to the password reset screen.
 
 If the email doesn't arrive, double check to make sure your credentials are correct, and that you have set a sensible value for [the relevant password reset environment variables](environment-variables.md#password-reset-and-email). Check the logs for any potential errors and feedback.
+
+### Mail server timeouts
+
+If your mail server stops answering, the password reset request still completes, and a warning in the logs shows that the email failed to send. You can request another reset straight away.
 
 ### Built-in rate limiter
 
