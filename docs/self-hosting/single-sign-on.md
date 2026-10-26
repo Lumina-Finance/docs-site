@@ -50,7 +50,7 @@ By default, the app requires the provider to confirm that your email address is 
 
 ## Existing accounts
 
-The app never links a provider sign-in to an existing account automatically, even when the email addresses match. If someone who already has an account signs in through the provider for the first time, they'll see <UiElement>Account already exists</UiElement> instead.
+The app never links a provider sign-in to an existing account automatically, even when the email addresses match. If someone who already has an account signs in through the provider for the first time and the provider has verified their email address, they'll see <UiElement>Account already exists</UiElement> instead. An address the provider hasn't verified is never matched against accounts, so it gets the same result as a new address.
 
 To use the provider from then on, they sign in with their password, go to <UiPath>Settings → Security</UiPath>, choose <UiElement>Link</UiElement> next to the provider under <UiElement>Sign-in providers</UiElement>, and complete any MFA steps as required.
 
