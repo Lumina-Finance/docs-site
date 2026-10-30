@@ -1,14 +1,14 @@
 ---
 title: Email
-description: Configure SMTP delivery to receive password-reset emails from your instance.
+description: Configure SMTP delivery to receive sign-up confirmation and password-reset emails from your instance.
 ---
 
-Lumina Finance uses email to send password-reset links. This page explains how to connect your email provider through SMTP and check that those links reach your inbox.
+Lumina Finance uses email to send sign-up confirmation and password-reset links. This page explains how to connect your email provider through SMTP and check that those links reach your inbox.
 
 ## Setting up email delivery {#configure-smtp}
 
-:::info[Reset links are logged to console by default]
-By default, the app writes outgoing emails, which contain password reset links and tokens, in the log.
+:::info[Links are logged to console by default]
+By default, the app writes outgoing emails, which contain sign-up confirmation and password reset links and tokens, in the log.
 :::
 
 By default, outgoing emails are written to the app's logs. To receive them in your inbox, you'll need to connect the app to an SMTP server using the connection details and credentials supplied by your email provider.
@@ -32,9 +32,17 @@ On port 465, the app uses TLS. On other ports, such as 587, it uses STARTTLS.
 
 [`MAIL_FROM`](environment-variables.md#mail_from) defaults to your SMTP username. If that username isn't an email address, or your provider requires a different sender address, set `MAIL_FROM` explicitly. Outgoing messages will always use the display name `Lumina Finance (Self-Hosted)` alongside that address.
 
+## Sign-up confirmation emails {#signup-confirmation}
+
+Signing up doesn't create an account straight away. The app emails a link to the address entered on the sign-up form, and the account is created once its owner opens the link and chooses a password. Each link works once, for 24 hours.
+
+If you haven't connected an email provider, the link is written to the app's logs instead. Run `docker compose logs app` to find it and open it yourself. Set [`APP_URL`](environment-variables.md#app_url) first, since the app builds the link from it.
+
+The app shows the same confirmation message whether or not the address already has an account, and it sends nothing to an address that does. Each address can receive up to 3 sign-up emails in a rolling 24-hour period, which [`SIGNUP_DAILY_EMAIL_LIMIT`](environment-variables.md#signup_daily_email_limit) changes. An email that fails to send doesn't count toward that limit.
+
 ## Applying and checking the settings {#test-delivery}
 
-Once you've saved the `.env` file, recreate the app to load the new settings. Then, request a password reset on the login screen to see if you can receive the email. Clicking on the link sent in the email should bring you to the password reset screen.
+Once you've saved the `.env` file, recreate the app to load the new settings. Then, request a password reset on the login screen to see if you can receive the email. Clicking on the link sent in the email should bring you to the password reset screen. A sign-up confirmation email works the same way.
 
 If the email doesn't arrive, double check to make sure your credentials are correct, and that you have set a sensible value for [the relevant password reset environment variables](environment-variables.md#password-reset-and-email). Check the logs for any potential errors and feedback.
 

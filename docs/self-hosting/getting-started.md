@@ -68,7 +68,7 @@ The app also keeps a fourth secret, [`BANK_TRANSACTION_HASH_KEY`](environment-va
 
 ### Setting the instance URL
 
-Set [`APP_URL`](environment-variables.md#app_url) to the address you'll use to open the app, such as `https://lumina-finance.example.com`. It's needed for passkeys, single sign-on and password reset emails. [Setting the instance URL](instance-url.md) explains the format and what it's used for.
+Set [`APP_URL`](environment-variables.md#app_url) to the address you'll use to open the app, such as `https://lumina-finance.example.com`. It's needed for passkeys, single sign-on, and sign-up and password reset emails. [Setting the instance URL](instance-url.md) explains the format and what it's used for.
 
 The app doesn't serve HTTPS on its own, so you'll want to put it behind a reverse proxy. Keep in mind that passkeys won't work without HTTPS, even with `APP_URL` set.
 
@@ -78,7 +78,7 @@ To start the app, simply run `docker compose up -d`, and open `http://localhost:
 
 ## Closing registration
 
-Once the app is running, anyone who can reach it can create an account. After you and everyone else who'll use the app have created accounts, you can [close registration](closing-registration.md) so nobody else can.
+Once the app is running, anyone who can reach it can start creating an account, and finishes by opening the link the app emails them. Until you [set up email](email.md), that link is in the app's logs. After you and everyone else who'll use the app have created accounts, you can [close registration](closing-registration.md) so nobody else can.
 
 ## Where to go from here
 
