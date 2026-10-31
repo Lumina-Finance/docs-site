@@ -21,6 +21,7 @@ const sidebars = {
     'self-hosting/signing-keys',
     'self-hosting/single-sign-on',
     'self-hosting/encryption-keys',
+    'self-hosting/blocking-abuse',
     {
       type: 'html',
       value: '<h2>Reference</h2>',

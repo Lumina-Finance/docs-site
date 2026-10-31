@@ -81,6 +81,26 @@ Controls whether the app checks GitHub releases and Docker Hub for a newer versi
 </EnvironmentVariable>
 </dl>
 
+## Logging
+
+<dl>
+<EnvironmentVariable name="LOG_LEVEL" type="DEBUG, INFO, WARNING or ERROR" defaultValue="INFO" example="DEBUG">
+
+How much the app writes to its log. `ERROR` writes only server errors, `WARNING` adds warnings, and `INFO` adds the lines [fail2ban](blocking-abuse.md) reads. `DEBUG` adds a line for each request with its method, route, status and duration, and no values from the request.
+
+</EnvironmentVariable>
+</dl>
+
+## Proxies
+
+<dl>
+<EnvironmentVariable name="TRUSTED_PROXIES" type="Addresses or ranges, separated by spaces" defaultValue="private_ranges" example="203.0.113.7/32">
+
+The reverse proxies in front of the app whose forwarded client address it believes, so the log shows the visitor and not the proxy. The default believes any private address, so a proxy on a public address must be named, or sign-in cookies won't be marked Secure and bans won't work. [Blocking repeated sign-in attempts](blocking-abuse.md#behind-a-reverse-proxy) explains when to set it.
+
+</EnvironmentVariable>
+</dl>
+
 ## Registration
 
 <dl>
