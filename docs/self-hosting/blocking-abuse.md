@@ -7,6 +7,12 @@ Lumina Finance writes a line to its log for each failed sign-in, each failed pas
 
 These lines never hold an email, name, request body or query string, and a sign-in that succeeds writes none.
 
+## The built-in sign-in lock {#sign-in-lock}
+
+The app also locks an email address for 30 minutes after 5 failed sign-in attempts. Wrong passwords and wrong second-factor codes count together, and the lock signs the account out of all its sessions. While an address is locked, sign-in answers "Account temporarily locked". A completed sign-in clears the count, and waiting out the lock gives all 5 attempts back.
+
+The count follows the address typed on the sign-in form, so an address with no account locks the same way and nobody can use the lock to find out which addresses have accounts. There's nothing to configure.
+
 ## Set it up
 
 Run fail2ban on the machine that runs Docker. Leave [`LOG_LEVEL`](environment-variables.md#log_level) at `INFO` or `DEBUG`, since `WARNING` and `ERROR` stop these lines and fail2ban would then ban no one. These steps read the log files of Docker's standard `json-file` logging driver, so if your Docker is set to another driver, set `driver: json-file` under `logging` for the app service in your Compose file.
