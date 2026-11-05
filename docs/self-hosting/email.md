@@ -48,7 +48,7 @@ If the email doesn't arrive, double check to make sure your credentials are corr
 
 ### Mail server timeouts
 
-If your mail server stops answering, the password reset request still completes, and a warning in the logs shows that the email failed to send. You can request another reset straight away.
+If your mail server stops answering, the password reset request still completes, and a warning in the logs shows that the email failed to send. The account then waits before another reset email is tried, as the [built-in rate limiter](#built-in-rate-limiter) explains.
 
 ### Built-in rate limiter
 

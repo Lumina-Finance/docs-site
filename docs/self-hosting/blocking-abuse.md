@@ -9,7 +9,7 @@ These lines never hold an email, name, request body or query string, and a sign-
 
 ## The built-in sign-in lock {#sign-in-lock}
 
-The app also locks an email address for 30 minutes after 5 failed sign-in attempts. Wrong passwords and wrong second-factor codes count together, and the lock signs the account out of all its sessions. While an address is locked, sign-in answers "Account temporarily locked". A completed sign-in clears the count, and waiting out the lock gives all 5 attempts back.
+The app also locks an email address for 30 minutes after 5 failed sign-in attempts. Wrong passwords and wrong second-factor codes count together, and the lock signs the account out of all its sessions. While an address is locked, the login page says "Too many failed attempts." A completed sign-in clears the count, and waiting out the lock gives all 5 attempts back.
 
 The count follows the address typed on the sign-in form, so an address with no account locks the same way and nobody can use the lock to find out which addresses have accounts. There's nothing to configure.
 
