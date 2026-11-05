@@ -21,7 +21,6 @@ const sidebars = {
     'self-hosting/signing-keys',
     'self-hosting/single-sign-on',
     'self-hosting/encryption-keys',
-    'self-hosting/accounts-with-the-same-email',
     'self-hosting/database-role-passwords',
     'self-hosting/blocking-abuse',
     {
