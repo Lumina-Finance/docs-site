@@ -1,5 +1,5 @@
 ---
-title: Blocking abuse
+title: Fail2ban integration
 description: Use fail2ban to ban addresses that repeatedly fail to sign in or flood sign-up and password reset requests.
 ---
 
