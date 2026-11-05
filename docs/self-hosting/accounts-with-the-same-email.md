@@ -3,7 +3,7 @@ title: Accounts with the same email in different capitals
 description: Resolve accounts whose email addresses differ only in capitals, which stop an update from starting.
 ---
 
-Lumina Finance treats `Alice@example.com` and `alice@example.com` as the same email address, so one address can only ever belong to one account. Earlier versions let both exist. This covers the letters A to Z. Addresses differing in the capitals of other letters, such as `Émile@example.com` and `émile@example.com`, stay separate.
+Lumina Finance treats `Alice@example.com` and `alice@example.com` as the same email address, so one address can only ever belong to one account. This covers the letters A to Z. Addresses differing in the capitals of other letters, such as `Émile@example.com` and `émile@example.com`, stay separate.
 
 If your instance holds two or more accounts whose addresses differ only in the capitals of A to Z, the app refuses to start after the update. It names the addresses in its log and changes nothing. It never merges the accounts for you, because that could give one person access to another person's finances.
 
