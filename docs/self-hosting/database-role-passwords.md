@@ -55,6 +55,5 @@ The app generates a new password, saves it in the same place and updates the rol
 
 ## What to expect
 
-- The app is unavailable while it restarts, so pick a quiet moment
 - Nobody is signed out, and the data isn't touched
 - You don't lose access if the files are lost. The app generates new passwords and updates the roles. This is different from [the encryption key](encryption-keys.md), which can't be recovered
