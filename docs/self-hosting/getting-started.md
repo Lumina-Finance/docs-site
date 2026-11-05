@@ -78,7 +78,7 @@ To start the app, simply run `docker compose up -d`, and open `http://localhost:
 
 ## Closing registration
 
-Once the app is running, anyone who can reach it can start creating an account, and finishes by opening the link the app emails them. Until you [set up email](email.md), that link is in the app's logs. After you and everyone else who'll use the app have created accounts, you can [close registration](closing-registration.md) so nobody else can.
+Once the app is running, anyone who can reach it can create an account. After you and everyone else who'll use the app have created accounts, you can [close registration](closing-registration.md) so nobody else can.
 
 ## Where to go from here
 
