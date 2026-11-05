@@ -36,7 +36,7 @@ On port 465, the app uses TLS. On other ports, such as 587, it uses STARTTLS.
 
 Signing up doesn't create an account straight away. The app emails a link to the address entered on the sign-up form, and the account is created once its owner opens the link and chooses a password. Each link works once, for 24 hours.
 
-If you haven't connected an email provider, the link is written to the app's logs instead. Run `docker compose logs app` to find it and open it yourself. Set [`APP_URL`](environment-variables.md#app_url) first, since the app builds the link from it.
+If you haven't connected an email provider, the link is written to the app's logs instead. Run `docker compose logs app` to find it, then open it in your browser. Set [`APP_URL`](environment-variables.md#app_url) first, since the app builds the link from it.
 
 The app shows the same confirmation message whether or not the address already has an account, and it sends nothing to an address that does. Each address can receive up to 3 sign-up emails in a rolling 24-hour period, which [`SIGNUP_DAILY_EMAIL_LIMIT`](environment-variables.md#signup_daily_email_limit) changes. An email that fails to send doesn't count toward that limit.
 
