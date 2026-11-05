@@ -96,7 +96,7 @@ How much the app writes to its log. `ERROR` writes only server errors, `WARNING`
 <dl>
 <EnvironmentVariable name="TRUSTED_PROXIES" type="Addresses or ranges, separated by spaces" defaultValue="private_ranges" example="203.0.113.7/32">
 
-The reverse proxies in front of the app whose forwarded client address it believes, so the log shows the visitor and not the proxy. The default believes any private address, so a proxy on a public address must be named, or sign-in cookies won't be marked Secure and bans won't work. [Blocking repeated sign-in attempts](blocking-abuse.md#behind-a-reverse-proxy) explains when to set it.
+The reverse proxies in front of the app whose forwarded client address it believes, so the log shows the visitor and not the proxy. The default believes any private address, so a proxy on a public address must be named, or sign-in cookies won't be marked Secure and bans won't work. [Blocking abuse](blocking-abuse.md#behind-a-reverse-proxy) explains when to set it.
 
 </EnvironmentVariable>
 </dl>

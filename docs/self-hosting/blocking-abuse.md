@@ -1,5 +1,5 @@
 ---
-title: Blocking repeated sign-in attempts
+title: Blocking abuse
 description: Use fail2ban to ban addresses that repeatedly fail to sign in or flood sign-up and password reset requests.
 ---
 
