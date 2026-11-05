@@ -65,7 +65,6 @@ Set `TRUSTED_PROXIES` first, as [described below](#behind-a-reverse-proxy). With
    On Debian 12, fail2ban stops with `Have not found any log file for sshd jail`, since its default SSH jail looks for a log file that system doesn't keep. Point that jail at the system journal, then run the commands again:
 
    ```bash
-   sudo apt install python3-systemd
    printf '[sshd]\nbackend = systemd\n' | sudo tee /etc/fail2ban/jail.d/sshd-journal.local
    ```
 
@@ -77,7 +76,7 @@ Run `sudo fail2ban-client reload` each time `docker compose up -d` replaces the 
 
 ## Behind a reverse proxy
 
-The app believes the client address forwarded by a proxy on a private address, so a reverse proxy on the same Docker network or private network needs no setting. If your proxy is on a public address, the log shows the proxy's address, and fail2ban would ban the proxy. Name it with [`TRUSTED_PROXIES`](environment-variables.md#trusted_proxies) in `.env`, then run `docker compose up -d` again and reload fail2ban:
+The app believes the client address forwarded by a proxy on a private address, so a reverse proxy on the same Docker network or private network needs no setting. A visitor on your own private network is logged under the proxy's address. If your proxy is on a public address, the log shows the proxy's address, and fail2ban would ban the proxy. Name it with [`TRUSTED_PROXIES`](environment-variables.md#trusted_proxies) in `.env`, then run `docker compose up -d` again and reload fail2ban:
 
 ```dotenv
 TRUSTED_PROXIES=203.0.113.7/32

@@ -86,7 +86,7 @@ Controls whether the app checks GitHub releases and Docker Hub for a newer versi
 <dl>
 <EnvironmentVariable name="LOG_LEVEL" type="DEBUG, INFO, WARNING or ERROR" defaultValue="INFO" example="DEBUG">
 
-How much the app writes to its log. `ERROR` writes only server errors, `WARNING` adds warnings, and `INFO` adds the lines [fail2ban](blocking-abuse.md) reads. `DEBUG` adds a line for each request with its method, route, status and duration, and no values from the request.
+How much the app writes to its log. `ERROR` writes only server errors, `WARNING` adds warnings, and `INFO` adds the lines [fail2ban](blocking-abuse.md) reads. `DEBUG` adds a line for each request with its method, route, status and duration, and no values from the request. Startup messages are written at every level.
 
 </EnvironmentVariable>
 </dl>
