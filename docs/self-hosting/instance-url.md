@@ -3,7 +3,7 @@ title: Setting instance URL
 description: Set or change your instance URL and keep access to your account when using passkeys.
 ---
 
-Lumina Finance needs `APP_URL` if you want to use Passkeys, SSO, or enable password reset emails. This guide covers setting that address and updating your configuration when it changes.
+Lumina Finance needs `APP_URL` if you want to use Passkeys, SSO, or enable sign-up and password reset emails. This guide covers setting that address and updating your configuration when it changes.
 
 ## Setting the URL
 
