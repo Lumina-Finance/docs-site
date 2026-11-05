@@ -93,7 +93,7 @@ The ban only stops visitors whose connections reach this machine through a port 
 
 ## IPv6
 
-Lumina Finance and the jail both work with IPv6, but whether your instance takes IPv6 visitors is part of your own host's setup. The Compose file leaves IPv6 off for its network. If this machine has a public IPv6 address, Docker then passes IPv6 visitors to the app from its own private address. All of them share one logged address, none can be banned, and since private addresses are trusted by default, any of them can name another address and get it banned.
+The Compose file leaves IPv6 off for its network. If this machine has a public IPv6 address, Docker then passes IPv6 visitors to the app from its own private address. All of them share one logged address, none can be banned, and since private addresses are trusted by default, any of them can name another address and get it banned.
 
 So on a machine with a public IPv6 address, configure one of these in `compose.override.yml`, then run `docker compose up -d` again and reload fail2ban. To take IPv6 visitors and ban them by their own address, turn on IPv6 for the network:
 
