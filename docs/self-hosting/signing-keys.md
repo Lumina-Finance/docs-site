@@ -34,7 +34,7 @@ You can replace either key at any time, the same way as above. Back up the curre
 | Refresh key | Access tokens already issued keep working until they expire, which takes [15 minutes by default](environment-variables.md#jwt_access_token_expire_seconds). After that, everyone has to sign in again. |
 | Both | Every access and refresh token stops working, and everyone has to sign in again. |
 
-The app is unavailable while it restarts, so pick a quiet moment. Replacing the signing keys doesn't touch your stored data, and it has nothing to do with [`APP_ENCRYPTION_KEY`](environment-variables.md#app_encryption_key). To undo a replacement, put the old files back and restart the app.
+Nobody can use the app while it restarts, so replace the keys at a quiet time. Replacing the signing keys doesn't touch your stored data, and it has nothing to do with [`APP_ENCRYPTION_KEY`](environment-variables.md#app_encryption_key). To undo a replacement, put the old files back and restart the app.
 
 ## Using another directory or filename
 
