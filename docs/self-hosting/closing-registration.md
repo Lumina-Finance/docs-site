@@ -14,7 +14,6 @@ REGISTRATION_ENABLED=false
 Once registration is closed:
 
 - The login page no longer offers sign-up, and going to the sign-up page takes you back to the login page.
-- A sign-up confirmation link sent before you closed registration no longer creates an account.
 - If you've set up [single sign-on](single-sign-on.md), someone without an account who signs in through the provider returns to the login page with "Registration is closed on this instance." instead of getting a new account.
 - People who already have accounts sign in, reset their passwords, and manage their passkeys, two-factor authentication and linked providers as usual.
 
