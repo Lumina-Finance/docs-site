@@ -24,6 +24,18 @@ When the app starts, it deletes a key file that's empty, protected by a passphra
 
 Once you've replaced the files, restart the app to load the keys.
 
+## Replacing the keys later
+
+You can replace either key at any time, the same way as above. Back up the current files first and keep them until you're sure the new keys work, because the app deletes a key file it can't read. The two keys do different jobs, so what people notice depends on which one you replace:
+
+| Key replaced | What happens when the app restarts |
+|-|-|
+| Access key | Every access token stops working. Signed-in browsers ask for a new one with their refresh token, so most people notice nothing. Anyone halfway through a two-factor sign-in, a single sign-on sign-up or an emailed sign-up link has to start again. |
+| Refresh key | Access tokens already issued keep working until they expire, which takes [15 minutes by default](environment-variables.md#jwt_access_token_expire_seconds). After that, everyone has to sign in again. |
+| Both | Every access and refresh token stops working, and everyone has to sign in again. |
+
+Replacing the signing keys doesn't touch your stored data. To undo a replacement, put the old files back and restart the app.
+
 ## Using another directory or filename
 
 If you'd like to use another directory or different filenames, set [`JWT_ACCESS_PRIVATE_KEY_PATH`](environment-variables.md#jwt_access_private_key_path) and [`JWT_REFRESH_PRIVATE_KEY_PATH`](environment-variables.md#jwt_refresh_private_key_path) in `.env` to the full paths inside the app container. Double-check both paths, since a path that points to a missing file gets a newly generated key rather than an error.
