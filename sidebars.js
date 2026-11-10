@@ -2,6 +2,7 @@
 const sidebars = {
   selfHosting: [
     'self-hosting/getting-started',
+    'self-hosting/nightly-builds',
     {
       type: 'html',
       value: '<h2>Common configurations</h2>',
